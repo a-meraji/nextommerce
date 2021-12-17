@@ -3,7 +3,7 @@ import { backToggler } from "../utils/themeClass";
 
 export default function BtnThemeToggle({ toggleTheme, isDark }) {
   return (
-    <>
+    <div className={styles.container}>
       <input
         type="checkbox"
         id="toggle"
@@ -25,6 +25,6 @@ export default function BtnThemeToggle({ toggleTheme, isDark }) {
           backgroundColor: backToggler(isDark),
         }}
       ></div>
-    </>
+    </div>
   );
 }

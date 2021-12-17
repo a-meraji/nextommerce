@@ -1,15 +1,14 @@
-import * as types from "../types";
-
+import { INCREMENT, DECREMENT } from "../types";
 export const sum = (numb) => (dispatch) => {
   dispatch({
-    type: types.INCREMENT,
+    type: INCREMENT,
     payload: numb,
   });
 };
 
 export const min = (numb) => (dispatch) => {
   dispatch({
-    type: types.DECREMENT,
+    type: DECREMENT,
     payload: numb
   })
 }

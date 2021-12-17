@@ -8,7 +8,7 @@ export default function login() {
   } = useForm();
 
   const submitHandler = async (form) => {
-    const res = await fetch("/api/auth/users", {
+    const res = await fetch("/api/auth/admin", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

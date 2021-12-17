@@ -15,13 +15,7 @@
   @value --white: #fff;
 
 
-.body {
-  margin: 0;
-  padding: 0;
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
-  position: relative;
+.container {
 }
 
 .background {
@@ -53,19 +47,22 @@
   /** Show the dimples on the moon **/
 }
 .toggle__checkbox:checked + .toggle__label .toggle__label_background {
-  left: 60px;
-  width: 5px;
+  left: 20px;
+  width: 2px;
+  height: 2px;
+top:15px;
 }
 .toggle__checkbox:checked + .toggle__label .toggle__label_background:before {
-  width: 5px;
-  height: 5px;
-  top: -25px;
+  width: 2px;
+  height: 2px;
+  top: -10px;
+  left: -6px;
 }
 .toggle__checkbox:checked + .toggle__label .toggle__label_background:after {
-  width: 5px;
-  height: 5px;
-  left: -30px;
-  top: 20px;
+  width: 2px;
+  height: 2px;
+  left: -10px;
+  top: 4px;
 }
 .toggle__checkbox:checked + .toggle__label:before {
   background: --white;
@@ -80,11 +77,11 @@
 }
 .toggle__label {
   /** Placeholder element, starting at blue **/
-  width: 200px;
-  height: 100px;
+  width: 60px;
+  height:29px;
   background: --blue-color;
   border-radius: 100px;
-  border: 5px solid --blue-border;
+  border: 2px solid --blue-border;
   display: flex;
   position: relative;
   transition: all 350ms ease-in;
@@ -93,35 +90,35 @@
   /** Gray dots on the moon **/
 }
 .toggle__label_background {
-  width: 10px;
-  height: 5px;
+  width: 6px;
+  height: 2px;
   border-radius: 5px;
   position: relative;
   background: --white;
-  left: 135px;
-  top: 45px;
+  left: 40px;
+  top: 11px;
   transition: all 150ms ease-in;
 }
 .toggle__label_background:before {
   content: "";
   position: absolute;
   top: -5px;
-  width: 40px;
-  height: 5px;
+  width: 12px;
+  height: 2px;
   border-radius: 5px;
   background: --white;
-  left: -20px;
+  left: -9px;
   transition: all 150ms ease-in;
 }
 .toggle__label_background:after {
   content: "";
   position: absolute;
   top: 5px;
-  width: 40px;
-  height: 5px;
+  width: 12px;
+  height: 2px;
   border-radius: 5px;
   background: --white;
-  left: -10px;
+  left:0px;
   transition: all 150ms ease-in;
 }
 .toggle__label:before {
@@ -130,11 +127,11 @@
   animation-fill-mode: forwards;
   transition: all 350ms ease-in;
   content: "";
-  width: 82px;
-  height: 82px;
-  border: 5px solid --yellow-border;
-  top: 4px;
-  left: 4px;
+  width: 27px;
+  height: 27px;
+  border: 3px solid --yellow-border;
+  top: -1px;
+  left: 2px;
   position: absolute;
   border-radius: 82px;
   background: --yellow-background;
@@ -147,8 +144,6 @@
   box-shadow: --gray-dots -13px 0 0 2px, var(--gray-dots) -24px 14px 0 -2px;
   left: 143px;
   top: 23px;
-  width: 10px;
-  height: 10px;
   background: transparent;
   border-radius: 50%;
   opacity: 0;
@@ -156,27 +151,27 @@
 
 @keyframes switch {
   0% {
-    left: 4px;
+    left: 2px;
   }
   60% {
-    left: 4px;
-    width: 112px;
+    left: 0px;
+    width: 55px;
   }
   100% {
-    left: 104px;
-    width: 82px;
+    left: 29px;
+    width: 27px;
   }
 }
 @keyframes reverse {
   0% {
-    left: 104px;
-    width: 82px;
+    left: 29px;
+    width: 27px;
   }
   60% {
-    left: 72px;
-    width: 112px;
+    left: 0px;
+    width: 55px;
   }
   100% {
-    left: 4px;
+    left: 2px;
   }
 }

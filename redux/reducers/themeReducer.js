@@ -1,8 +1,7 @@
 import {TOGGLE_THEME} from "../types";
-import { lightColor, darkColor } from "../values";
 
 const themeReducer = (
-  isDark= false,
+  isDark= true,
   action
 ) => {
   switch (action.type) {
