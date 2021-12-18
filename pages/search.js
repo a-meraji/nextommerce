@@ -2,7 +2,7 @@ export default function search() {
     return (
         <div>
             <button onClick={async()=>{
-                const res = await fetch("/api/product/crud?name=cotton_hat", {
+                const res = await fetch("/api/product/crud", {
                     method: "GET",
                     headers: {
                       "Content-Type": "application/json",

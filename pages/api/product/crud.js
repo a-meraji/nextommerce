@@ -44,22 +44,19 @@ const createProduct = async (req, res) => {
   }
 };
 const readOneProduct = async (req, res) => {
-  console.log(req.query);
-  const name = req.query.name;
-  console.log(name);
-  if (name) {
-    try {
-      const product = await Product.findOne({ name: name });
-      if (product) {
-        return res.status(200).json(product);
-      } else {
-        return res.status(200).json({ message: "product not found" });
-      }
-    } catch (error) {
-      errorHandler(error);
+  const name = req.query.name?req.query.name:undefined;
+  try {
+    // find product by name if name not provided return all products
+    const product = name
+      ? await Product.findOne({ name: name })
+      : await Product.find({});
+    if (product) {
+      return res.status(200).json(product);
+    } else {
+      return res.status(200).json({ message: "product not found" });
     }
-  } else {
-    return res.status(422).send({ message: "data_incomplete" });
+  } catch (error) {
+    errorHandler(error);
   }
 };
 const updateProduct = async (req, res) => {};

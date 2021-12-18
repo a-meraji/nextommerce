@@ -2,16 +2,15 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import TableKinds from "../../../components/admin/TableKinds";
 import AcceptModal from "../../../components/admin/AcceptModal";
-import { connect } from "react-redux";
-import { updateCats } from "../../../redux/actions/catActions";
 
-function crud({ allCats, updateCats }) {
+function create() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const [allCats, setCats] = useState([]);
   //categories that fetch from DB
   useEffect(async () => {
     if (allCats === undefined) return;
@@ -23,7 +22,7 @@ function crud({ allCats, updateCats }) {
         },
       });
       const data = await res.json();
-      updateCats(data);
+      setCats(data);
     }
   }, [allCats]);
 
@@ -48,7 +47,8 @@ function crud({ allCats, updateCats }) {
         body: JSON.stringify(finalPro),
       });
       const data = await res.json();
-      console.log(data);
+      if(data._id){alert('product saved successfuly')}
+      else{alert('something went wrong try again later')}
       setSave(false);
     }
   }, [save]);
@@ -214,11 +214,4 @@ function crud({ allCats, updateCats }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  const allCats = state.catReducer;
-  return { allCats };
-};
-const mapDispatchToProps = {
-  updateCats,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(crud);
+export default create;
