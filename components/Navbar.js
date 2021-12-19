@@ -1,15 +1,11 @@
 import { SearchIcon, MenuIcon, ShoppingBagIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import { navToggler } from "../utils/themeClass";
-import { connect } from "react-redux";
-import { toggleTheme } from "../redux/actions/themeActions";
-import BtnThemeToggle from "./BtnThemeToggle";
+import Toggle from "./ThemeToggle";
 
-function Navbar({ isDark, toggleTheme }) {
+function Navbar() {
   return (
     <nav
-      style={navToggler(isDark)}
-      className="flex justify-between text-sm items-center px-3 py-5 bg-transparent"
+      className="flex justify-between text-sm items-center px-3 py-5 bg-primary text-primary transition-all"
     >
       <div className="flex">
         <div className="flex">
@@ -21,7 +17,7 @@ function Navbar({ isDark, toggleTheme }) {
           </div>
         </div>
       </div>
-      <div className="flex bg-gray-300 bg-opacity-25 py-1 px-2 rounded-full">
+      <div className="flex py-1 px-2 rounded-full">
         <div class="form-control">
           <input
             type="text"
@@ -33,7 +29,7 @@ function Navbar({ isDark, toggleTheme }) {
       </div>
       <div className="flex">
         <div className="mr-6">
-          <BtnThemeToggle toggleTheme={toggleTheme} isDark={isDark} />
+          <Toggle/>
         </div>
         <div className="mr-6">
           <button>
@@ -52,11 +48,4 @@ function Navbar({ isDark, toggleTheme }) {
     </nav>
   );
 }
-
-const mapStateToProps = (state) => {
-  return { ...state.themeReducer };
-};
-const mapDispatchToProps = {
-  toggleTheme,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default Navbar;

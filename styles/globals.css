@@ -1,6 +1,6 @@
-:root {
-  @apply .light;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .dark {
   --color-bg-primary: #080808;
@@ -30,7 +30,3 @@
   --color-alert: #ffa700;
   --color-danger: #fc2835;
 }
-
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
