@@ -1,27 +1,12 @@
-hat
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F115%2F489%2FHat-front-black__72990.1603748583.png&w=1920&q=85
+SPOTIFY_THEME
 
-
-jacket
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F116%2F512%2FMen-Jacket-Front-Black__15466.1603283963.png&w=1920&q=85
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F122%2F412%2Fmockup-008b81ff__29393.1603748041.jpg&w=1920&q=85
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F124%2F415%2Fmockup-c2bbbaf4__00019.1601229493.png&w=1920&q=85
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F125%2F420%2Fmockup-7500e8eb__78586.1601229597.png&w=1920&q=85
-
-
-shirt
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F117%2F534%2FMen-TShirt-Black-Front__70046.1603748348.png&w=1920&q=85
-
-mask
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F118%2F508%2FSurgical-Mask-Black__89554.1603756821.png&w=1920&q=85
-
-
-t-shirt
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F119%2F398%2Fmockup-31b14bb5__19161.1603748166.png&w=1920&q=85
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F120%2F402%2Fmockup-521d0b16__86945.1603748107.png&w=1920&q=85
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F121%2F406%2Fmockup-a0dc2330__62146.1601012861.png&w=1920&q=85
-
-
-jogger
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F126%2F423%2Fmockup-9c5e3634__60853.1603747807.png&w=1920&q=85
-https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F127%2F431%2Fmockup-9fc4c1cf__88683.1601229845.png&w=1920&q=85
+bg: #000000, #121212 , [#171717(:hover#272727)* it may need oppacity on top of #121212]
+headline: #fffff
+p:#b2b2b2
+buttons: #535353
+accent: #00bc5d
+on contrast on hover on selected: #ffffff
+success = #0093e7
+approve = #00d567
+alert = #ffa700
+danger = #fc2835

@@ -1,9 +1,31 @@
 module.exports = {
   mode: 'jit',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        primary: 'var(--color-bg-primary)',
+        secondary: 'var(--color-bg-secondary)',
+        third: 'var(--color-bg-three)',
+        cont: 'var(--color-bt-gray)',
+        accent: 'var(--color-accent)',
+        success: 'var(--color-success)',
+        approve: 'var(--color-approve)',
+        alert: 'var(--color-alert)',
+        danger: 'var(--color-danger)',
+      },
+      textColor: {
+        primary: 'var(--color-text-primary)',
+        secondary: 'var(--color-text-secondary)',
+        cont: 'var(--color-bt-gray)',
+        accent: 'var(--color-accent)',
+        success: 'var(--color-success)',
+        approve: 'var(--color-approve)',
+        alert: 'var(--color-alert)',
+        danger: 'var(--color-danger)',
+      },
+    },
   },
   variants: {
     extend: {},

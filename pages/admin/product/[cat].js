@@ -59,7 +59,7 @@ function index({ allProducts, allCategories, query }) {
       {products.map((product, i) => {
         return (
           <div className="pb-6" key={i}>
-            <AdminProduts product={product} />
+            <AdminProduts product={product} index={i} setProducts={setProducts} products={products} />
           </div>
         );
       })}

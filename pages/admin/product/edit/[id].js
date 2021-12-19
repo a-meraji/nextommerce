@@ -19,7 +19,7 @@ function edit({ id, product, allCategories }) {
   const [catSt, setCatSt] = useState(category);
   // final product
   const [save, setSave] = useState(false);
-  const [finalPro, setFinalPro] = useState({});
+  const [finalPro, setFinalPro] = useState(product);
 
   // modal state
   const [showModal, setShowModal] = useState(false);
@@ -28,16 +28,16 @@ function edit({ id, product, allCategories }) {
   useEffect(async () => {
     if (save) {
       const res = await fetch("/api/product/crud", {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(finalPro),
       });
       const data = await res.json();
-      if (data._id) {
-        alert("product saved successfuly");
-      } else {
+      if (data.message=="updated") {
+        alert("changes saved successfuly");
+       } else {
         alert("something went wrong try again later");
       }
       setSave(false);
@@ -47,9 +47,10 @@ function edit({ id, product, allCategories }) {
   const submitHandler = (form) => {
     // make a product model to send
     const { name, category, price, description, sale, available } = form;
-    console.log(form);
+
     const newName = name.replace(/ /g, "_");
     const newProduct = {
+      id,
       name: newName,
       category,
       price,
@@ -173,7 +174,41 @@ function edit({ id, product, allCategories }) {
             )}
           </div>
         </div>
-        <button>submit</button>
+        {/* description */}
+        <label className="mt-5  ml-2">description</label>
+        <textarea
+          className="w-full h-56 bg-gray-300 bg-opacity-20  mt-2 rounded-md text-gray-200 pl-3 py-0.5"
+          type="text"
+          defaultValue={description}
+          placeholder="product description..."
+          {...register("description", { required: true })}
+        />
+        {errors.description && (
+          <p className="text-red-700 ml-10">enter the product description</p>
+        )}
+        {/* sale & availablity */}
+        <div className="mt-6">
+          <input className="mt-3 mr-2" type="checkbox" {...register("sale")} defaultChecked={sale} />
+          <label>on sale</label>
+        </div>
+        <div>
+          <input
+            className="mt-3 mr-2"
+            type="checkbox"
+            {...register("available")}
+            defaultChecked={available}
+          />
+          <label>is available</label>
+        </div>
+        
+        <button
+          className="w-3/4 mx-auto mt-10 bg-gray-100 bg-opacity-90 rounded-full text-gray-800 px-auto py-1.5 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-gray-200 hover:text-gray-100"
+          onClick={() => {
+            setShowModal(true);
+          }}
+        >
+          save
+        </button>
       </form>
     </div>
     

@@ -8,7 +8,7 @@ const reqHandler = (req, res) => {
   const method = req.method;
   if (method === "POST") createProduct(req, res);
   else if (method === "GET") readOneProduct(req, res);
-  else if (method === "UPDATE") updateProduct(req, res);
+  else if (method === "PATCH") updateProduct(req, res);
   else if (method === "DELETE") deleteProduct(req, res);
   else {
     res.status(422).send({ message: "req_method_not_supported" });
@@ -44,19 +44,21 @@ const createProduct = async (req, res) => {
   }
 };
 const readOneProduct = async (req, res) => {
-  const id = req.query.id?req.query.id:undefined;
-  const name = req.query.name?req.query.name:undefined;
-  const category = req.query.cat?req.query.cat:undefined;
+  const id = req.query.id ? req.query.id : undefined;
+  const name = req.query.name ? req.query.name : undefined;
+  const category = req.query.cat ? req.query.cat : undefined;
 
   try {
     let product;
-    if(id){
+    if (id) {
       product = await Product.findById(id);
-    }else{
+    } else {
       // find product by name if name not provided return all products
       product = name
         ? await Product.findOne({ name: name })
-        : category ? await Product.find({category: category}) :await Product.find({});
+        : category
+        ? await Product.find({ category: category })
+        : await Product.find({});
     }
     if (product) {
       return res.status(200).json(product);
@@ -67,8 +69,56 @@ const readOneProduct = async (req, res) => {
     errorHandler(error);
   }
 };
-const updateProduct = async (req, res) => {};
-const deleteProduct = async (req, res) => {};
+const updateProduct = async (req, res) => {
+  const { id, name, category, price, store, description, sale, available } =
+    req.body;
+  if (id && name && category && price && store && description) {
+    try {
+      Product.findByIdAndUpdate(
+        id,
+        { name, category, price, store, description, sale, available },
+        function (err, docs) {
+          if (err) {
+            errorHandler(err);
+          } else {
+            return res.status(200).json({ message: "updated", docs });
+          }
+        }
+      );
+    } catch (error) {
+      errorHandler(error);
+    }
+  } else {
+    return res.status(422).json({
+      message: "data_incomplete",
+      data: { name, category, price, store, description, sale, available },
+    });
+  }
+};
+const deleteProduct = async (req, res) => {
+  const { id } = req.body;
+  if (id) {
+    try {
+      Product.findByIdAndDelete(
+        id,
+        function (err, docs) {
+          if (err) {
+            errorHandler(err);
+          } else {
+            return res.status(200).json({ message: "deleted", docs });
+          }
+        }
+      );
+    } catch (error) {
+      errorHandler(error);
+    }
+  } else {
+    return res.status(422).json({
+      message: "data_incomplete",
+      data: { id },
+    });
+  }
+};
 
 const errorHandler = (err) => {
   return res.status(500).send({ message: err.message });

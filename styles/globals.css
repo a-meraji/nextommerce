@@ -1,0 +1,36 @@
+:root {
+  @apply .light;
+}
+
+.dark {
+  --color-bg-primary: #080808;
+  --color-bg-secondary: #121212;
+  --color-bg-three: #171717;
+  --color-bg-hover: #272727;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b2b2b2;
+  --color-bt-gray: #535353;
+  --color-accent: #00bc5d;
+  --color-success: #0093e7;
+  --color-approve: #00d567;
+  --color-alert: #ffa700;
+  --color-danger: #fc2835;
+}
+
+.light {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #edf2f7;
+  --color-bg-three: #171717;
+  --color-text-primary: #2d3748;
+  --color-text-secondary: #4a5568;
+  --color-bt-gray: #535353;
+  --color-accent: #00bc5d;
+  --color-success: #0093e7;
+  --color-approve: #00d567;
+  --color-alert: #ffa700;
+  --color-danger: #fc2835;
+}
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
