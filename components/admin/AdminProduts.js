@@ -1,101 +1,80 @@
 import { useEffect, useState } from "react";
-import { XIcon, CheckIcon } from "@heroicons/react/outline";
-
+import { XIcon, CheckIcon, PencilAltIcon, TrashIcon , MenuIcon} from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 const elm = (
-  <div className={`flex flex-row justify-between -mb-3`}>
-    <p className="max-w-[55px] pl-2">size</p>
-
-    <p className="max-w-[55px] pl-4">amount</p>
+  <div className={`min-w-[115px] border-b-[1px] flex flex-row justify-between -mb-3 pb-0.5`}>
+    <p className="pl-2">size</p>
+    <p className="pr-2">amount</p>
   </div>
 );
 
 export default function AdminProduts({ product }) {
-  const { store, description, sale, available } = product;
-  const [productSt, setProductSt] = useState(product);
-  
+  const { name, price, store, description, sale, available, _id } = product;
+const router = useRouter();
   //for a smart responsive
-  const[innerW, setInnerW] = useState(window.innerWidth);
+  const [innerW, setInnerW] = useState(typeof window!=='undefined'?window.innerWidth:0);
   useEffect(() => {
+    if(typeof window === "undefined")return
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
-});
-const updateWidth = () => {
+  });
+  const updateWidth = () => {
     setInnerW(window.innerWidth);
-}
-
-  const changeHandler = (e, val) => {
-    var tmp = product;
-    tmp[val] = e.target.value;
-    setProductSt(tmp);
-    console.log(productSt);
   };
-  
-  return (
-    <form className="border-[1px] rounded-3xl my-6 mx-8 py-9 px-10 text-white">
-      <label className="text-xl">name: </label>
-      <input
-        type="text"
-        className="mb-4 pl-3 pb-0.5 bg-gray-300 bg-opacity-20 rounded-full text-gray-200"
-        defaultValue={productSt.name.replace("_", " ")}
-        onChange={(e) => {
-          changeHandler(e, "name");
-        }}
-      />
-      <br />
-      <label className="text-lg">price: </label>
-      <input
-        type="number"
-        className="mb-1 pl-3 pb-0.5 bg-gray-300 bg-opacity-20 rounded-full text-gray-200"
-        defaultValue={productSt.price}
-        onChange={(e) => {
-          changeHandler(e, "price");
-        }}
-      />
 
+  return (
+    <div className="border-[1px] relative rounded-3xl my-6 mx-8 py-9 px-10 text-white">
+      <div className="absolute right-10 flex flex-row">
+        <TrashIcon width="20px" className="mr-4"/>
+        <PencilAltIcon width="20px" onClick={()=>router.push(`/admin/product/edit/${_id}`)}/>
+
+      </div>
+      <p className="text-lg mb-4 w-max pb-1 border-gray-300 border-b-[2px]">
+        <strong>name:</strong> {name.replace("_", " ")}
+      </p>
+      <p>
+        <strong>price: </strong> <span className="w-max bg-gray-300 bg-opacity-20 rounded-lg text-gray-200 px-2 pb-0.5">{price}$</span>
+      </p>
       {store.map((miniStore, i) => {
         const { color, imgUrls, sizeAmnt } = miniStore;
         return (
-          <div key={i} className="border-t-[1px]  my-6 pt-6">
-            <label className="mb-2">color: </label>
-            <input
-              className="mb-1 pl-3 pb-0.5 bg-gray-300 bg-opacity-20 rounded-full text-gray-200"
-              type="text"
-              defaultValue={color}
-              onChange={(e) => changeHandler(e, "color")}
-            />
+          <div key={i} className="border-t-[1px]  mt-10 mb-14 pt-10">
+            <p>
+              <strong>color: {' '}</strong>
+              <span className="w-max bg-gray-300 bg-opacity-20 rounded-lg text-gray-200 px-2 pb-0.5">
+                {color}
+              </span>
+            </p>
 
             {/* when indow resize a column with amount and size title will add or remove */}
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-y-4 justify-items-start max-w-[500px] mt-4 mb-6">  
-              {window.innerWidth >= 768 && sizeAmnt.length > 2 ? elm : ""}
-              {window.innerWidth >= 768 ? elm : elm}
-              {window.innerWidth >= 648 && sizeAmnt.length > 1 ? elm : ""}
-            </div>
+            {typeof window !== 'undefined' ?
+             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-y-4 justify-items-center max-w-[550px] mt-4 mb-6">
+             {window.innerWidth >= 768 && sizeAmnt.length > 2 ? elm : ""}
+             {window.innerWidth >= 768 ? elm : elm}
+             {window.innerWidth >= 648 && sizeAmnt.length > 1 ? elm : ""}
+           </div>:''}
+           
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-y-4 justify-items-start max-w-[500px] mt-4 mb-6">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-y-4 justify-items-center max-w-[550px] mt-4 mb-6">
               {sizeAmnt.map((val, i) => {
                 const col = i % 2 === 0 ? 2 : 1;
                 return (
                   <div
-                    className={`border-[1px] rounded-full flex flex-row justify-between`}
+                    className={`min-w-[110px] rounded-full flex flex-row justify-between bg-gray-300 bg-opacity-20 text-gray-200 pl-4 pr-6 pb-0.5`}
                   >
                     <div>
-                      <input
-                        className="max-w-[55px] pl-4 bg-gray-300 bg-opacity-20 rounded-l-full text-gray-200"
-                        defaultValue={val.size}
-                        onChange={(e)=>changeHandler(e,sizeAmnt[i]['size'])}
-                      />
+                      <p
+                      >{val.size}</p>
                     </div>
                     <div>
-                      <input
-                        className="max-w-[55px] pl-4 bg-gray-300 bg-opacity-20 rounded-r-full text-gray-200"
-                        defaultValue={val.amount}
-                      />
+                      <p                     
+                      >{val.amount}</p>
                     </div>
                   </div>
                 );
               })}
             </div>
-            <div className="grid grid-cols-3 gap-y-4 justify-items-center max-w-[550px]">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-y-4 justify-items-center max-w-[550px]">
               {imgUrls.map((url) => (
                 <img src={url} width="150px" />
               ))}
@@ -113,6 +92,6 @@ const updateWidth = () => {
         {available ? <CheckIcon width="20px" /> : <XIcon width="20px" />}
         <p className={`${available ? "" : "line-through"}`}> is available</p>
       </div>
-    </form>
+    </div>
   );
 }

@@ -7,7 +7,8 @@ export default function TableKinds({
   storeSt,
   setStoreSt,
 }) {
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState(storeSt[i].color);
+  console.log(color)
   // const onChangeHandler = (e) =>{
   //     let tempObj = store;
   //     tempObj.i=
@@ -74,7 +75,7 @@ export default function TableKinds({
           <th>size</th>
           <th>amount</th>
         </tr>
-        {storeSt[i]["sizeAmnt"].map((val, j) => TR(j))}
+        {storeSt[i]["sizeAmnt"].map((val, j) => TR(val,j))}
       </table>
       <div className="mb-6">
         <button

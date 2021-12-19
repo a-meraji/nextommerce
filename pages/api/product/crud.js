@@ -44,12 +44,20 @@ const createProduct = async (req, res) => {
   }
 };
 const readOneProduct = async (req, res) => {
+  const id = req.query.id?req.query.id:undefined;
   const name = req.query.name?req.query.name:undefined;
+  const category = req.query.cat?req.query.cat:undefined;
+
   try {
-    // find product by name if name not provided return all products
-    const product = name
-      ? await Product.findOne({ name: name })
-      : await Product.find({});
+    let product;
+    if(id){
+      product = await Product.findById(id);
+    }else{
+      // find product by name if name not provided return all products
+      product = name
+        ? await Product.findOne({ name: name })
+        : category ? await Product.find({category: category}) :await Product.find({});
+    }
     if (product) {
       return res.status(200).json(product);
     } else {
