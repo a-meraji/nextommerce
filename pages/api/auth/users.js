@@ -1,6 +1,6 @@
 import connectDB from "../../../middleware/db/mongodb";
 import { hashPass, comparePass } from "../../../middleware/db/bcrypt";
-import User from "../../../models/User";
+import User from "../../../models/UserModel";
 
 const reqHandler = (req, res) => {
   if (req.method === "POST") {
