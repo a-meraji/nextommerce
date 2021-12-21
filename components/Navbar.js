@@ -1,6 +1,6 @@
 import { SearchIcon, MenuIcon, ShoppingBagIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import { useGlobalContext } from "../Contexts/Context";
+import {useGlobalContext} from "../Contexts/globalContext/context"
 import Toggle from "./ThemeToggle";
 
 function Navbar() {
@@ -54,3 +54,4 @@ function Navbar() {
   );
 }
 export default Navbar;
+

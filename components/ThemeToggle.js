@@ -1,7 +1,7 @@
 //ThemeToggle.js
 import React from 'react';
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
-import { useGlobalContext } from '../utils/Context';
+import { useGlobalContext } from '../Contexts/globalContext/context';
 
 const Toggle = () => {
     const { theme, setTheme } = useGlobalContext();

@@ -1,11 +1,13 @@
 import React from 'react'
-// import Footer from './Footer'
 import Navbar from './Navbar'
+import Sidebar from './Sidebar'
+// import Footer from './Footer'
 
 export default function Layout({children}) {
     return (
         <div className='content glob-trans'>
-            {/* <Navbar/> */}
+            <Navbar/>
+            <Sidebar />
             {children}
             {/* <Footer/> */}
         </div>
