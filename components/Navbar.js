@@ -1,16 +1,18 @@
 import { SearchIcon, MenuIcon, ShoppingBagIcon } from "@heroicons/react/outline";
 import Link from "next/link";
+import { useGlobalContext } from "../Contexts/Context";
 import Toggle from "./ThemeToggle";
 
 function Navbar() {
+  const {sideToggler } = useGlobalContext();
   return (
     <nav
       className="flex justify-between text-sm items-center px-3 py-5 bg-primary text-secondary"
     >
       <div className="flex ">
-        <div>
+        <button onClick={sideToggler}>
           <MenuIcon className="cursor-pointer w-[22px] h-[22px] hover:text-primary" />
-        </div>
+        </button>
         <div className="hidden sm:flex">
           <div className="ml-6 hover:text-primary">
             <Link href="/">Home</Link>

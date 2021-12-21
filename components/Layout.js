@@ -5,7 +5,7 @@ import Navbar from './Navbar'
 export default function Layout({children}) {
     return (
         <div className='content glob-trans'>
-            <Navbar/>
+            {/* <Navbar/> */}
             {children}
             {/* <Footer/> */}
         </div>
