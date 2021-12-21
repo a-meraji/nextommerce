@@ -4,11 +4,11 @@
 
 .dark {
   --color-bg-primary: #080808;
-  --color-bg-secondary: #121212;
-  --color-bg-three: #171717;
-  --color-bg-hover: #272727;
+  --color-bg-secondary: #151515;
+  --color-bg-three: #282828;
+  --color-bg-hover: #3c3c3c;
   --color-text-primary: #ffffff;
-  --color-text-secondary: #b2b2b2;
+  --color-text-secondary: #b3b3b3;
   --color-bt-gray: #535353;
   --color-accent: #00bc5d;
   --color-success: #0093e7;
@@ -18,9 +18,10 @@
 }
 
 .light {
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #edf2f7;
-  --color-bg-three: #171717;
+  --color-bg-primary: #efefef;
+  --color-bg-secondary: #ffffff;
+  --color-bg-three: #46556855;
+  --color-bg-hover: #35445788;
   --color-text-primary: #2d3748;
   --color-text-secondary: #4a5568;
   --color-bt-gray: #535353;
@@ -29,4 +30,13 @@
   --color-approve: #00d567;
   --color-alert: #ffa700;
   --color-danger: #fc2835;
+}
+
+.glob-trans{
+  transition: width 0.5s ease-in-out, height 0.5s ease-in-out, color 0.5s ease-in-out, background 0.5s ease-in-out;
+  /* transition-all duration-500 ease-in-out */
+}
+.glob-trans > *{
+  transition: width 0.5s ease-in-out, height 0.5s ease-in-out, color 0.5s ease-in-out, background 0.5s ease-in-out;
+  /* transition-all duration-500 ease-in-out */
 }

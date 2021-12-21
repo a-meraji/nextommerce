@@ -5,38 +5,41 @@ import Toggle from "./ThemeToggle";
 function Navbar() {
   return (
     <nav
-      className="flex justify-between text-sm items-center px-3 py-5 bg-primary text-primary transition-all"
+      className="flex justify-between text-sm items-center px-3 py-5 bg-primary text-secondary"
     >
-      <div className="flex">
-        <div className="flex">
-          <div className="ml-3">
+      <div className="flex ">
+        <div>
+          <MenuIcon className="cursor-pointer w-[22px] h-[22px] hover:text-primary" />
+        </div>
+        <div className="hidden sm:flex">
+          <div className="ml-6 hover:text-primary">
             <Link href="/">Home</Link>
           </div>
-          <div className="ml-6">
+          <div className="ml-6 hover:text-primary">
             <Link href="/products/all">Categories</Link>
           </div>
         </div>
       </div>
-      <div className="flex py-1 px-2 rounded-full">
-        <div class="form-control">
+      <div className="flex justify-between max-w-min bg-third hover:bg-hover hover:text-primary py-1 px-2 rounded-full ">
+        <div class="form-control min-w-[150px] sm:min-w-[200px] md:min-w-[250px] ">
           <input
             type="text"
             placeholder="Search"
-            class="mt-[1px] ml-1 bg-transparent focus:outline-none   input input-ghost"
+            class="mt-[1px] w-full ml-1 bg-transparent text-primary placeholder-[#757474] focus:outline-none"
           />
         </div>
         <SearchIcon className="w-5 h-5 mr-1" />
       </div>
       <div className="flex">
-        <div className="mr-6">
+        <div className="mr-3 sm:mr-6 mt-1">
           <Toggle/>
         </div>
-        <div className="mr-6">
+        <div className="mr-3 sm:mr-6 mt-1 hover:text-primary">
           <button>
-            <ShoppingBagIcon className="w-7 h-7"/>
+            <ShoppingBagIcon className="w-[22px] h-[22px]"/>
           </button>
         </div>
-        <div className="mr-3">
+        <div>
           <button>
             <img
               className="w-7 h-7 rounded-full"

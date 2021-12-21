@@ -8,6 +8,7 @@ module.exports = {
         primary: 'var(--color-bg-primary)',
         secondary: 'var(--color-bg-secondary)',
         third: 'var(--color-bg-three)',
+        hover: 'var(--color-bg-hover)',
         cont: 'var(--color-bt-gray)',
         accent: 'var(--color-accent)',
         success: 'var(--color-success)',
@@ -18,6 +19,8 @@ module.exports = {
       textColor: {
         primary: 'var(--color-text-primary)',
         secondary: 'var(--color-text-secondary)',
+        hover: 'var(--color-dg-hover)',
+        third: 'var(--color-bg-three)',
         cont: 'var(--color-bt-gray)',
         accent: 'var(--color-accent)',
         success: 'var(--color-success)',

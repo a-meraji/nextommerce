@@ -7,16 +7,14 @@ const Toggle = () => {
     const { theme, setTheme } = useGlobalContext();
 
     return (
-        <div className="transition duration-500 ease-in-out rounded-full p-2">
+        <div className="transition cursor-pointer hover:text-primary rounded-full">
             {theme === 'dark' ? (
-                <SunIcon width='25px'
+                <SunIcon width='22px'
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                    className="text-black  text-2xl cursor-pointer"
                 />
             ) : ( 
-                    <MoonIcon width='25px'
+                    <MoonIcon width='22px'
                         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                        className="text-black  text-2xl cursor-pointer"
                     />
                 )}
         </div>
