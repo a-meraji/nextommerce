@@ -4,7 +4,7 @@ import Intro from "../components/Intro";
 export default function Home() {
   return (
     <>
-    <div className="absolute w-full py-10 top-0 bg-secondary"></div>
+    {/* <div className="absolute w-full py-10 top-0 bg-secondary"></div> */}
       <div className="">
         {/* <Hat /> */}
         <Intro />
