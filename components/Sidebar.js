@@ -7,7 +7,7 @@ function Sidebar() {
 
   return (
     <aside
-      className={`glob-trans py-8 px-6 fixed top-0 left-0 w-full sm:w-[325px] h-full bg-primary text-secondary grid grid-rows${
+      className={`z-50 glob-trans py-8 px-6 fixed top-0 left-0 w-full sm:w-[325px] h-full bg-primary text-secondary grid grid-rows${
         showSide
           ? "translate-y-0 translate-x-0"
           : "-translate-y-full -translate-x-full"

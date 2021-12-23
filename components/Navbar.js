@@ -1,4 +1,4 @@
-import { SearchIcon, MenuIcon, ShoppingBagIcon } from "@heroicons/react/outline";
+import { SearchIcon, MenuIcon, ShoppingBagIcon, UserCircleIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import {useGlobalContext} from "../Contexts/globalContext/context"
 import Toggle from "./ThemeToggle";
@@ -7,7 +7,7 @@ function Navbar() {
   const {sideToggler } = useGlobalContext();
   return (
     <nav
-      className="flex justify-between text-sm items-center px-3 py-5 bg-primary text-secondary"
+      className="z-40 sticky top-0 flex justify-between text-sm items-center px-3 py-5 bg-transparent text-secondary"
     >
       <div className="flex ">
         <button onClick={sideToggler}>
@@ -43,10 +43,11 @@ function Navbar() {
         </div>
         <div>
           <button>
-            <img
+            {/* <img
               className="w-7 h-7 rounded-full"
               src="https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
-            ></img>
+            ></img> */}
+            <UserCircleIcon className="w-[24px] h-[24px] mt-1"/>
           </button>
         </div>
       </div>
