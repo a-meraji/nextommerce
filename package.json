@@ -9,6 +9,7 @@
     "@heroicons/react": "^1.0.5",
     "aos": "^2.3.4",
     "bcrypt": "^5.0.1",
+    "framer-motion": "^5.5.5",
     "mongodb": "^4.2.1",
     "mongoose": "^6.1.1",
     "next": "latest",
@@ -19,7 +20,8 @@
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",

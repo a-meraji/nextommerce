@@ -52,45 +52,57 @@ body{
   transition: all 0.2s ease-in-out;
    transition-all duration-500 ease-in-out 
 }*/
-/* moto */
-#moto {
-  transform: translateY(100px);
-}
-.fade-in {
-  color:white;
-  animation-name: fade-in;
-  animation-duration: 2s;
-  opacity: 0;
-}
-.moto-anim1 {
-  animation-name: opace-inc;
-  animation-duration: 2s;
-  opacity: 1;
-}
-@keyframes fade-in {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-@keyframes opace-inc {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
-@media screen and (max-height: 850px) {
-  @media screen and (min-width: 800px) {
-    .hat {
-      margin-top: -8rem;
-    }
-    #moto {
-      transform: translateY(35px);
-    }
-  }
+.animation div {
+  width: 300px;
+  display: inline-block;
+  white-space: nowrap;
 }
+/*keyframe animations*/
+.first {
+ -webkit-animation: bannermove 25s linear infinite;
+    -moz-animation: bannermove 25s linear infinite;
+     -ms-animation: bannermove 25s linear infinite;
+         animation: bannermove 25s linear infinite;
+}
+ 
+@keyframes "bannermove" {
+ 0% {
+    margin-left: 0px;
+ }
+ 100% {
+    margin-left: -1800px;
+ }
+ 
+}
+ 
+@-moz-keyframes bannermove {
+ 0% {
+   margin-left: 0px;
+ }
+ 100% {
+   margin-left: -1800px;
+ }
+ 
+}
+ 
+@-webkit-keyframes "bannermove" {
+ 0% {
+   margin-left: 0px;
+ }
+ 100% {
+   margin-left: -1800px;
+ }
+ 
+}
+ 
+@-ms-keyframes "bannermove" {
+ 0% {
+   margin-left: 0px;
+ }
+ 100% {
+   margin-left: -1800px;
+ }
+ 
+}
+ 
