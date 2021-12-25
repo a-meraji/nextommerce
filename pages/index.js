@@ -3,6 +3,7 @@ import { server } from "../config";
 import Intro from "../components/Intro";
 import { motion } from "framer-motion";
 import GridProducts from "../components/GridProducts";
+import Moto1 from "../components/Moto1";
 export default function Home({ newArivals, sales }) {
   return (
     <>
@@ -21,6 +22,7 @@ export default function Home({ newArivals, sales }) {
           </motion.h4>
           <GridProducts products={newArivals} limit={6} />
         </div>
+        <Moto1 />
         <Center />
       </div>
     </>
