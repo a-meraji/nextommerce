@@ -61,7 +61,7 @@ useEffect(async () => {
 
       </div>
       <p className="text-lg mb-4 w-max pb-1 border-gray-300 border-b-[2px]">
-        <strong>name:</strong> {name.replace("_", " ")}
+        <strong>name:</strong> {name.replace(/_/g, " ")}
       </p>
       <p>
         <strong>price: </strong> <span className="w-max bg-gray-300 bg-opacity-20 rounded-lg text-gray-200 px-2 pb-0.5">{price}$</span>

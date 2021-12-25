@@ -83,7 +83,7 @@ console.log(newArival)
           className="w-72 ml-8 bg-gray-300 bg-opacity-20  mt-2 rounded-full text-gray-200 pl-3 py-0.5"
           type="text"
           placeholder="product name..."
-          defaultValue={name.replace("_", " ")}
+          defaultValue={name.replace(/_/g, " ")}
           {...register("name", {
             required: true,
             pattern:
