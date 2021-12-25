@@ -26,6 +26,10 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    newArival:{
+      type:Boolean,
+      default:false,
+    },
     available: {
       type: Boolean,
       default: true,

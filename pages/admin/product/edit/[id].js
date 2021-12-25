@@ -5,14 +5,14 @@ import AcceptModal from "../../../../components/admin/AcceptModal";
 import { server } from "../../../../config";
 
 function edit({ id, product, allCategories }) {
-  const { name, category, price, store, description, sale, available } =
+  const { name, category, price, store, description, sale, newArival, available } =
     product;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+console.log(newArival)
   //states for different kinds of a product diffrent colors sizes and amounts
   const [storeSt, setStoreSt] = useState(store);
   // category State
@@ -27,6 +27,7 @@ function edit({ id, product, allCategories }) {
   // fetch data just after click on save  button
   useEffect(async () => {
     if (save) {
+      console.log(finalPro)
       const res = await fetch("/api/product/crud", {
         method: "PATCH",
         headers: {
@@ -37,6 +38,7 @@ function edit({ id, product, allCategories }) {
       const data = await res.json();
       if (data.message=="updated") {
         alert("changes saved successfuly");
+        console.log("data is: ",data)
        } else {
         alert("something went wrong try again later");
       }
@@ -46,7 +48,7 @@ function edit({ id, product, allCategories }) {
 
   const submitHandler = (form) => {
     // make a product model to send
-    const { name, category, price, description, sale, available } = form;
+    const { name, category, price, description, sale, newArival, available } = form;
 
     const newName = name.replace(/ /g, "_");
     const newProduct = {
@@ -57,6 +59,7 @@ function edit({ id, product, allCategories }) {
       store: storeSt,
       description,
       sale,
+      newArival,
       available,
     };
     setFinalPro(newProduct);
@@ -190,6 +193,10 @@ function edit({ id, product, allCategories }) {
         <div className="mt-6">
           <input className="mt-3 mr-2" type="checkbox" {...register("sale")} defaultChecked={sale} />
           <label>on sale</label>
+        </div>
+        <div className="mt-3">
+          <input className="mt-3 mr-2" type="checkbox" {...register("newArival")} defaultChecked={newArival} />
+          <label>New Arival</label>
         </div>
         <div>
           <input

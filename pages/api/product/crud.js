@@ -17,8 +17,16 @@ const reqHandler = (req, res) => {
 export default connectDB(reqHandler);
 
 const createProduct = async (req, res) => {
-  const { name, category, price, store, description, sale, available } =
-    req.body;
+  const {
+    name,
+    category,
+    price,
+    store,
+    description,
+    sale,
+    newArival,
+    available,
+  } = req.body;
   if (name && category && price && store && description) {
     try {
       const product = new Product({
@@ -28,6 +36,7 @@ const createProduct = async (req, res) => {
         store,
         description,
         sale,
+        newArival,
         available,
       });
 
@@ -39,7 +48,16 @@ const createProduct = async (req, res) => {
   } else {
     return res.status(422).send({
       message: "data_incomplete",
-      data: { name, category, price, store, description, sale, available },
+      data: {
+        name,
+        category,
+        price,
+        store,
+        description,
+        sale,
+        newArival,
+        available,
+      },
     });
   }
 };
@@ -47,7 +65,8 @@ const readOneProduct = async (req, res) => {
   const id = req.query.id ? req.query.id : undefined;
   const name = req.query.name ? req.query.name : undefined;
   const category = req.query.cat ? req.query.cat : undefined;
-
+  const filter = req.query.filter ? req.query.filter : undefined;
+  console.log(req.query)
   try {
     let product;
     if (id) {
@@ -58,6 +77,8 @@ const readOneProduct = async (req, res) => {
         ? await Product.findOne({ name: name })
         : category
         ? await Product.find({ category: category })
+        : filter
+        ? await Product.find(filter)
         : await Product.find({});
     }
     if (product) {
@@ -66,17 +87,35 @@ const readOneProduct = async (req, res) => {
       return res.status(200).json({ message: "product not found" });
     }
   } catch (error) {
-    errorHandler(error);
+    errorHandler(error, res);
   }
 };
 const updateProduct = async (req, res) => {
-  const { id, name, category, price, store, description, sale, available } =
-    req.body;
+  const {
+    id,
+    name,
+    category,
+    price,
+    store,
+    description,
+    sale,
+    newArival,
+    available,
+  } = req.body;
   if (id && name && category && price && store && description) {
     try {
       Product.findByIdAndUpdate(
         id,
-        { name, category, price, store, description, sale, available },
+        {
+          name,
+          category,
+          price,
+          store,
+          description,
+          sale,
+          newArival,
+          available,
+        },
         function (err, docs) {
           if (err) {
             errorHandler(err);
@@ -86,12 +125,21 @@ const updateProduct = async (req, res) => {
         }
       );
     } catch (error) {
-      errorHandler(error);
+      errorHandler(error, res);
     }
   } else {
     return res.status(422).json({
       message: "data_incomplete",
-      data: { name, category, price, store, description, sale, available },
+      data: {
+        name,
+        category,
+        price,
+        store,
+        description,
+        sale,
+        newArival,
+        available,
+      },
     });
   }
 };
@@ -99,18 +147,15 @@ const deleteProduct = async (req, res) => {
   const { id } = req.body;
   if (id) {
     try {
-      Product.findByIdAndDelete(
-        id,
-        function (err, docs) {
-          if (err) {
-            errorHandler(err);
-          } else {
-            return res.status(200).json({ message: "deleted", docs });
-          }
+      Product.findByIdAndDelete(id, function (err, docs) {
+        if (err) {
+          errorHandler(err);
+        } else {
+          return res.status(200).json({ message: "deleted", docs });
         }
-      );
+      });
     } catch (error) {
-      errorHandler(error);
+      errorHandler(error, res);
     }
   } else {
     return res.status(422).json({
@@ -120,6 +165,6 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-const errorHandler = (err) => {
+const errorHandler = (err, res) => {
   return res.status(500).send({ message: err.message });
 };

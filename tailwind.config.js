@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       backgroundColor: {
         primary: 'var(--color-bg-primary)',
+        primarycont: 'var(--color-bg-primary-cont)',
         secondary: 'var(--color-bg-secondary)',
         third: 'var(--color-bg-three)',
         hover: 'var(--color-bg-hover)',
@@ -19,6 +20,8 @@ module.exports = {
       textColor: {
         primary: 'var(--color-text-primary)',
         secondary: 'var(--color-text-secondary)',
+        primarycont: 'var(--color-text-primary-cont)',
+        secondarycont: 'var(--color-text-secondary-cont)',
         hover: 'var(--color-dg-hover)',
         third: 'var(--color-bg-three)',
         cont: 'var(--color-bt-gray)',

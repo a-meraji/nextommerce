@@ -55,7 +55,7 @@ function create() {
 
   const submitHandler = (form) => {
     // make a product model to send
-    const { name, category, price, description, sale, available } = form;
+    const { name, category, price, description, sale,newArival, available } = form;
     const newName = name.replace(/ /g, "_");
     const newProduct = {
       name: newName,
@@ -64,6 +64,7 @@ function create() {
       store: storeSt,
       description,
       sale,
+      newArival,
       available,
     };
     setFinalPro(newProduct);
@@ -190,6 +191,10 @@ function create() {
         <div className="mt-6">
           <input className="mt-3 mr-2" type="checkbox" {...register("sale")} />
           <label>on sale</label>
+        </div>
+        <div className="mt-6">
+          <input className="mt-3 mr-2" type="checkbox" {...register("newArival")} />
+          <label>new arival</label>
         </div>
         <div>
           <input

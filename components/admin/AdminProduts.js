@@ -10,7 +10,7 @@ const elm = (
 );
 
 export default function AdminProduts({ product, index, setProducts, products }) {
-  const { name, price, store, description, sale, available, _id } = product;
+  const { name, price, store, description, sale, newArival, available, _id } = product;
 const router = useRouter();
 // confirm delete State
 const [confDelete, setConfDelete] = useState(false);
@@ -118,6 +118,10 @@ useEffect(async () => {
       <div className="flex flex- row my-3">
         {sale ? <CheckIcon width="20px" /> : <XIcon width="20px" />}
         <p className={`${sale ? "" : "line-through"}`}> on sale</p>
+      </div>
+      <div className="flex flex- row my-3">
+        {newArival ? <CheckIcon width="20px" /> : <XIcon width="20px" />}
+        <p className={`${newArival ? "" : "line-through"}`}> New Arival</p>
       </div>
       <div className="flex flex- row my-3">
         {available ? <CheckIcon width="20px" /> : <XIcon width="20px" />}

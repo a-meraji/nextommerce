@@ -18,8 +18,13 @@ body{
   --color-bg-secondary: #151515;
   --color-bg-three: #282828;
   --color-bg-hover: #3c3c3c;
+  --color-bg-primary-cont: #efefef;
+
   --color-text-primary: #ffffff;
   --color-text-secondary: #b3b3b3;
+  --color-text-primary-cont: #2d3748;
+  --color-text-secondary-cont: #4a5568;
+
   --color-bt-gray: #535353;
   --color-accent: #00bc5d;
   --color-success: #0093e7;
@@ -33,8 +38,13 @@ body{
   --color-bg-secondary: #ffffff;
   --color-bg-three: #46556855;
   --color-bg-hover: #35445788;
+  --color-bg-primary-cont: #080808;
+
   --color-text-primary: #2d3748;
   --color-text-secondary: #4a5568;
+  --color-text-primary-cont: #ffffff;
+  --color-text-secondary-cont: #b3b3b3;
+
   --color-bt-gray: #535353;
   --color-accent: #00bc5d;
   --color-success: #0093e7;
@@ -71,7 +81,7 @@ body{
     margin-left: 0px;
  }
  100% {
-    margin-left: -1800px;
+    margin-left: -2100px;
  }
  
 }
@@ -81,7 +91,7 @@ body{
    margin-left: 0px;
  }
  100% {
-   margin-left: -1800px;
+   margin-left: -2100px;
  }
  
 }
@@ -91,7 +101,7 @@ body{
    margin-left: 0px;
  }
  100% {
-   margin-left: -1800px;
+   margin-left: -2100px;
  }
  
 }
@@ -101,7 +111,7 @@ body{
    margin-left: 0px;
  }
  100% {
-   margin-left: -1800px;
+   margin-left: -2100px;
  }
  
 }
