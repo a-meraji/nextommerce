@@ -2,8 +2,12 @@ import { SearchIcon, MenuIcon, ShoppingBagIcon, UserCircleIcon } from "@heroicon
 import Link from "next/link";
 import {useGlobalContext} from "../Contexts/globalContext/context"
 import Toggle from "./ThemeToggle";
+import { useRouter } from "next/router";
+import {useState} from 'react'
 
 function Navbar() {
+  const router = useRouter();
+  const [search, setSearch] = useState(router.query.q?router.query.q:"");
   const {sideToggler } = useGlobalContext();
   return (
     <>
@@ -16,19 +20,22 @@ function Navbar() {
         </button>
         <div className="hidden sm:flex">
           <div className="ml-6 hover:text-primary">
-            <Link href="/">Home</Link>
+            <Link href="/"><a>Home</a></Link>
           </div>
           <div className="ml-6 hover:text-primary">
-            <Link href="/products/all">Categories</Link>
+            <Link href="/products/all"><a>Categories</a></Link>
           </div>
         </div>
       </div>
       <div className="flex justify-between max-w-min bg-third hover:bg-hover hover:text-primary py-1 px-2 rounded-full ">
-        <div class="form-control min-w-[150px] sm:min-w-[200px] md:min-w-[250px] ">
+        <div className="form-control min-w-[150px] sm:min-w-[200px] md:min-w-[250px] ">
           <input
+          value={search}
+          onChange={(e)=> setSearch(e.target.value)}
+          onKeyUp={(e)=>{console.log(e.key); if(e.key===13)router.push({search: `name=${search}`})}}
             type="text"
             placeholder="Search"
-            class="mt-[1px] w-full ml-1 bg-transparent text-primary placeholder-[#757474] focus:outline-none"
+            className="mt-[1px] w-full ml-1 bg-transparent text-primary placeholder-[#757474] focus:outline-none"
           />
         </div>
         <SearchIcon className="w-5 h-5 mr-1" />

@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
-// import Footer from './Footer'
+import Footer from './Footer'
 
 export default function Layout({children}) {
     return (
@@ -9,7 +9,7 @@ export default function Layout({children}) {
             <Navbar/>
             <Sidebar />
             {children}
-            {/* <Footer/> */}
+            <Footer/>
         </div>
     )
 }

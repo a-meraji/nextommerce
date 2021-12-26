@@ -19,10 +19,11 @@ body{
   --color-bg-three: #282828;
   --color-bg-hover: #3c3c3c;
   --color-bg-primary-cont: #efefef;
+  --color-bg-secondary-cont: #ffffff;
 
   --color-text-primary: #ffffff;
   --color-text-secondary: #b3b3b3;
-  --color-text-primary-cont: #151515;
+  --color-text-primary-cont: #070707;
   --color-text-secondary-cont: #4a5568;
 
   --color-bt-gray: #535353;
@@ -39,6 +40,8 @@ body{
   --color-bg-three: #46556855;
   --color-bg-hover: #35445788;
   --color-bg-primary-cont: #080808;
+  --color-bg-secondary-cont: #151515;
+
 
   --color-text-primary: #2d3748;
   --color-text-secondary: #4a5568;
@@ -55,58 +58,5 @@ body{
 
 .glob-trans {
   transition: all 0.3s ease-in-out;
-}
-
-.animation div {
-  width: 300px;
-  display: inline-block;
-  white-space: nowrap;
-}
-/*keyframe animations*/
-.first {
- -webkit-animation: bannermove 25s linear infinite;
-    -moz-animation: bannermove 25s linear infinite;
-     -ms-animation: bannermove 25s linear infinite;
-         animation: bannermove 25s linear infinite;
-}
- 
-@keyframes "bannermove" {
- 0% {
-    margin-left: 0px;
- }
- 100% {
-    margin-left: -2100px;
- }
- 
-}
- 
-@-moz-keyframes bannermove {
- 0% {
-   margin-left: 0px;
- }
- 100% {
-   margin-left: -2100px;
- }
- 
-}
- 
-@-webkit-keyframes "bannermove" {
- 0% {
-   margin-left: 0px;
- }
- 100% {
-   margin-left: -2100px;
- }
- 
-}
- 
-@-ms-keyframes "bannermove" {
- 0% {
-   margin-left: 0px;
- }
- 100% {
-   margin-left: -2100px;
- }
- 
 }
  

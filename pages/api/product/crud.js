@@ -66,7 +66,17 @@ const readOneProduct = async (req, res) => {
   const name = req.query.name ? req.query.name : undefined;
   const category = req.query.cat ? req.query.cat : undefined;
   const filter = req.query.filter ? req.query.filter : undefined;
-  console.log(req.query)
+  const value = req.query.value ? req.query.value : undefined;
+  // creatinf a propper condition object
+  var conObj = new Object();
+  if (filter!=="undefined" && value!=="undefined") {
+    if (value === "true" || value === "false") {
+      conObj[filter] = value;
+    } else {
+      conObj[filter] = new RegExp(value, "i");
+    }
+  }
+
   try {
     let product;
     if (id) {
@@ -77,8 +87,8 @@ const readOneProduct = async (req, res) => {
         ? await Product.findOne({ name: name })
         : category
         ? await Product.find({ category: category })
-        : filter
-        ? await Product.find(filter)
+        : conObj.hasOwnProperty(filter)
+        ? await Product.find(conObj)
         : await Product.find({});
     }
     if (product) {

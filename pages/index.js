@@ -8,22 +8,39 @@ export default function Home({ newArivals, sales }) {
   return (
     <>
       <div className="bg-secondary">
-        {/* <Hat /> */}
         <Intro />
-        <div className="w-[66%] mx-auto mt-36 mb-20">
-          <motion.h4
-            initial={{ y: 0, opacity: 0 }}
-            whileInView={{ y: -40, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ ease: "easeOut", duration: 1 }}
-            className="capitalize text-3xl text-secondary mb-10 text-center"
-          >
-            latest arivals
-          </motion.h4>
-          <GridProducts products={newArivals} limit={6} />
-        </div>
+        {newArivals.length > 0 ? (
+          <div className="w-[66%] mx-auto mt-36 mb-20">
+            <motion.h4
+              initial={{ y: 0, opacity: 0 }}
+              whileInView={{ y: -40, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ ease: "easeOut", duration: 1 }}
+              className="capitalize text-3xl text-secondary mb-10 text-center"
+            >
+              latest arivals
+            </motion.h4>
+            <GridProducts products={newArivals} limit={6} />
+          </div>
+        ) : null}
         <Moto1 />
-        <Center />
+        {sales.length > 0 ? (
+          <div className="w-[66%] mx-auto mt-36 mb-10">
+            <motion.h4
+              initial={{ y: 0, opacity: 0 }}
+              whileInView={{ y: -40, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ ease: "easeOut", duration: 1 }}
+              className="capitalize text-3xl text-secondary mb-10 text-center"
+            >
+              on sales
+            </motion.h4>
+            <GridProducts products={sales} limit={6} />
+          </div>
+        ) : null}
+        <div className="w-full flex justify-center pb-24">
+          <button className="py-2 px-5 bg-hover text-secondary rounded-full text-xl hover:bg-secondarycont hover:text-secondarycont">View Products</button>
+        </div>
       </div>
     </>
   );
@@ -42,10 +59,8 @@ export async function getStaticProps() {
 }
 
 async function getProductsFromDB(prop, value) {
-  var filter = new Object();
-  filter.prop = value;
   const data = await fetch(
-    `${server}/api/product/crud?${+encodeURIComponent(JSON.stringify(filter))}`,
+    `${server}/api/product/crud?filter=${prop}&value=${value}`,
     {
       method: "GET",
       headers: {
