@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <>
     <nav
-      className="z-40 sticky top-0 flex justify-between text-sm items-center px-3 py-5 bg-transparent text-secondary"
+      className="z-40 sticky top-0 flex justify-between text-sm items-center px-3 py-5 bg-transparent text-secondary glob-trans"
     >
       <div className="flex ">
         <button onClick={sideToggler}>
@@ -53,7 +53,7 @@ function Navbar() {
         </div>
       </div>
     </nav>
-    <div className="absolute w-full py-10 top-0 bg-secondary"></div>
+    <div className="absolute w-full py-10 top-0 bg-secondary glob-trans"></div>
     </>
   );
 }

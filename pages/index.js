@@ -10,7 +10,7 @@ export default function Home({ newArivals, sales }) {
       <div className="bg-secondary">
         {/* <Hat /> */}
         <Intro />
-        <div className="w-[66%] mx-auto my-36">
+        <div className="w-[66%] mx-auto mt-36 mb-20">
           <motion.h4
             initial={{ y: 0, opacity: 0 }}
             whileInView={{ y: -40, opacity: 1 }}
