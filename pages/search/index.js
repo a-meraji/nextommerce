@@ -5,20 +5,24 @@ import { FilterIcon, TemplateIcon } from "@heroicons/react/outline";
 import SideCategories from "../../components/SideCategories";
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../Contexts/globalContext/context";
-import { SALE, LATEST, PRICE_INC, PRICE_DEC } from "../../Contexts/redux/types";
-
+// import { SALE, LATEST, PRICE_INC, PRICE_DEC } from "../../Contexts/redux/types";
+export const SALE = "SALE";
+export const LATEST = "LATEST";
+export const PRICE_INC = "PRICE_INC";
+export const PRICE_DEC = "PRICE_DEC";
 export default function index({ products, categories }) {
   const router = useRouter();
   const { filter, setFilter, sorter } = useGlobalContext();
   const [proSt, setProSt] = useState([...products]);
   useEffect(() => {
-   const tempObj = sorter(products);
-   if(tempObj.message !== "undefined"){
-     if(tempObj.message === "ok"){
-       const res = tempObj.tempArr;
-       setProSt([...res]);
-     }
-   }
+    setProSt([...products]);
+  }, [products]);
+  useEffect(() => {
+    const resObj = sorter(products);
+    if (resObj.message === "ok") {
+      const { sortedProducts } = resObj;
+      setProSt([...sortedProducts]);
+    }
   }, [filter]);
 
   return (
@@ -37,7 +41,11 @@ export default function index({ products, categories }) {
                 ? `Found ${products.length} items to show`
                 : "no result to show"}
             </h4>
-            <GridProducts key={proSt[0]["name"]} products={proSt} limit={100} />
+            <GridProducts
+              key={proSt[0] !== "undefined" ? ["name"] : "clothes"}
+              products={proSt}
+              limit={100}
+            />
             ;
           </div>
           <div className="hidden sm:block w-[17%] pr-3">
@@ -46,25 +54,33 @@ export default function index({ products, categories }) {
             </h4>
             <div className="flex flex-col gap-y-2 mt-3 ml-0.5">
               <button
-                className={`hover:text-primary capitalize`}
+                className={`hover:text-primary capitalize ${
+                  filter === SALE ? "text-accent underline" : ""
+                }`}
                 onClick={() => setFilter(SALE)}
               >
                 on sales
               </button>
               <button
-                className={`hover:text-primary capitalize`}
+                className={`hover:text-primary capitalize ${
+                  filter === LATEST ? "text-accent underline" : ""
+                }`}
                 onClick={() => setFilter(LATEST)}
               >
                 latest arivals
               </button>
               <button
-                className={`hover:text-primary capitalize`}
+                className={`hover:text-primary capitalize ${
+                  filter === PRICE_INC ? "text-accent underline" : ""
+                }`}
                 onClick={() => setFilter(PRICE_INC)}
               >
                 price: low to high
               </button>
               <button
-                className={`hover:text-primary capitalize`}
+                className={`hover:text-primary capitalize ${
+                  filter === PRICE_DEC ? "text-accent underline" : ""
+                }`}
                 onClick={() => setFilter(PRICE_DEC)}
               >
                 price: high to low

@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import { SALE, LATEST, PRICE_INC, PRICE_DEC } from "../redux/types";
+// import { SALE, LATEST, PRICE_INC, PRICE_DEC } from "../redux/types";
+export const SALE = "SALE";
+export const LATEST = "LATEST";
+export const PRICE_INC = "PRICE_INC";
+export const PRICE_DEC = "PRICE_DEC";
 const getInitialTheme = () => {
   if (typeof window !== "undefined" && window.localStorage) {
     const storedPrefs = window.localStorage.getItem("color-theme");
@@ -51,26 +55,28 @@ const ContextProvider = ({ initialTheme, children }) => {
   // sort products
   const [filter, setFilter] = useState("");
   function sorter(rawProducts) {
-    let f = filter
+    let f = filter;
     if (filter === "") {
-       f = router.query.sort;
-      if (f === "undefined") return {message:"not-ok"};
+      f = router.query.sort;
+      if (f == undefined) return { message: "not-ok" };
       setFilter(f);
     }
 
-    let tempArr = [...rawProducts];
+    let sortedProducts = [...rawProducts];
     switch (f) {
       case SALE:
-        tempArr = tempArr.filter((item) => item.sale === true);
+        sortedProducts = sortedProducts.filter((item) => item.sale === true);
         break;
       case LATEST:
-        tempArr.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        sortedProducts.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
         break;
       case PRICE_INC:
-        tempArr.sort((a, b) => a.price - b.price);
+        sortedProducts.sort((a, b) => a.price - b.price);
         break;
       case PRICE_DEC:
-        tempArr.sort((a, b) => b.price - a.price);
+        sortedProducts.sort((a, b) => b.price - a.price);
         break;
       default:
         console.log("default");
@@ -81,7 +87,7 @@ const ContextProvider = ({ initialTheme, children }) => {
     currentUrlParams.set("sort", filter);
     router.push(router.pathname + "?" + currentUrlParams.toString());
 
-    return {message:'ok',tempArr};
+    return { message: "ok", sortedProducts };
   }
   return (
     <Context.Provider

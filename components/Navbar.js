@@ -41,14 +41,12 @@ function Navbar() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyUp={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === "Enter") {
                   let currentUrlParams = new URLSearchParams(
                     window.location.search
                   );
                   currentUrlParams.set("q", search);
-                  router.push(
-                    server + "search?" + currentUrlParams.toString()
-                  );
+                  router.push(server + "search?" + currentUrlParams.toString());
                 }
               }}
               type="text"
