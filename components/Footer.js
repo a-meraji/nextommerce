@@ -68,7 +68,7 @@ function footer() {
           <div className="flex md:flex-nowrap flex-wrap justify-center items-end md:justify-start">
             <div className="relative sm:w-64 w-40 sm:mr-4 mr-2">
               <label
-                for="footer-field"
+                htmlFor="footer-field"
                 className="leading-7 pl-3 text-sm text-secondary"
               >
                 Send a message
@@ -88,9 +88,9 @@ function footer() {
             <a className="text-secondary">
               <svg
                 fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
@@ -100,9 +100,9 @@ function footer() {
             <a href="https://twitter.com/mamad_coder" target="_blank" className="ml-3 text-secondary">
               <svg
                 fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
@@ -113,9 +113,9 @@ function footer() {
               <svg
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >

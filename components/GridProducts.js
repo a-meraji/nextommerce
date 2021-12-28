@@ -1,25 +1,31 @@
 import { motion } from "framer-motion";
-
-export default function GridProducts({ products, limit }) {
+import { useEffect, useState } from "react";
+export default function GridProducts({ products, limit}) {
+  const [st,setSt] = useState(0)
+  useEffect(() => {
+    setSt(st+1);
+  }, [products])
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-28">
+    <>
+     <p>{st}</p>
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 pt-28">
       {products.map((product, i) => {
         if (i >= limit) return;
         return (
           <motion.div
-            initial={{ opacity: 0, y: 0 }}
-            whileInView={{ opacity: 1, y: -100 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 1.1 }}
-            transition={{
-              opacity: { ease: "easeOut", duration: 1 },
+          initial={{ opacity: 0, y: 0 }}
+          whileInView={{ opacity: 1, y: -100 }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 1.05 }}
+          transition={{
+            opacity: { ease: "easeOut", duration: 1 },
               y: { ease: "easeOut", duration: 1 },
               scale: { ease: "easeIn", duration: 0.3 },
             }}
             key={i}
-            className={`group relative w-full bg-third rounded-sm`}
-          >
+            className={`group relative w-full bg-third rounded-sm transition-colors`}
+            >
             <img
               className="w-full object-contain"
               src={product.store[0]["imgUrls"][0]}
@@ -34,5 +40,6 @@ export default function GridProducts({ products, limit }) {
         );
       })}
     </div>
+        </>
   );
 }

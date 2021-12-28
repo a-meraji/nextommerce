@@ -16,7 +16,7 @@ export default function Home({ newArivals, sales }) {
               whileInView={{ y: -40, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ ease: "easeOut", duration: 1 }}
-              className="capitalize text-3xl text-secondary mb-10 text-center"
+              className="capitalize text-3xl text-secondary text-center"
             >
               latest arivals
             </motion.h4>
@@ -31,7 +31,7 @@ export default function Home({ newArivals, sales }) {
               whileInView={{ y: -40, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ ease: "easeOut", duration: 1 }}
-              className="capitalize text-3xl text-secondary mb-10 text-center"
+              className="capitalize text-3xl text-secondary text-center"
             >
               on sales
             </motion.h4>

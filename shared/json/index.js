@@ -14,7 +14,7 @@ export const sideList = [
 ];
 export const socialLinks = [
   { url: "https://twitter.com/mamad_coder", icon: FiTwitter },
-  { url: "twitter", icon: FiInstagram },
-  { url: "twitter", icon: FiFacebook },
-  { url: "t", icon: FaWhatsapp },
+  { url: "https://twitter.com/mamad_coder", icon: FiInstagram },
+  { url: "https://twitter.com/mamad_coder", icon: FiFacebook },
+  { url: "https://twitter.com/mamad_coder", icon: FaWhatsapp },
 ];
