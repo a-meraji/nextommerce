@@ -18,3 +18,17 @@ export const socialLinks = [
   { url: "https://twitter.com/mamad_coder", icon: FiFacebook },
   { url: "https://twitter.com/mamad_coder", icon: FaWhatsapp },
 ];
+
+export const sortView = [
+{sort:"relevence", name:'relevence'},
+{sort:"sale", name:'on sale'},
+{sort:"latest", name:'latest arivals'},
+{sort:"price_inc", name:'prcie: low to high'},
+{sort:"price_dec", name:'price: high to low'},
+]
+
+export const relevence='relevence';
+export const sale='sale';
+export const latest='latest';
+export const price_inc='price_inc';
+export const price_dec='price_dec';

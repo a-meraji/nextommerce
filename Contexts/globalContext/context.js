@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-// import { SALE, LATEST, PRICE_INC, PRICE_DEC } from "../redux/types";
-export const SALE = "SALE";
-export const LATEST = "LATEST";
-export const PRICE_INC = "PRICE_INC";
-export const PRICE_DEC = "PRICE_DEC";
+import {sale, latest, price_inc, price_dec, relevence} from "../../shared/json/index"
 const getInitialTheme = () => {
   if (typeof window !== "undefined" && window.localStorage) {
     const storedPrefs = window.localStorage.getItem("color-theme");
@@ -55,27 +51,29 @@ const ContextProvider = ({ initialTheme, children }) => {
   // sort products
   const [filter, setFilter] = useState("");
   function sorter(rawProducts) {
+
+    let sortedProducts = [...rawProducts];
     let f = filter;
-    if (filter === "") {
+    
+    if (f === "") {
       f = router.query.sort;
-      if (f == undefined) return { message: "not-ok" };
+      if (f == undefined) return { message: "not-ok", sortedProducts };
       setFilter(f);
     }
 
-    let sortedProducts = [...rawProducts];
     switch (f) {
-      case SALE:
+      case sale:
         sortedProducts = sortedProducts.filter((item) => item.sale === true);
         break;
-      case LATEST:
+      case latest:
         sortedProducts.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
         break;
-      case PRICE_INC:
+      case price_inc:
         sortedProducts.sort((a, b) => a.price - b.price);
         break;
-      case PRICE_DEC:
+      case price_dec:
         sortedProducts.sort((a, b) => b.price - a.price);
         break;
       default:
@@ -84,7 +82,7 @@ const ContextProvider = ({ initialTheme, children }) => {
     }
 
     let currentUrlParams = new URLSearchParams(router.query);
-    currentUrlParams.set("sort", filter);
+    currentUrlParams.set("sort", f);
     router.push(router.pathname + "?" + currentUrlParams.toString());
 
     return { message: "ok", sortedProducts };

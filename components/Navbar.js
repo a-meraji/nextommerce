@@ -44,9 +44,9 @@ function Navbar() {
                 if (e.key === "Enter") {
                   let currentUrlParams = new URLSearchParams(
                     window.location.search
-                  );
-                  currentUrlParams.set("q", search);
-                  router.push(server + "search?" + currentUrlParams.toString());
+                    );
+                    currentUrlParams.set("q", search);
+                    router.push(server + "search?" + currentUrlParams.toString());
                 }
               }}
               type="text"
