@@ -10,9 +10,9 @@ import SortItems from "../../components/SortItems";
 import { server } from "../../config";
 import { FilterIcon, TemplateIcon } from "@heroicons/react/outline";
 
-export default function index({ products, categories }) {
+export default function index({ products, allCategories }) {
   const router = useRouter();
-  const { filter, setFilter, sorter } = useGlobalContext();
+  const { sorter, sort } = useGlobalContext();
   // to update page when search query change
   const [currentQ, setCurrentQ] = useState(router.query.q);
   // contains products to show
@@ -22,26 +22,16 @@ export default function index({ products, categories }) {
   useEffect(() => {
     if (currentQ !== router.query.q) {
       setCurrentQ(router.query.q);
-      const srt = router.query.sort;
-            if(srt!= undefined){
-              setFilter(srt)
-            }else{
-              setFilter("relevence");
-            }
-      setProSt([...products]);
+      const resArr = sorter(products);
+      setProSt([...resArr]);
     }
   }, [router.query.q]);
 
   // trigger when sort view change
   useEffect(() => {
-    const resObj = sorter(products);
-    if (resObj.message === "ok") {
-      const { sortedProducts } = resObj;
-      setProSt([...sortedProducts]);
-    } else {
-      setProSt([...products]);
-    }
-  }, [filter]);
+    const resArr = sorter(products);
+    setProSt([...resArr]);
+  }, [sort]);
 
   return (
     <>
@@ -51,7 +41,7 @@ export default function index({ products, categories }) {
       <div className="bg-secondary text-secondary glob-trans">
         <div className="flex flex-row pt-10">
           {/* selecting categories */}
-          <SideCategories categories={categories} />
+          <SideCategories categories={allCategories} />
           {/* showing result for search */}
           <div className="w-[60%] sm:w-[56%] mx-auto">
             <h4 className="mb-4">
@@ -92,9 +82,9 @@ export async function getServerSideProps(cnx) {
   });
 
   const products = await data.json();
-  const categories = await rewCats.json();
+  const allCategories = await rewCats.json();
 
   return {
-    props: { products, categories },
+    props: { products, allCategories },
   };
 }

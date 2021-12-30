@@ -29,7 +29,7 @@ function Navbar() {
               </Link>
             </div>
             <div className="ml-6 hover:text-primary">
-              <Link href="/products/all">
+              <Link href="/search">
                 <a>Categories</a>
               </Link>
             </div>
@@ -43,7 +43,7 @@ function Navbar() {
               onKeyUp={(e) => {
                 if (e.key === "Enter") {
                   let currentUrlParams = new URLSearchParams(
-                    window.location.search
+                    router.query
                     );
                     currentUrlParams.set("q", search);
                     router.push(server + "search?" + currentUrlParams.toString());

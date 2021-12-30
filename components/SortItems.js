@@ -1,7 +1,11 @@
 import { sortView } from "../shared/json";
+import { useRouter } from "next/router";
+import { server } from "../config";
 import { useGlobalContext } from "../Contexts/globalContext/context";
+
 function SortItems() {
-  const { filter, setFilter } = useGlobalContext();
+  const router = useRouter();
+  const { sort, setSort } = useGlobalContext();
   return (
     <div className="hidden sm:block w-[17%] pr-3">
       <h4 className="text-md capitalize mb-0.5 text-primary">Sort By</h4>
@@ -10,9 +14,9 @@ function SortItems() {
           <button
             key={i}
             className={`text-left hover:text-primary capitalize ${
-              filter === item.sort ? "text-accent underline" : ""
+              sort === item.sort ? "text-accent underline" : ""
             }`}
-            onClick={() => setFilter(item.sort)}
+            onClick={() => setSort(item.sort)}
           >
             {item.name}
           </button>
