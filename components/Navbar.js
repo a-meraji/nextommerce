@@ -46,7 +46,7 @@ function Navbar() {
                     router.query
                     );
                     currentUrlParams.set("q", search);
-                    router.push(server + "search?" + currentUrlParams.toString());
+                    router.push(server + "/search?" + currentUrlParams.toString());
                 }
               }}
               type="text"

@@ -54,7 +54,6 @@ export default function cats({ products, allCategories, category }) {
               products={proSt}
               limit={100}
             />
-            ;
           </div>
           {/* set sort view of search results */}
           <SortItems />
@@ -87,7 +86,12 @@ export async function getStaticProps(cnx) {
   const allCategories = await catsData.json();
 
   return {
-    props: { products, allCategories, category},
+    props: {
+      products,
+      allCategories,
+      category,
+    },
+    revalidate: 900, //every 15 minutes
   };
 }
 export async function getStaticPaths() {

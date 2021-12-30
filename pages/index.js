@@ -4,6 +4,7 @@ import Intro from "../components/Intro";
 import { motion } from "framer-motion";
 import GridProducts from "../components/GridProducts";
 import Moto1 from "../components/Moto1";
+import Link from "next/link";
 export default function Home({ newArivals, sales }) {
   return (
     <>
@@ -39,7 +40,11 @@ export default function Home({ newArivals, sales }) {
           </div>
         ) : null}
         <div className="w-full flex justify-center pb-24">
-          <button className="py-2 px-5 bg-hover text-secondary rounded-full text-xl hover:bg-secondarycont hover:text-secondarycont">View Products</button>
+          <button className="py-2 px-5 bg-hover text-secondary rounded-full text-xl hover:bg-secondarycont hover:text-secondarycont">
+            <Link href="/search">
+              <a>View Products</a>
+            </Link>
+          </button>
         </div>
       </div>
     </>

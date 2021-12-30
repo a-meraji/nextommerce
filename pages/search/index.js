@@ -54,7 +54,6 @@ export default function index({ products, allCategories }) {
               products={proSt}
               limit={100}
             />
-            ;
           </div>
           {/* set sort view of search results */}
           <SortItems />

@@ -1,6 +1,5 @@
 import { sortView } from "../shared/json";
 import { useRouter } from "next/router";
-import { server } from "../config";
 import { useGlobalContext } from "../Contexts/globalContext/context";
 
 function SortItems() {
