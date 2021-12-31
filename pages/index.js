@@ -11,7 +11,7 @@ export default function Home({ newArivals, sales }) {
       <div className="bg-secondary">
         <Intro />
         {newArivals.length > 0 ? (
-          <div className="w-[66%] mx-auto mt-36 mb-20">
+          <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-20">
             <motion.h4
               initial={{ y: 0, opacity: 0 }}
               whileInView={{ y: -40, opacity: 1 }}
@@ -26,7 +26,7 @@ export default function Home({ newArivals, sales }) {
         ) : null}
         <Moto1 />
         {sales.length > 0 ? (
-          <div className="w-[66%] mx-auto mt-36 mb-10">
+          <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-10">
             <motion.h4
               initial={{ y: 0, opacity: 0 }}
               whileInView={{ y: -40, opacity: 1 }}

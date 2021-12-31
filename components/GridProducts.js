@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 export default function GridProducts({ products, limit }) {
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 pt-28">
+    <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 pt-28">
       {products?.map((product, i) => {
         if (i >= limit) return;
         return (
@@ -23,10 +23,10 @@ export default function GridProducts({ products, limit }) {
               className="w-full object-contain"
               src={product.store[0]["imgUrls"][0]}
             />
-            <div className="group-hover:bg-hover absolute bottom-0 right-0 left-0  text-secondary rounded-sm">
+            <div className="opacity-75 bg-secondary text-secondary group-hover:bg-primarycont group-hover:text-secondarycont absolute bottom-0 right-0 left-0 rounded-sm">
               <div className="flex justify-between px-2 text-lg">
-                <p className="max-w-[90%]">{product.name.replace(/_/g, " ")}</p>
-                <p>{product.price}$</p>
+                <p className="-ml-1 whitespace-nowrap  overflow-hidden">{product.name.replace(/_/g, " ")}</p>
+                <p className="-mr-1 ml-1">{product.price}$</p>
               </div>
             </div>
           </motion.div>

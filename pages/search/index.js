@@ -43,7 +43,7 @@ export default function index({ products, allCategories }) {
           {/* selecting categories */}
           <SideCategories categories={allCategories} />
           {/* showing result for search */}
-          <div className="w-[60%] sm:w-[56%] mx-auto">
+          <div className="w-[85%] sm:w-[60%] mx-auto">
             <h4 className="mb-4">
               {products?.length > 0
                 ? `Found ${products.length} items to show`
