@@ -76,7 +76,6 @@ const readOneProduct = async (req, res) => {
       conObj[filter] = new RegExp(value, "i");
     }
   }
-
   try {
     let product;
     if (id) {
