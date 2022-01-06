@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
+import Link from "next/link";
 export default function GridProducts({ products, limit }) {
   return (
     <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 pt-28">
       {products?.map((product, i) => {
         if (i >= limit) return;
         return (
-          <motion.div
+          <Link href={`/product/${product.name}`} key={i}>
+          <motion.a
             initial={{ opacity: 0, y: 0 }}
             whileInView={{ opacity: 1, y: -100 }}
             viewport={{ once: true }}
@@ -16,7 +18,6 @@ export default function GridProducts({ products, limit }) {
               y: { ease: "easeOut", duration: 1 },
               scale: { ease: "easeIn", duration: 0.3 },
             }}
-            key={i}
             className={`group relative w-full bg-third rounded-sm transition-colors`}
           >
             <img
@@ -29,7 +30,8 @@ export default function GridProducts({ products, limit }) {
                 <p className="-mr-1 ml-1">{product.price}$</p>
               </div>
             </div>
-          </motion.div>
+          </motion.a>
+                </Link>
         );
       })}
     </div>

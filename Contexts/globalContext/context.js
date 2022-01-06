@@ -1,5 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 import { useRouter } from "next/router";
+import reducer from "../Reducer/reducer";
+
+import {
+  CLEAR_CART,
+  REMOVE,
+  GET_TOTALS,
+  LOADING,
+  DISPLAY_ITEMS,
+  TOGGLE_AMOUNT,
+  ADD,
+} from "../Reducer/types";
 import {
   sale,
   latest,
@@ -7,6 +18,8 @@ import {
   price_dec,
   relevence,
 } from "../../shared/json/index";
+
+// get prefered theme saved on the browser and if exist then set the theme base on that
 const getInitialTheme = () => {
   if (typeof window !== "undefined" && window.localStorage) {
     const storedPrefs = window.localStorage.getItem("color-theme");
@@ -23,11 +36,46 @@ const getInitialTheme = () => {
   return "dark"; // light theme as the default;
 };
 
+// initial reducer values 
+const reducernitialState = {
+  loading: false,
+  cart: [],
+  total: 0,
+  amount: 0,
+};
+
+/* ********  CONTEXT ************ */
 const Context = React.createContext();
 
 const ContextProvider = ({ initialTheme, children }) => {
   const router = useRouter();
 
+  const [state, dispatch] = useReducer(reducer, reducernitialState);
+  // all functionallities to work with reducers with diferent dispatches
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART });
+  };
+  const remove = (name) => {
+    dispatch({ type: REMOVE, payload: index });
+  };
+  const cartChange = (name, type) => {
+    dispatch({ type: TOGGLE_AMOUNT, payload: { index, type } });
+  };
+  const displayCart = () => {
+    dispatch({ type: DISPLAY_ITEMS });
+  };
+  const addItem = (item) => {
+    dispatch({ type:ADD, payload: {item} })
+}  
+  useEffect(() => {
+    dispatch({ type: 'GET_TOTALS' })
+    // check browser history
+  }, [state.cart])
+
+
+  // set the theme from window storage or preferences
+  //then set root classlist (diffrent classes on root have diffrent values for a colorName)
+  // and also whenever theme changed then set root classList and window storage again.
   const [theme, setTheme] = React.useState(getInitialTheme);
 
   const ToggleTheme = (rawTheme) => {
@@ -48,15 +96,14 @@ const ContextProvider = ({ initialTheme, children }) => {
     ToggleTheme(theme);
   }, [theme]);
 
-  // side bar
+  // side bar display condition
   const [showSide, setShowSide] = useState(false);
   function sideToggler() {
     setShowSide(!showSide);
   }
 
-  // sort products
+  // sort products for view base on the choosen filter
   const [sort, setSort] = useState("relevence");
-
   function sorter(rawProducts) {
     let sortedProducts = [...rawProducts];
 
@@ -82,9 +129,17 @@ const ContextProvider = ({ initialTheme, children }) => {
 
     return sortedProducts;
   }
+
+
   return (
     <Context.Provider
       value={{
+        ...state,
+        clearCart,
+        remove,
+        cartChange,
+        displayCart,
+        addItem,
         theme,
         setTheme,
         showSide,

@@ -1,7 +1,6 @@
 import {server} from "../../config/index";
 import GridProducts from "../../components/GridProducts";
 import SingleProduct from "../../components/SingleProduct";
-import { useState } from "react";
 
 export default function id({ product, relateds }) {
 
@@ -19,24 +18,6 @@ export default function id({ product, relateds }) {
             <GridProducts products={relateds} limit="10" />
           </div>
         </section>
-        <style svg>{`
-        .gridy{
-          
-        }
-        @media screen and (min-width: 640px) {
-          .gridy{
-            grid-template-columns: 65vw 35vw;
-          }
-        }
-        .chevron{
-          -webkit-transition: -webkit-transform .3s ease-in-out;
-          -ms-transition: -ms-transform .3s ease-in-out;
-          transition: transform .3s ease-in-out;  
-        }
-        .dropdown{
-          transition: all .3s ease-in-out;  
-        }
-        `}</style>
       </div>
     </>
   );
@@ -52,7 +33,7 @@ export async function getStaticProps(cnx) {
     },
   });
 
-  const relatedsRes = await fetch(`${server}/api/product/crud`,{
+  const relatedsRes = await fetch(`${server}/api/product/crud?cat=t-shirt`,{
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -72,16 +53,16 @@ export async function getStaticProps(cnx) {
 
 export async function getStaticPaths() {
 
-  const relatedRes =  await fetch(`${server}/api/product/crud?cat=t-shirt`, {
+  const allProductRes =  await fetch(`${server}/api/product/crud`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
 
-  const relateds = await relatedRes.json();
+  const allProducts = await allProductRes.json();
 
-  const paths = relateds.map((item)=>({params:{name: item.name}}))
+  const paths = allProducts.map((item)=>({params:{name: item.name}}))
 
   return { paths, fallback: 'blocking' }
 }

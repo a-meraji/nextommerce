@@ -1,20 +1,25 @@
+import { useState } from "react";
+import { useGlobalContext } from "../Contexts/globalContext/context";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { server } from "../config";
+
+// theme toggle Button
+import Toggle from "./ThemeToggle";
+
+// icons
 import {
   SearchIcon,
   MenuIcon,
   ShoppingBagIcon,
   UserCircleIcon,
 } from "@heroicons/react/outline";
-import Link from "next/link";
-import { useGlobalContext } from "../Contexts/globalContext/context";
-import Toggle from "./ThemeToggle";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { server } from "../config";
 
 function Navbar() {
   const router = useRouter();
+  const { sideToggler, amount } = useGlobalContext();
+  // setting value of search input
   const [search, setSearch] = useState(router.query.q ? router.query.q : "");
-  const { sideToggler } = useGlobalContext();
   return (
     <>
       <nav className="z-40 sticky top-0 flex justify-between text-sm items-center px-3 py-5 bg-transparent text-secondary glob-trans">
@@ -42,11 +47,11 @@ function Navbar() {
               onChange={(e) => setSearch(e.target.value)}
               onKeyUp={(e) => {
                 if (e.key === "Enter") {
-                  let currentUrlParams = new URLSearchParams(
-                    router.query
-                    );
-                    currentUrlParams.set("q", search);
-                    router.push(server + "/search?" + currentUrlParams.toString());
+                  let currentUrlParams = new URLSearchParams(router.query);
+                  currentUrlParams.set("q", search);
+                  router.push(
+                    server + "/search?" + currentUrlParams.toString()
+                  );
                 }
               }}
               type="text"
@@ -60,10 +65,15 @@ function Navbar() {
           <div className="mr-3 sm:mr-6 mt-1">
             <Toggle />
           </div>
-          <div className="mr-3 sm:mr-6 mt-1 hover:text-primary">
+          <div className="mr-3 sm:mr-6 mt-1 hover:text-primary relative flex flex-row">
             <button>
               <ShoppingBagIcon className="w-[22px] h-[22px]" />
             </button>
+            {amount !== 0 ? (
+              <div className="text-xs absolute text-center bottom-0 -right-2 w-4 h-4 rounded-full bg-secondarycont text-secondarycont">
+                {amount}
+              </div>
+            ) : null}
           </div>
           <div>
             <button>
