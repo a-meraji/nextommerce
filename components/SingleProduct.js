@@ -13,7 +13,7 @@ function SingleProduct({ product }) {
   const router = useRouter();
   const { name, price, store, description } = product;
 
-  const { addItem } = useGlobalContext();
+  const { addItem, cartToggler } = useGlobalContext();
 
   // take out all image urls from store and push into images[]
   var images = [];
@@ -24,6 +24,10 @@ function SingleProduct({ product }) {
   // Product & Cart State
   const [color, setColor] = useState(store[0]["color"]);
   const [size, setSize] = useState(store[0]["sizeAmnt"][0]["size"]);
+useEffect(() => {
+  setColor(store[0]['color']);
+  setSize(store[0]["sizeAmnt"][0]["size"])
+}, [store])
 
   // UI States
   const [imgIndex, setImgIndex] = useState(0);
@@ -122,28 +126,46 @@ function SingleProduct({ product }) {
                 </button>
               ))}
             </div>
-            <h4 className="mb-1">Size</h4>
-            <div className="flex flex-row mb-5">
-              {store.map((item) => {
-                if (item.color === color) {
-                  return item["sizeAmnt"].map((subItem) => {
-                    if (subItem.amount > 0) {
-                      return (
-                        <button
-                          onClick={() => setSize(subItem.size)}
-                          className="mr-2 text-sm"
-                        >
-                          {subItem.size}
-                        </button>
-                      );
+            {store[0]['sizeAmnt'][0]['size'] != "" ? (
+              <>
+                {" "}
+                <h4 className="mb-1">Size</h4>
+                <div className="flex flex-row mb-5">
+                  {store.map((item) => {
+                    if (item.color === color) {
+                      return item["sizeAmnt"].map((subItem) => {
+                        if (subItem.amount > 0) {
+                          return (
+                            <button
+                              onClick={() => setSize(subItem.size)}
+                              className="mr-2 text-sm"
+                            >
+                              {subItem.size}
+                            </button>
+                          );
+                        }
+                      });
                     }
-                  });
-                }
-              })}
-            </div>
+                  })}
+                </div>
+              </>
+            ) : null}
           </div>
           <p className="mb-4">{description}</p>
-          <button onClick={()=>addItem({name,price, amount:1, color, size, image:images[0]})} className="bg-primarycont text-primarycont w-full text-lg curier  py-5 mx-auto my-8 hover:opacity-70">
+          <button
+            onClick={() => {
+              addItem({
+                name,
+                price,
+                amount: 1,
+                color,
+                size,
+                image: images[0],
+              });
+              cartToggler();
+            }}
+            className="bg-primarycont text-primarycont w-full text-lg curier  py-5 mx-auto my-8 hover:opacity-70"
+          >
             ADD TO CART
           </button>
           {/* dropdowns */}

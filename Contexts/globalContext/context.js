@@ -55,10 +55,10 @@ const ContextProvider = ({ initialTheme, children }) => {
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
   };
-  const remove = (name) => {
+  const remove = (index) => {
     dispatch({ type: REMOVE, payload: index });
   };
-  const cartChange = (name, type) => {
+  const cartChange = (index, type) => {
     dispatch({ type: TOGGLE_AMOUNT, payload: { index, type } });
   };
   const displayCart = () => {
