@@ -143,7 +143,7 @@ function SingleProduct({ product }) {
             </div>
           </div>
           <p className="mb-4">{description}</p>
-          <button onClick={()=>addItem({name,price, amount:1, color, size})} className="bg-primarycont text-primarycont w-full text-lg curier  py-5 mx-auto my-8 hover:opacity-70">
+          <button onClick={()=>addItem({name,price, amount:1, color, size, image:images[0]})} className="bg-primarycont text-primarycont w-full text-lg curier  py-5 mx-auto my-8 hover:opacity-70">
             ADD TO CART
           </button>
           {/* dropdowns */}

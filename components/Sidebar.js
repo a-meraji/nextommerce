@@ -1,7 +1,7 @@
 import { useGlobalContext } from "../Contexts/globalContext/context";
-import { XIcon } from "@heroicons/react/outline";
-import { sideList, socialLinks } from "../shared/json";
 import Link from "next/link";
+import { sideList, socialLinks } from "../shared/json";
+import { XIcon } from "@heroicons/react/outline";
 function Sidebar() {
   const { showSide, sideToggler } = useGlobalContext();
 

@@ -36,7 +36,7 @@ const getInitialTheme = () => {
   return "dark"; // light theme as the default;
 };
 
-// initial reducer values 
+// initial reducer values
 const reducernitialState = {
   loading: false,
   cart: [],
@@ -65,13 +65,12 @@ const ContextProvider = ({ initialTheme, children }) => {
     dispatch({ type: DISPLAY_ITEMS });
   };
   const addItem = (item) => {
-    dispatch({ type:ADD, payload: {item} })
-}  
+    dispatch({ type: ADD, payload: { item } });
+  };
   useEffect(() => {
-    dispatch({ type: 'GET_TOTALS' })
+    dispatch({ type: "GET_TOTALS" });
     // check browser history
-  }, [state.cart])
-
+  }, [state.cart]);
 
   // set the theme from window storage or preferences
   //then set root classlist (diffrent classes on root have diffrent values for a colorName)
@@ -101,7 +100,11 @@ const ContextProvider = ({ initialTheme, children }) => {
   function sideToggler() {
     setShowSide(!showSide);
   }
-
+  // cart display condition
+  const [showCart, setShowCart] = useState(false);
+  function cartToggler() {
+    setShowCart(!showCart);
+  }
   // sort products for view base on the choosen filter
   const [sort, setSort] = useState("relevence");
   function sorter(rawProducts) {
@@ -130,7 +133,6 @@ const ContextProvider = ({ initialTheme, children }) => {
     return sortedProducts;
   }
 
-
   return (
     <Context.Provider
       value={{
@@ -144,6 +146,8 @@ const ContextProvider = ({ initialTheme, children }) => {
         setTheme,
         showSide,
         sideToggler,
+        showCart,
+        cartToggler,
         sorter,
         sort,
         setSort,

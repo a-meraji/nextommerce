@@ -33,6 +33,21 @@ module.exports = {
         alert: 'var(--color-alert)',
         danger: 'var(--color-danger)',
       },
+      borderColor: {
+        primary: 'var(--color-bg-primary)',
+        primarycont: 'var(--color-bg-primary-cont)',
+        secondary: 'var(--color-bg-secondary)',
+        secondarycont: 'var(--color-bg-secondary-cont)',
+
+        third: 'var(--color-bg-three)',
+        hover: 'var(--color-bg-hover)',
+        cont: 'var(--color-bt-gray)',
+        accent: 'var(--color-accent)',
+        success: 'var(--color-success)',
+        approve: 'var(--color-approve)',
+        alert: 'var(--color-alert)',
+        danger: 'var(--color-danger)',
+      }
     },
   },
   variants: {

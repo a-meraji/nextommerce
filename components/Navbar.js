@@ -17,7 +17,7 @@ import {
 
 function Navbar() {
   const router = useRouter();
-  const { sideToggler, amount } = useGlobalContext();
+  const { sideToggler, amount, cartToggler } = useGlobalContext();
   // setting value of search input
   const [search, setSearch] = useState(router.query.q ? router.query.q : "");
   return (
@@ -66,7 +66,7 @@ function Navbar() {
             <Toggle />
           </div>
           <div className="mr-3 sm:mr-6 mt-1 hover:text-primary relative flex flex-row">
-            <button>
+            <button onClick={cartToggler}>
               <ShoppingBagIcon className="w-[22px] h-[22px]" />
             </button>
             {amount !== 0 ? (
