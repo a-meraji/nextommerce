@@ -22,25 +22,25 @@ function Navbar() {
   const [search, setSearch] = useState(router.query.q ? router.query.q : "");
   return (
     <>
-      <nav className="z-40 sticky top-0 flex justify-between text-sm items-center px-3 py-5 bg-transparent text-secondary glob-trans">
+      <nav className="z-40 sticky top-0 flex justify-between text-sm items-center px-3 py-5 bg-transparent text-primary glob-trans">
         <div className="flex ">
           <button onClick={sideToggler}>
-            <MenuIcon className="cursor-pointer w-[22px] h-[22px] hover:text-primary" />
+            <MenuIcon className="cursor-pointer w-[22px] h-[22px] hover:text-accent" />
           </button>
           <div className="hidden sm:flex">
-            <div className="ml-6 hover:text-primary">
+            <div className="ml-6 hover:text-accent">
               <Link href="/">
                 <a>Home</a>
               </Link>
             </div>
-            <div className="ml-6 hover:text-primary">
+            <div className="ml-6 hover:text-accent">
               <Link href="/search">
                 <a>Categories</a>
               </Link>
             </div>
           </div>
         </div>
-        <div className="flex justify-between max-w-min bg-third hover:bg-hover hover:text-primary py-1 px-2 rounded-full ">
+        <div className="flex justify-between max-w-min bg-third hover:bg-hover hover:text-accent py-1 px-2 rounded-full ">
           <div className="form-control min-w-[150px] sm:min-w-[200px] md:min-w-[250px] ">
             <input
               value={search}
@@ -65,7 +65,7 @@ function Navbar() {
           <div className="mr-3 sm:mr-6 mt-1">
             <Toggle />
           </div>
-          <div className="mr-3 sm:mr-6 mt-1 hover:text-primary relative flex flex-row">
+          <div className="mr-3 mb-1 sm:mr-6 mt-1 hover:text-accent relative flex flex-row">
             <button onClick={cartToggler}>
               <ShoppingBagIcon className="w-[22px] h-[22px]" />
             </button>
@@ -75,13 +75,13 @@ function Navbar() {
               </div>
             ) : null}
           </div>
-          <div>
+          <div className="hover:text-accent">
             <button>
               {/* <img
               className="w-7 h-7 rounded-full"
               src="https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
             ></img> */}
-              <UserCircleIcon className="w-[24px] h-[24px] mt-1" />
+              <UserCircleIcon className="w-[24px] h-[24px] mt-1 " />
             </button>
           </div>
         </div>

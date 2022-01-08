@@ -10,6 +10,7 @@ import {
   DISPLAY_ITEMS,
   TOGGLE_AMOUNT,
   ADD,
+  CART_CHANGE,
 } from "../Reducer/types";
 import {
   sale,
@@ -67,9 +68,30 @@ const ContextProvider = ({ initialTheme, children }) => {
   const addItem = (item) => {
     dispatch({ type: ADD, payload: { item } });
   };
+  const getTotal = () => {
+    dispatch({ type: GET_TOTALS });
+  };
+  // get the cart from local storage in case user refresh
   useEffect(() => {
-    dispatch({ type: "GET_TOTALS" });
-    // check browser history
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("cart");
+      if (typeof storedCart === "string") {
+        const cartArr = JSON.parse(storedCart);
+        dispatch({ type: CART_CHANGE, payload: cartArr });
+        //add storage eventlistener for syncing cart in all tabs
+        window.addEventListener("storage", onStorageUpdate);
+        return () => {
+          window.removeEventListener("storage", onStorageUpdate);
+        };
+      }
+    }
+  }, []);
+  // update check bill whenever cart change
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      getTotal();
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+    }
   }, [state.cart]);
 
   // set the theme from window storage or preferences
@@ -91,7 +113,7 @@ const ContextProvider = ({ initialTheme, children }) => {
     ToggleTheme(initialTheme);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     ToggleTheme(theme);
   }, [theme]);
 
@@ -132,6 +154,18 @@ const ContextProvider = ({ initialTheme, children }) => {
 
     return sortedProducts;
   }
+
+  //update states in all tabs
+  const onStorageUpdate = (e) => {
+    const { key, newValue } = e;
+    if (key === "cart") {
+      const cartArr = JSON.parse(newValue);
+      dispatch({ type: CART_CHANGE, payload: cartArr });
+    }
+    if (key === "color-theme") {
+      setTheme(newValue);
+    }
+  };
 
   return (
     <Context.Provider

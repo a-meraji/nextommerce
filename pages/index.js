@@ -40,7 +40,7 @@ export default function Home({ newArivals, sales }) {
           </div>
         ) : null}
         <div className="w-full flex justify-center pb-24">
-          <button className="py-2 px-5 bg-hover text-secondary rounded-full text-xl hover:bg-secondarycont hover:text-secondarycont">
+          <button className="py-2 px-5 bg-accent text-primarycont rounded-full text-xl hover:scale-105 transition-transform">
             <Link href="/search">
               <a>View Products</a>
             </Link>

@@ -8,10 +8,11 @@ import {
   INCREASE,
   DECREASE,
   ADD,
+  CART_CHANGE,
 } from "./types";
 
 const reducer = (state, action) => {
-  console.log(action.type);
+  // console.log(action.type);
   if (action.type === CLEAR_CART) {
     return { ...state, cart: [] };
   }
@@ -71,7 +72,9 @@ const reducer = (state, action) => {
     tempC.push(newItem)
     return { ...state, cart: tempC }   
   }
-  
+  if(action.type === CART_CHANGE){
+    return {...state, cart: action.payload}
+  }
   throw new Error("no matching action type");
 };
 

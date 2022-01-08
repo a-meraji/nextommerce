@@ -93,7 +93,7 @@ useEffect(() => {
         {/* picture silder */}
         <div
           id="slide-container"
-          className="flex  flex-cols bg-primary overflow-scroll scrollbar-hide"
+          className="flex  flex-cols bg-secondary overflow-scroll scrollbar-hide"
         >
           {images.map((url, i) => (
             <img
@@ -108,8 +108,8 @@ useEffect(() => {
               }}
               src={url}
               className={`${
-                i === imgIndex ? "bg-primarycont" : null
-              } w-[33%] max-w-[200px] m-[1px] bg-secondary object-contain`}
+                i === imgIndex ? "bg-secondarycont" : null
+              } w-[33%] max-w-[200px] m-[1px] bg-third object-contain`}
             />
           ))}
         </div>

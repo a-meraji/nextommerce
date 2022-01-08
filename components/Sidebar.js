@@ -25,7 +25,7 @@ function Sidebar() {
       <ul className=" mt-4">
         {sideList.map((item, i) => (
           <li
-            className="flex pl-4 py-3 rounded-full w-1/2 hover:w-full hover:text-primary hover:bg-third glob-trans hover:ml-4"
+            className="flex pl-4 py-3 rounded-full w-1/2 hover:w-full hover:text-primary hover:bg-hover glob-trans hover:ml-4"
             key={i}
             onClick={sideToggler}
           >
@@ -40,7 +40,7 @@ function Sidebar() {
       <ul className="flex justify-center">
         {socialLinks.map((item, i) => (
           <li
-            className="mx-3 p-1 -mb-1 glob-trans hover:scale-150 hover:text-primary rounded-full hover:bg-third"
+            className="mx-3 p-1 -mb-1 glob-trans hover:scale-150 hover:text-primary rounded-full hover:bg-hover"
             key={i}
           >
             <Link href={item.url}>

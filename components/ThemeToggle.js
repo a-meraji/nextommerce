@@ -7,7 +7,7 @@ const Toggle = () => {
     const { theme, setTheme } = useGlobalContext();
 
     return (
-        <div className="transition cursor-pointer hover:text-primary rounded-full">
+        <div className="transition cursor-pointer hover:text-accent rounded-full">
             {theme === 'dark' ? (
                 <SunIcon width='22px'
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}

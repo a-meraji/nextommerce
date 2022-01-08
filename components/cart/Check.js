@@ -1,6 +1,6 @@
 export default function Check({total: subtotal}) {
     return (
-        <div className="my-3 text-sm fixed bottom-0 left-0 right-0 px-10 curier">
+        <div className="my-3 text-sm px-10 curier">
       <div className="min-w-full min-h-[1px] bg-primarycont my-2 -mx-10"></div>
             <div className="flex flex-row justify-between"><div>Subtotal</div><div>$ {subtotal}</div></div>
             <div className="my-1 flex flex-row justify-between"><div>Taxes</div><div>Calculated at checkout</div></div>

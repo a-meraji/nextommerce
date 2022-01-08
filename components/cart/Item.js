@@ -6,7 +6,7 @@ export default function Item({ item, index }) {
   const { image, name, color, size, price, amount } = item;
   const { remove, cartChange } = useGlobalContext();
   return (
-    <div className="my-3 overflow-scroll scrollbar-hide">
+    <div className="mt-6">
       <div className="flex flex-row">
         <img
           src={image}

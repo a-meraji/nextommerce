@@ -24,7 +24,7 @@ export default function GridProducts({ products, limit }) {
               className="w-full object-contain"
               src={product.store[0]["imgUrls"][0]}
             />
-            <div className="opacity-75 bg-secondary text-secondary group-hover:bg-primarycont group-hover:text-secondarycont absolute bottom-0 right-0 left-0 rounded-sm">
+            <div className="text-secondary group-hover:bg-primarycont group-hover:text-secondarycont absolute bottom-0 right-0 left-0 rounded-sm">
               <div className="flex justify-between px-2 text-lg">
                 <p className="-ml-1 whitespace-nowrap  overflow-hidden">{product.name.replace(/_/g, " ")}</p>
                 <p className="-mr-1 ml-1">{product.price}$</p>

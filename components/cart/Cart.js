@@ -11,7 +11,7 @@ function Cart() {
   const { showCart, cartToggler, cart, total, amount } = useGlobalContext();
   return (
     <article
-      className={`py-4 px-10 z-50 glob-trans fixed top-0 right-0 w-screen md:w-[35vw] h-screen bg-primary text-primary`}
+      className={`py-4 px-10 z-50 glob-trans fixed top-0 bottom-0 right-0 w-screen md:w-[60vw] lg:w-[35vw] bg-primary text-primary`}
       style={
         showCart
           ? { transform: "translate(0%,0%)" }
@@ -23,11 +23,15 @@ function Cart() {
       </button>
 
       {amount > 0 ? (
-      <div className="">
+      <>
       <h4 className="my-4 text-2xl font-semibold"> My Cart </h4>
+      <div className="h-[87%] flex flex-col justify-between">
+        <div className="overflow-scroll scrollbar-hide">
         {cart.map((item, i) => <Item key={i} index={i} item={item} />)}
-        <Check total={total} />
         </div>
+        <Check total={total} />
+      </div>
+        </>
         ) : (
           <EmptyCart />
           )}
