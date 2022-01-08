@@ -1,7 +1,6 @@
 import { sortView } from "../shared/json";
 import { useRouter } from "next/router";
 import { useGlobalContext } from "../Contexts/globalContext/context";
-
 function SortItems() {
   const router = useRouter();
   const { sort, setSort } = useGlobalContext();

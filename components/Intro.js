@@ -1,6 +1,8 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from "next/image";
 import { useEffect } from "react";
+
 export default function Intro() {
   useEffect(() => {
     AOS.init({
@@ -13,11 +15,15 @@ export default function Intro() {
       <div className="text-secondary curier">
         <div className="h-[100vh]">
           <div className="relative h-screen -top-10 left-0 right-0">
-            <img
+            <div className="relative w-screen h-screen">
+            <Image
               data-aos="fade"
+              layout="fill"
+              priority={true}
               src="https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F115%2F489%2FHat-front-black__72990.1603748583.png&w=640&q=85"
-              className="w-full h-screen object-contain bg-transparent"
-            />
+              className="object-contain bg-transparent"
+              />
+              </div>
             <p
               data-aos="fade-up"
               className="absolute  left-0 right-0 text-center top-[65%] sm:top-[75%] text-lg"

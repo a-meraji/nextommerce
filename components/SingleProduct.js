@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useGlobalContext } from "../Contexts/globalContext/context";
 import { useRouter } from "next/router";
-
+import CostumeImg from "../shared/utils/imageOpt";
 //icons
 import {
   ArrowRightIcon,
   ArrowLeftIcon,
   ChevronRightIcon,
 } from "@heroicons/react/outline";
+
 
 function SingleProduct({ product }) {
   const router = useRouter();
@@ -24,10 +25,10 @@ function SingleProduct({ product }) {
   // Product & Cart State
   const [color, setColor] = useState(store[0]["color"]);
   const [size, setSize] = useState(store[0]["sizeAmnt"][0]["size"]);
-useEffect(() => {
-  setColor(store[0]['color']);
-  setSize(store[0]["sizeAmnt"][0]["size"])
-}, [store])
+  useEffect(() => {
+    setColor(store[0]["color"]);
+    setSize(store[0]["sizeAmnt"][0]["size"]);
+  }, [store]);
 
   // UI States
   const [imgIndex, setImgIndex] = useState(0);
@@ -60,10 +61,11 @@ useEffect(() => {
       {/* col 1 */}
       <div className="">
         <div className="relative text-primary">
-          <img
-            className="h-[70vh] object-contain mx-auto"
-            src={images[imgIndex]}
-          />
+          <div className="h-[70vh] relative">
+
+
+            <CostumeImg alt={name} src={images[imgIndex]} />
+            </div>
           <div className="absolute top-0 left-0">
             <p className="bg-primary bg-opacity-70 pt-3 pb-1 px-6 text-4xl font-semibold capitalize">
               {name.replace(/_/g, " ")}
@@ -126,7 +128,7 @@ useEffect(() => {
                 </button>
               ))}
             </div>
-            {store[0]['sizeAmnt'][0]['size'] != "" ? (
+            {store[0]["sizeAmnt"][0]["size"] != "" ? (
               <>
                 {" "}
                 <h4 className="mb-1">Size</h4>
