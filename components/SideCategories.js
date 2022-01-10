@@ -4,6 +4,8 @@ import Link from "next/link";
 export default function SideCategories({ categories }) {
   const router = useRouter();
   return (
+    <>
+    {/* for tablet and pc view port */}
     <div className="hidden relative sm:block w-[15%] pl-3">
       <div className="absolute top-0 right-0">
 
@@ -33,5 +35,8 @@ export default function SideCategories({ categories }) {
       </div>
         </div>
     </div>
+    {/* for mobile view port */}
+    <div className="absolute top-0 left-0 block sm:hidden mx-5">1</div>
+    </>
   );
 }

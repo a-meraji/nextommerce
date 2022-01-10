@@ -60,8 +60,8 @@ function SingleProduct({ product }) {
     <section className="grid gridy">
       {/* col 1 */}
       <div className="">
-        <div className="relative text-primary pt-20 md:pt-0 max-w-[80%]">
-          <div className="absolute top-0 left-0 z-10">
+        <div className="relative text-primary">
+          <div className="absolute top-0 left-0 sm:z-10">
             <p className="bg-primary pt-3  pl-5 pr-3 text-4xl font-semibold capitalize">
               {name.replace(/_/g, " ")}
             </p>
@@ -80,7 +80,7 @@ function SingleProduct({ product }) {
               shimmer(600, 400)
             )}`}
           />
-
+          {/* left and right arrow buttons */}
           <div className="absolute bottom-3 right-5 rounded-[50%] bg-primary bg-opacity-70 w-12  h-12 p-1 text-xs flex flex-row">
             <ArrowLeftIcon
               onClick={() => {
@@ -151,6 +151,11 @@ function SingleProduct({ product }) {
                       : "transparent",
                   }}
                 >
+                  {item.color === color ? (
+                    <span className="absolute top-0 bottom-0 left-0 right-0 text-primary">
+                      <CheckIcon />
+                    </span>
+                  ) : null}
                   {item.colorCode !== null ? (
                     <span className=" invisible sub-color group-hover:visible transition-all absolute text-xs top-8 left-1/2 -translate-x-1/2  p-2 bg-secondarycont text-secondarycont rounded-md">
                       {item.color}
