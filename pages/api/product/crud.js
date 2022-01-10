@@ -30,7 +30,7 @@ const createProduct = async (req, res) => {
   if (name && category && price && store && description) {
     try {
       const product = new Product({
-        name,
+        name: name.toLowerCase(),
         category,
         price,
         store,
@@ -117,7 +117,7 @@ const updateProduct = async (req, res) => {
       Product.findByIdAndUpdate(
         id,
         {
-          name,
+          name: name.toLowerCase(),
           category,
           price,
           store,

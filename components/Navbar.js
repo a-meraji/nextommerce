@@ -22,7 +22,7 @@ function Navbar() {
   const [search, setSearch] = useState(router.query.q ? router.query.q : "");
   return (
     <>
-      <nav className="z-40 sticky top-0 flex justify-between text-sm items-center px-3 py-5 bg-transparent text-primary glob-trans">
+      <nav className="z-40 sticky top-0 flex justify-between text-sm items-center px-5 py-5 bg-transparent text-primary glob-trans">
         <div className="flex ">
           <button onClick={sideToggler}>
             <MenuIcon className="cursor-pointer w-[22px] h-[22px] hover:text-accent" />
@@ -41,7 +41,7 @@ function Navbar() {
           </div>
         </div>
         <div className="flex justify-between max-w-min bg-third hover:bg-hover hover:text-accent py-1 px-2 rounded-full ">
-          <div className="form-control min-w-[150px] sm:min-w-[200px] md:min-w-[250px] ">
+          <div className="form-control min-w-[110px] sm:min-w-[200px] md:min-w-[250px] ">
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -62,10 +62,10 @@ function Navbar() {
           <SearchIcon className="w-5 h-5 mr-1" />
         </div>
         <div className="flex">
-          <div className="mr-3 sm:mr-6 mt-1">
+          <div className="mr-5 sm:mr-6 mt-1">
             <Toggle />
           </div>
-          <div className="mr-3 mb-1 sm:mr-6 mt-1 hover:text-accent relative flex flex-row">
+          <div className="mr-5 mb-1 sm:mr-6 mt-1 hover:text-accent relative flex flex-row">
             <button onClick={cartToggler}>
               <ShoppingBagIcon className="w-[22px] h-[22px]" />
             </button>

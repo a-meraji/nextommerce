@@ -28,7 +28,7 @@ function create() {
 
   //states for diffrent kinds of a product diffrent colors sizes and amounts
   const [storeSt, setStoreSt] = useState([
-    { color: "", sizeAmnt: [{ size: "", amount: 0 }], imgUrls: [] },
+    { color: "", colorCode:"", sizeAmnt: [{ size: "", amount: 0 }], imgUrls: [] },
   ]);
   // final product
   const [save, setSave] = useState(false);
@@ -154,6 +154,7 @@ function create() {
                   ...storeSt,
                   {
                     color: "",
+                    colorCode: "",
                     sizeAmnt: [{ size: "", amount: 0 }],
                     imgUrls: [],
                   },

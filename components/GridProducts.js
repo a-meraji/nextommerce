@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
-import CostumeImg from "../shared/utils/imageOpt";
+import Image from "next/image";
+import { shimmer, toBase64 } from "../shared/utils/imgPlaceholder";
 
 export default function GridProducts({ products, limit }) {
   return (
@@ -20,15 +21,16 @@ export default function GridProducts({ products, limit }) {
                 y: { ease: "easeOut", duration: 1 },
                 scale: { ease: "easeIn", duration: 0.3 },
               }}
-              className={`group relative w-[40vw] h-[40vw] sm:w-[18.5vw] sm:h-[18.5vw] bg-third  rounded-sm transition-colors`}
+              className={`group  bg-third  rounded-sm transition-colors`}
             >
-              {/* <img
-              className="w-full object-contain"
-              src={product.store[0]["imgUrls"][0]}
-            /> */}
-              <CostumeImg
+              <Image
                 alt={product.name}
                 src={product.store[0]["imgUrls"][0]}
+                width={300}
+                height={300}
+                className="object-contain"
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(300, 300))}`}
               />
 
               <div className="text-secondary group-hover:bg-primarycont group-hover:text-secondarycont absolute bottom-0 right-0 left-0 rounded-sm">

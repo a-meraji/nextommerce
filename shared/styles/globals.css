@@ -20,6 +20,8 @@ body{
   --color-bg-hover: #3c3c3c;
   --color-bg-primary-cont: #ffffff;
   --color-bg-secondary-cont: #eee;
+  --color-bg-hover-cont: #3f3f3f;
+
 
   --color-text-primary: #ffffff;
   --color-text-secondary: #b3b3b3;
@@ -41,7 +43,7 @@ body{
   --color-bg-hover: #efefef;
   --color-bg-primary-cont: #080808;
   --color-bg-secondary-cont: #151515;
-
+  --color-bg-hover-cont: #a0a0a0;
 
   --color-text-primary: #0c1214;
   --color-text-secondary: #505e67;

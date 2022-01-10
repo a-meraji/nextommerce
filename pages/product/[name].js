@@ -48,6 +48,7 @@ export async function getStaticProps(cnx) {
       product,
       relateds,
     },
+    revalidate: 900, //every 15 minutes
   }
 }
 

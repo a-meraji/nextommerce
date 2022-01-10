@@ -7,6 +7,7 @@ export default function TableKinds({
   setStoreSt,
 }) {
   const [color, setColor] = useState(storeSt[i].color);
+  const [clrCode, setClrCode] = useState(storeSt[i].colorCode)
 
   const TR = (val, j) => (
     <tr>
@@ -20,6 +21,20 @@ export default function TableKinds({
             setColor(e.target.value);
             let tempObj = storeSt;
             tempObj[i]["color"] = e.target.value;
+            setStoreSt(tempObj);
+          }}
+        />
+      </td>
+      <td>
+        <input
+          className="w-full bg-gray-300 bg-opacity-20 text-gray-200 p-1"
+          type="text"
+          placeholder="color code"
+          value={clrCode}
+          onChange={(e) => {
+            setClrCode(e.target.value);
+            let tempObj = storeSt;
+            tempObj[i]["colorCode"] = e.target.value;
             setStoreSt(tempObj);
           }}
         />
@@ -78,6 +93,7 @@ export default function TableKinds({
       <table className="mt-6 mb-4">
         <tr style={{ textAlign: "left" }}>
           <th>color</th>
+          <th>color code</th>
           <th>size</th>
           <th>amount</th>
         </tr>

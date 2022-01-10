@@ -154,6 +154,7 @@ console.log(newArival)
                   ...storeSt,
                   {
                     color: "",
+                    colorCode:"",
                     sizeAmnt: [{ size: "", amount: 0 }],
                     imgUrls: [],
                   },
