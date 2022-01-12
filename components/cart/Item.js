@@ -3,7 +3,7 @@ import { INCREASE, DECREASE } from "../../Contexts/Reducer/types";
 // icons
 import { XIcon, MinusIcon, PlusIcon } from "@heroicons/react/outline";
 export default function Item({ item, index }) {
-  const { image, name, color, size, price, amount } = item;
+  const { image, name, color, colorCode, size, price, amount } = item;
   const { remove, cartChange } = useGlobalContext();
   return (
     <div className="mt-6">
@@ -15,7 +15,17 @@ export default function Item({ item, index }) {
         <div className="w-full flex flex-col justify-start">
           <p className="text-lg">{name.replace(/_/g, " ")}</p>
           <div className="flex flex-row mt-0.5">
-            <p>color: {color}</p>
+            <p>
+              color:
+              <span
+                style={{
+                  backgroundColor: colorCode!==null ? colorCode : "transparent",
+                }}
+                className="ml-0.5 border-[1px] border-primarycont rounded-[50%] text-xs px-3 py-1"
+              >
+                {colorCode !== null ? null : color}
+              </span>
+            </p>
             {size ? (
               <p className="ml-3">
                 size:{" "}

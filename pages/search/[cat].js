@@ -39,7 +39,7 @@ export default function cats({ products, allCategories, category }) {
       <div className="fixed w-full py-10 top-0 bg-secondary glob-trans  z-30"></div>
       {/* search page */}
       <div className="bg-secondary text-secondary glob-trans">
-        <div className="flex flex-row pt-16 sm:pt-10 relative">
+        <div className="flex flex-row pt-32 sm:pt-10 relative">
           {/* selecting categories */}
           <SideCategories categories={allCategories} />
           {/* showing result for search */}

@@ -1,0 +1,16 @@
+.menuToggler {
+  position: absolute;
+  z-index: 2;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  opacity:0;
+}
+
+.menuLabel {
+  position: absolute;
+  z-index: 2;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}

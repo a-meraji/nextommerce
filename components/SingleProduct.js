@@ -25,6 +25,7 @@ function SingleProduct({ product }) {
 
   // Product & Cart State
   const [color, setColor] = useState(store[0]["color"]);
+  const [colorCode, setColorCode] = useState(store[0]["colorCode"]);
   const [size, setSize] = useState(store[0]["sizeAmnt"][0]["size"]);
   useEffect(() => {
     setColor(store[0]["color"]);
@@ -138,10 +139,10 @@ function SingleProduct({ product }) {
         <div>
           <div>
             <h4 className="mb-1 text-lg">Color</h4>
-            <div className="flex flex-row mb-7">
+            <div className="flex flex-row mb-7 flex-wrap">
               {store.map((item) => (
                 <button
-                  onClick={() => setColor(item.color)}
+                  onClick={() => {setColor(item.color); setColorCode(item.colorCode)}}
                   className={`${
                     item.color === color ? "border-2 border-primarycont" : null
                   } group hover:scale-110 transition-all relative mr-3 w-10 h-10 rounded-[50%]`}
@@ -170,7 +171,7 @@ function SingleProduct({ product }) {
               <>
                 {" "}
                 <h4 className="mb-1 text-xl">Size</h4>
-                <div className="flex flex-row mb-5">
+                <div className="flex flex-row mb-5 flex-wrap">
                   {store.map((item) => {
                     if (item.color === color) {
                       return item["sizeAmnt"].map((subItem, i) => {
@@ -183,7 +184,7 @@ function SingleProduct({ product }) {
                                 subItem.size === size
                                   ? "border-primarycont border-2 text-primary"
                                   : "border-hovercont border-[1px]"
-                              } hover:scale-110 transition-all mr-3 w-10 h-10 rounded-[50%]`}
+                              } hover:scale-110 mb-3 transition-all mr-3 w-10 h-10 rounded-[50%]`}
                             >
                               {subItem.size}
                             </button>
@@ -204,6 +205,7 @@ function SingleProduct({ product }) {
                 price,
                 amount: 1,
                 color,
+                colorCode,
                 size,
                 image: images[0],
               });
@@ -259,7 +261,7 @@ function SingleProduct({ product }) {
           <div className="border-t-[0.5px] border-t-gray-300 py-3"></div>
         </div>
       </div>
-      <style svg>{`
+      <style jsx>{`
         .sub-color::before {
             content: '';
             display: block;
