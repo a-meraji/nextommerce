@@ -15,11 +15,15 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    amount:{
+      type:Number,
+      required: true,
+    },
     cart: {
       type: Array,
       required: true,
     },
-    location: {
+    address: {
       type: String,
       required: true,
     },
@@ -27,6 +31,10 @@ const orderSchema = new mongoose.Schema(
         type: Number,
         required: true,
     },
+    sent:{
+      type: Boolean,
+      default: false,
+    }
   },
   {
     timestamps: true,

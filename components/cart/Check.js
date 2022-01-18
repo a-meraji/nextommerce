@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Check({ total: subtotal }) {
   return (
     <div className="my-3 text-sm  curier">
@@ -19,9 +21,9 @@ export default function Check({ total: subtotal }) {
         <div>Total</div>
         <div>${subtotal}</div>
       </div>
-      <button className="w-full mt-4 py-5 capitalize text-lg bg-primarycont text-primarycont">
-        proceed to checkout
-      </button>
+      <div className="w-full mt-4 py-5 capitalize text-lg bg-primarycont text-primarycont text-center">
+        <Link href="/checkout">proceed to checkout</Link>
+      </div>
     </div>
   );
 }

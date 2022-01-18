@@ -128,7 +128,7 @@ const updateProduct = async (req, res) => {
         },
         function (err, docs) {
           if (err) {
-            errorHandler(err);
+            errorHandler(err, res);
           } else {
             return res.status(200).json({ message: "updated", docs });
           }
