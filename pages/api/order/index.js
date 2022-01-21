@@ -24,43 +24,36 @@ const createOrder = async (req, res) => {
         cart,
         cost,
         amount,
+        sent:false,
       });
 
       const createdOrder = await order.save();
       return res.status(200).send({ message: "saved", createdOrder });
     } catch (error) {
-      errorHandler(error);
+      errorHandler(error,res);
     }
   } else {
     return res.status(422).send({
-      message: "data_incomplete",
-      data: {
-        name,
-        lastname,
-        address,
-        phone,
-        cart,
-        cost,
-        amount,
-      },
+      message: "incomplete data"
     });
   }
 };
 
 const readOrders = async (req, res) => {
-  console.log(req.query)
   const { key, value } = req.query;
   var conditions = {};
 if(key!='undefined' && value!='undefined'){
   const keysArr = key.split("_");
   const valuesArr = value.split("_");
   for (var i = 0; i < keysArr.length; i++) {
-    if(keysArr[i]==="date"){
-      const newRange = valuesArr[i].split("@");
-      conditions['createdAt'] = {$gte: newRange[0], $lt: newRange[1]};
-      return
+    if(keysArr[i]==="createdAt"){
+      const newRange = valuesArr[i].split("to");
+      conditions[keysArr[i]] = {$gte: newRange[0], $lt: newRange[1]};
+
       }
-    conditions[keysArr[i]] = valuesArr[i];
+      else{
+        conditions[keysArr[i]] = valuesArr[i];
+      }
   }
 }
 

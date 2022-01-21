@@ -9,11 +9,11 @@ const Toggle = () => {
     return (
         <div className="transition cursor-pointer hover:text-accent rounded-full">
             {theme === 'dark' ? (
-                <SunIcon width='22px'
+                <SunIcon width={22}
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                 />
             ) : ( 
-                    <MoonIcon width='22px'
+                    <MoonIcon width={22}
                         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                     />
                 )}

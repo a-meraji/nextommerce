@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Check({ total: subtotal }) {
+export default function Check({ total: subtotal, cartToggler }) {
   return (
     <div className="my-3 text-sm  curier">
       <div className="min-w-full min-h-[1px] bg-primarycont my-2 -mx-10"></div>
@@ -22,7 +22,9 @@ export default function Check({ total: subtotal }) {
         <div>${subtotal}</div>
       </div>
       <div className="w-full mt-4 py-5 capitalize text-lg bg-primarycont text-primarycont text-center">
+        <button onClick={cartToggler}>
         <Link href="/checkout">proceed to checkout</Link>
+        </button>
       </div>
     </div>
   );

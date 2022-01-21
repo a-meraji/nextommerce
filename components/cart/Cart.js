@@ -18,8 +18,8 @@ function Cart() {
           : { transform: "translate(0%, -200%)" }
       }
     >
-      <button onClick={cartToggler} className="flex flex-row">
-        <XIcon width="20px" /> close
+      <button onClick={cartToggler} className="absolute top-2 left-2 flex flex-row">
+        <XIcon width={25} />
       </button>
 
       {amount > 0 ? (
@@ -29,7 +29,7 @@ function Cart() {
         <div className="overflow-scroll scrollbar-hide">
         {cart.map((item, i) => <Item key={i} index={i} item={item} />)}
         </div>
-        <Check total={total} />
+        <Check cartToggler={cartToggler} total={total} />
       </div>
         </>
         ) : (

@@ -18,31 +18,37 @@ export default function SideCategories({ categories }) {
   return (
     <>
       {/* for tablet and pc view port */}
-      <div className="hidden relative sm:block w-[15%] pl-3">
-        <div className="absolute top-0 right-0">
-          <h4 className="text-md capitalize mb-0.5 text-primary">Categories</h4>
+      <div className="hidden relative sm:block w-[15%]">
+        <div className="absolute top-0 left-0 ml-4 md:ml-10">
+          <h4 className="text-xl font-bold capitalize mb-0.5 text-primary">
+            Categories
+          </h4>
           <div className="flex flex-col gap-y-2 mt-3 ml-0.5">
             <div onClick={() => setSort("relevence")}>
-              <Link
-                onClick={() => setSort("relevence")}
-                href="/search"
-                className={`${
-                  router.query.cat == undefined ? "underline text-accent" : null
-                } text-left cursor-pointer hover:text-primary`}
-              >
-                <a>all products</a>
+              <Link onClick={() => setSort("relevence")} href="/search">
+                <a
+                  className={`${
+                    router.query.cat === undefined
+                      ? "underline text-accent"
+                      : "text-third"
+                  } cursor-pointer hover:text-primary`}
+                >
+                  all products
+                </a>
               </Link>
             </div>
             {categories?.map((item, i) => {
               return (
-                <Link
-                  key={i}
-                  className={`${
-                    router.query.cat === item ? "underline text-accent" : null
-                  } cursor-pointer hover:text-primary`}
-                  href={`/search/${item}`}
-                >
-                  <a>{item}</a>
+                <Link key={i} href={`/search/${item}`}>
+                  <a
+                    className={`${
+                      router.query.cat === item
+                        ? "underline text-accent"
+                        : "text-third"
+                    } cursor-pointer hover:text-primary`}
+                  >
+                    {item}
+                  </a>
                 </Link>
               );
             })}
@@ -50,21 +56,17 @@ export default function SideCategories({ categories }) {
         </div>
       </div>
       {/* for mobile view port */}
-      <div className="sm:hidden absolute top-0 mt-12 left-0 right-0 text-center">
+      <div className="sm:hidden absolute top-0 mt-14 left-0 right-0 text-center">
         <div
           onClick={() => setSort("relevence")}
-          className="w-max px-5 py-3 mx-auto bg-secondarycont text-secondarycont rounded-full z-10"
+          className="w-max text-sm px-4 py-2 mx-auto bg-forth text-forth rounded-full z-10"
         >
-          <Link
-            href="/search"
-            className={`cursor-pointer hover:text-primary`}
-          >
+          <Link href="/search" className={`cursor-pointer hover:text-primary`}>
             <a>All Products</a>
           </Link>
         </div>
       </div>
 
-      
       <div className="absolute top-20 left-0  block sm:hidden mx-6">
         <aside className="menu relative">
           <label htmlFor="mune-toggler" className={styles.menuLabel}>
@@ -80,13 +82,16 @@ export default function SideCategories({ categories }) {
             {categories?.map((item, i) => {
               return (
                 <li className={styles.menuItem} key={i}>
-                  <Link
-                    className={`${
-                      router.query.cat === item ? "underline text-accent" : null
-                    } cursor-pointer hover:text-primary`}
-                    href={`/search/${item}`}
-                  >
-                    <a className="text-xl">{iconer(item)}</a>
+                  <Link href={`/search/${item}`}>
+                    <a
+                      className={`${
+                        router.query.cat === item
+                          ? "underline text-accent"
+                          : null
+                      } text-lg`}
+                    >
+                      {iconer(item)}
+                    </a>
                   </Link>
                 </li>
               );

@@ -49,7 +49,7 @@ export default function Intro() {
 
       <div className="bg-third animation w-full whitespace-nowrap overflow-scroll scrollbar-hide">
         {bannerImages.map((item, i) => (
-          <Link ley={i} href={`/product/${item.name.replace(/\s/g, "_")}`}>
+          <Link key={i} href={`/product/${item.name.replace(/\s/g, "_")}`}>
           <a>
             <div  className={`${i===0?"first":null}`}>
             <Image width={300} height={300} src={item.url} alt={item.name} className="object-contain" 

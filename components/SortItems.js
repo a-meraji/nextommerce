@@ -9,10 +9,10 @@ function SortItems() {
   const { sort, setSort, theme } = useGlobalContext();
   return (
     <>
-      <div className="hidden relative sm:block w-[15%] pr-3">
-        <div className="top-0 left-0">
-          <h4 className="text-md capitalize mb-0.5 text-primary">Sort By</h4>
-          <div className="flex flex-col gap-y-2 mt-3 ml-0.5">
+      <div className="hidden relative sm:block w-[15%]">
+        <div className="top-0 left-0 -ml-4 md:ml-0">
+          <h4 className="text-xl font-bold capitalize mb-0.5 text-primary">Sort By</h4>
+          <div className="flex flex-col gap-y-2 mt-3 ml-0.5 text-third">
             {sortView.map((item, i) => (
               <button
                 key={i}

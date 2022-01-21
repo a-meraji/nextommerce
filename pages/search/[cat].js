@@ -39,15 +39,15 @@ export default function cats({ products, allCategories, category }) {
       <div className="fixed w-full py-10 top-0 bg-secondary glob-trans  z-30"></div>
       {/* search page */}
       <div className="bg-secondary text-secondary glob-trans">
-        <div className="flex flex-row pt-32 sm:pt-10 relative">
+        <div className="flex flex-row pt-36 sm:pt-5 relative">
           {/* selecting categories */}
           <SideCategories categories={allCategories} />
           {/* showing result for search */}
-          <div className="w-[85%] sm:w-[60%] mx-auto">
+          <div className="w-[85%] sm:w-[66%] mx-auto sm:-mt-5">
             <h4 className="mb-4">
               {products?.length > 0
-                ? `Found ${products.length} items to show`
-                : "no result to show"}
+                ? null
+                : "No result"}
             </h4>
             <GridProducts
               key={proSt[0] != undefined ? proSt[0]["name"] : "nothing"}

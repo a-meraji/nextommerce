@@ -1,9 +1,12 @@
 import { useGlobalContext } from "../Contexts/globalContext/context";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import TableOrder from "../components/TableOrder";
 
 export default function checkout() {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -51,23 +54,30 @@ export default function checkout() {
     const res = await data.json();
     if (res.message && res.message === "saved") {
       clearCart();
+      router.push("/")
       alert("your order submited successfuly");
     } else {
-      alert("something went wrong! Try again moments later.");
+      if(res.message==="incomplete data"){
+        alert("Please complete all fileds in the form")
+      }
+      else{
+        alert("something went wrong! Try again moments later.");
+      }
     }
   };
 
   return (
     <div className="relative bg-secondary text-secondary py-10">
+      <div className="w-4/5 max-w-[500px] border-2 bg-third border-third p-6 sm:px-10 mx-auto rounded-xl flex flex-col">
       <form
         onSubmit={handleSubmit(submitHandler)}
-        className="flex flex-col w-4/5 max-w-[500px] border-2 border-third p-6 sm:px-10 mx-auto rounded-xl"
+        className="flex flex-col"
       >
         <label className="mb-1 text-primary text-lg" htmlFor="name">
           Name:
         </label>
         <input
-          className="rounded-full px-2 mb-6"
+          className="rounded-full px-2 mb-6 bg-secondary"
           id="name"
           type="text"
           placeholder="enter your name"
@@ -89,7 +99,7 @@ export default function checkout() {
           Lastname:
         </label>
         <input
-          className="rounded-full px-2 mb-6"
+          className="rounded-full px-2 mb-6 bg-secondary"
           type="text"
           id="lastname"
           placeholder="enter your lastname"
@@ -111,7 +121,7 @@ export default function checkout() {
           Phone:
         </label>
         <input
-          className="rounded-full px-2 mb-6"
+          className="rounded-full px-2 mb-6 bg-secondary"
           id="phone"
           type="text"
           placeholder="enter your phone number"
@@ -132,7 +142,7 @@ export default function checkout() {
           Address:
         </label>
         <input
-          className="rounded-full px-2 mb-6"
+          className="rounded-full px-2 mb-6 bg-secondary"
           id="address"
           type="text"
           placeholder="enter your address"
@@ -144,17 +154,18 @@ export default function checkout() {
           <p className="text-red-700 -mt-4 mb-4">* enter your address</p>
         )}
 
-        <h3 className="text-lg mt-5">Your shopping Cart</h3>
+        <h3 className="text-lg mt-5 text-primary">Your shopping Cart</h3>
         <TableOrder cart={cart} />
-        <div className="w-1/2 flex flex-col items-center mx-auto my-7">
+        <div className="w-1/2 flex flex-col items-center mx-auto mt-7">
           <button className="rounded-full w-full mx-auto text-xl py-3 bg-accent text-white shadow-md my-8">
             SUBMIT
           </button>
-          <button className="rounded-full w-1/2 mx-auto text-sm py-1 bg-danger text-white shadow-sm">
-            Cancel
-          </button>
         </div>
       </form>
+          <button onClick={()=>router.back()} className="text-center rounded-full w-1/3 mx-auto text-sm py-1 bg-danger text-white">
+            Cancel
+          </button>
+          </div>
       {/* modal */}
       {send === true ? (
         <div className="absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center bg-[#000000d3]">
@@ -182,11 +193,7 @@ export default function checkout() {
           </div>
         </div>
       ) : null}
-      <style jsx>{`
-        input {
-          color: #272d6b;
-        }
-      `}</style>
+
     </div>
   );
 }

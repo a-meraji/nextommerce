@@ -9,7 +9,7 @@ export default function GridProducts({ products, limit }) {
       {products?.map((product, i) => {
         if (i >= limit) return;
         return (
-          <Link href={`/product/${product.name}`} key={i} passHref>
+          <Link key={i}  href={`/product/${product.name}`} passHref>
             <motion.a
               initial={{ opacity: 0, y: 0 }}
               whileInView={{ opacity: 1, y: -100 }}
@@ -22,6 +22,7 @@ export default function GridProducts({ products, limit }) {
                 scale: { ease: "easeIn", duration: 0.3 },
               }}
               className={`group  bg-third  rounded-sm transition-colors`}
+              style={{boxShadow: "0px 0px 10px -6px rgba(0, 0, 0, 1)"}}
             >
               <Image
                 alt={product.name}

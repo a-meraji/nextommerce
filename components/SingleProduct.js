@@ -34,8 +34,6 @@ function SingleProduct({ product }) {
 
   // UI States
   const [imgIndex, setImgIndex] = useState(0);
-  const [dropDown1, setDropDown1] = useState(false);
-  const [dropDown2, setDropDown2] = useState(false);
 
   //set image index every time the single-product change
   useEffect(() => {
@@ -60,21 +58,21 @@ function SingleProduct({ product }) {
   return (
     <section className="grid gridy">
       {/* col 1 */}
-      <div className="">
+      <div className="bg-primarycont">
         <div className="relative text-primary">
           <div className="absolute top-0 left-0 sm:z-10">
-            <p className="bg-primary pt-3  pl-5 pr-3 text-4xl font-semibold capitalize">
+            <p className="bg-secondary pt-3  pl-5 pr-3 text-4xl font-semibold capitalize">
               {name.replace(/_/g, " ")}
             </p>
-            <p className="bg-primary pb-2 px-5 text-xl font-thin w-min capitalize">
+            <p className="bg-secondary pb-2 px-5 text-xl font-thin w-min capitalize">
               {price}$
             </p>
           </div>
           <Image
             src={images[imgIndex]}
             alt={name}
-            width={640}
-            height={400}
+            width={800}
+            height={500}
             className="object-contain"
             placeholder="blur"
             blurDataURL={`data:image/svg+xml;base64,${toBase64(
@@ -102,7 +100,7 @@ function SingleProduct({ product }) {
         {/* picture silder */}
         <div
           id="slide-container"
-          className="flex bg-secondary overflow-x-scroll scrollbar-hide"
+          className="flex bg-secondarycont overflow-x-scroll scrollbar-hide"
         >
           {images.map((url, i) => (
             <div
@@ -117,7 +115,7 @@ function SingleProduct({ product }) {
                 setImgIndex(i);
               }}
               className={`${
-                i === imgIndex ? "bg-secondarycont" : "bg-third"
+                i === imgIndex ? "bg-primary" : null
               } min-w-[30%] sm:min-w-[25%] md:min-w-[20%] max-w-[200px] m-[1px] `}
             >
               <Image
@@ -135,17 +133,15 @@ function SingleProduct({ product }) {
         </div>
       </div>
       {/* cols 2 */}
-      <div className="p-11">
+      <div className="p-11 lg:pt-1">
         <div>
           <div>
-            <h4 className="mb-1 text-lg">Color</h4>
+            <h4 className="mb-2 text-md text-primary">COLOR</h4>
             <div className="flex flex-row mb-7 flex-wrap">
               {store.map((item) => (
                 <button
                   onClick={() => {setColor(item.color); setColorCode(item.colorCode)}}
-                  className={`${
-                    item.color === color ? "border-2 border-primarycont" : null
-                  } group hover:scale-110 transition-all relative mr-3 w-10 h-10 rounded-[50%]`}
+                  className={` group hover:scale-110 transition-all relative mr-3 w-12 h-12 rounded-[50%]`}
                   style={{
                     backgroundColor: item.colorCode
                       ? item.colorCode
@@ -153,7 +149,7 @@ function SingleProduct({ product }) {
                   }}
                 >
                   {item.color === color ? (
-                    <span className="absolute top-0 bottom-0 left-0 right-0 text-primary">
+                    <span className="absolute top-0 bottom-0 left-0 right-0 text-white">
                       <CheckIcon />
                     </span>
                   ) : null}
@@ -170,7 +166,7 @@ function SingleProduct({ product }) {
             {store[0]["sizeAmnt"][0]["size"] != "" ? (
               <>
                 {" "}
-                <h4 className="mb-1 text-xl">Size</h4>
+                <h4 className="mb-2 text-md text-primary">SIZE</h4>
                 <div className="flex flex-row mb-5 flex-wrap">
                   {store.map((item) => {
                     if (item.color === color) {
@@ -183,8 +179,8 @@ function SingleProduct({ product }) {
                               className={`${
                                 subItem.size === size
                                   ? "border-primarycont border-2 text-primary"
-                                  : "border-hovercont border-[1px]"
-                              } hover:scale-110 mb-3 transition-all mr-3 w-10 h-10 rounded-[50%]`}
+                                  : "border-hovercont text-third border-[1px]"
+                              } hover:scale-110 mb-3 transition-all mr-3 w-12 h-12 rounded-[50%]`}
                             >
                               {subItem.size}
                             </button>
@@ -197,7 +193,7 @@ function SingleProduct({ product }) {
               </>
             ) : null}
           </div>
-          <p className="mb-4">{description}</p>
+          <p className="mb-4 text-third">{description}</p>
           <button
             onClick={() => {
               addItem({
@@ -215,50 +211,6 @@ function SingleProduct({ product }) {
           >
             ADD TO CART
           </button>
-          {/* dropdowns */}
-          <div>
-            <button
-              className="m-1 flex text-xl"
-              onClick={() => setDropDown1(!dropDown1)}
-            >
-              <ChevronRightIcon
-                width="20px"
-                className={`${dropDown1 ? "rotate-90" : "rotate-0"} chevron`}
-              />{" "}
-              <p className="ml-1">Care</p>
-            </button>
-            <p
-              className={`${
-                dropDown1 ? "h-[105%] opacity-100" : "h-0 opacity-0"
-              } ml-5 dropdown p-2 shadow bg-base-100 rounded-box w-52`}
-            >
-              This is a limited edition production run. Printing starts when the
-              drop ends.
-            </p>
-          </div>
-          <div className="border-t-[0.5px] border-t-gray-300 py-3"></div>
-          {/* dropdown 2 */}
-          <div>
-            <button
-              className="m-1 flex text-xl"
-              onClick={() => setDropDown2(!dropDown2)}
-            >
-              <ChevronRightIcon
-                width="20px"
-                className={`${dropDown2 ? "rotate-90" : "rotate-0"} chevron`}
-              />
-              <p className="ml-1">Details</p>
-            </button>
-            <p
-              className={`${
-                dropDown2 ? "h-[105%] opacity-100" : "h-0 opacity-0"
-              } ml-5 dropdown p-2 shadow bg-base-100 rounded-box w-52`}
-            >
-              This is a limited edition production run. Printing starts when the
-              drop ends. Reminder: Bad Boys For Life.
-            </p>
-          </div>
-          <div className="border-t-[0.5px] border-t-gray-300 py-3"></div>
         </div>
       </div>
       <style jsx>{`
