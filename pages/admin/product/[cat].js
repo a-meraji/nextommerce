@@ -5,10 +5,8 @@ import AdminProduts from "../../../components/admin/AdminProduts";
 
 export default function cats({ allProducts, allCategories, query }) {
   const [products, setProducts] = useState(allProducts);
-  const [categories, setCategories] = useState(allCategories);
   //pushing query whene category change
   useEffect(async () => {
-    setCategories(query);
     setProducts(allProducts);
   }, [query]);
 
@@ -30,7 +28,7 @@ export default function cats({ allProducts, allCategories, query }) {
             queryHandler(e.target.value);
           }}
         >
-          {categories.map((cat, i) => (
+          {allCategories.map((cat, i) => (
             <option key={i} value={cat} selected={cat === query ? true : false}>
               {cat}
             </option>
@@ -81,7 +79,7 @@ export async function getStaticPaths() {
     },
   });
   const cats = await catsData.json();
-
+console.log("respons in path: ",cats)
   // Get the paths we want to pre-render based on posts
   const paths = cats.map((cat) => ({
     params: { cat },

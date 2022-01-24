@@ -65,7 +65,7 @@ function Navbar() {
           <div className="mr-5 sm:mr-6 mt-1">
             <Toggle />
           </div>
-            <button className="mr-5 mb-1 sm:mr-6 mt-1 hover:text-accent relative flex flex-row" onClick={cartToggler}>
+            <button className=" mb-1  mt-1 hover:text-accent relative flex flex-row" onClick={cartToggler}>
               <ShoppingBagIcon className="w-[22px] h-[22px]" />
             {amount !== 0 ? (
               <div className="text-xs absolute text-center bottom-0 -right-2 w-4 h-4 rounded-full bg-secondarycont text-secondarycont">

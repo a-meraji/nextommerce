@@ -49,7 +49,7 @@ useEffect(async () => {
   };
 
   return (
-    <div className="border-[1px] relative rounded-3xl my-6 mx-8 py-9 px-10 text-white">
+    <div key={index} className="border-[1px] relative rounded-3xl my-6 mx-8 py-9 px-10 text-white">
       <AcceptModal
           showModal={showModal}
           setShowModal={setShowModal}

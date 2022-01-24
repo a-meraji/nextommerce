@@ -28,13 +28,13 @@ const getInitialTheme = () => {
       return storedPrefs;
     }
 
-    const userMedia = window.matchMedia("(prefers-color-scheme: light)");
+    const userMedia = window.matchMedia("(prefers-color-scheme: dark)");
     if (userMedia.matches) {
-      return "light";
+      return "dark";
     }
   }
 
-  return "dark"; // light theme as the default;
+  return "light"; // light theme as the default;
 };
 
 // initial reducer values
