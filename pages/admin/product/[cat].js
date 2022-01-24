@@ -3,32 +3,13 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import AdminProduts from "../../../components/admin/AdminProduts";
 
-function index({ allProducts, allCategories, query }) {
+export default function cats({ allProducts, allCategories, query }) {
   const [products, setProducts] = useState(allProducts);
   const [categories, setCategories] = useState(allCategories);
   //pushing query whene category change
   useEffect(async () => {
-    const productsData = await fetch(
-      `${server}/api/product/crud?cat=${query}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const catsData = await fetch(`${server}/api/product/categories`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const pros = await productsData.json();
-    const cats = await catsData.json();
-    setCategories(cats);
-    setProducts(pros);
+    setCategories(query);
+    setProducts(allProducts);
   }, [query]);
 
   const router = useRouter();
@@ -88,6 +69,7 @@ export async function getStaticProps(context) {
 
   return {
     props: { allProducts, allCategories, query },
+    revalidate: 900, //every 15 minutes
   };
 }
 
@@ -102,11 +84,10 @@ export async function getStaticPaths() {
 
   // Get the paths we want to pre-render based on posts
   const paths = cats.map((cat) => ({
-    params: { cat: cat },
+    params: { cat },
   }));
   // We'll pre-render only these paths at build time.
   // { fallback: blocking } will server-render pages
   // on-demand if the path doesn't exist.
   return { paths, fallback: "blocking" };
 }
-export default index;
