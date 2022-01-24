@@ -22,7 +22,7 @@ function Navbar() {
   const [search, setSearch] = useState(router.query.q ? router.query.q : "");
   return (
     <>
-      <nav className="z-40 sticky top-0 flex justify-between text-sm items-center px-5 py-5 bg-transparent text-primary glob-trans">
+      <nav className="z-40 sticky top-0 flex justify-between text-sm items-center px-5 py-5 navbar text-primary glob-trans">
         <div className="flex ">
           <button onClick={sideToggler}>
             <MenuIcon className="cursor-pointer w-[22px] h-[22px] hover:text-accent" />
@@ -73,15 +73,15 @@ function Navbar() {
               </div>
             ) : null}
             </button>
-          <div className="hover:text-accent">
-            <button>
+          {/* <div className="hover:text-accent">
+            <button> */}
               {/* <img
               className="w-7 h-7 rounded-full"
               src="https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
             ></img> */}
-              <UserCircleIcon className="w-[24px] h-[24px] mt-1 " />
+              {/* <UserCircleIcon className="w-[24px] h-[24px] mt-1 " />
             </button>
-          </div>
+          </div> */}
         </div>
       </nav>
       <div className="absolute w-full py-10 top-0 bg-secondary glob-trans"></div>

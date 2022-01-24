@@ -46,3 +46,7 @@ export const sale='sale';
 export const latest='latest';
 export const price_inc='price_inc';
 export const price_dec='price_dec';
+
+
+export const refreshToken={type:"REFRESH", age: 60*60*24*365*5};
+export const accessToken={type:"ACCESS",age: 10*60};

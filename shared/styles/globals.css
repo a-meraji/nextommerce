@@ -64,4 +64,7 @@ body{
   transition: all 0.3s ease-in-out;
 }
 
- 
+ .navbar{
+  background: inherit;
+  backdrop-filter: blur(5px);
+ }
