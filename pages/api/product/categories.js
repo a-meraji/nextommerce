@@ -18,7 +18,6 @@ async function getCats(req, res) {
   try {
     const rawCats = await Category.find({});
     const cats = rawCats.map((cat) => cat.name);
-    console.log("categories in api: ", cats);
     if (cats) return res.status(200).send(cats);
     else
       return res.status(200).json({ message: "categories are not available" });

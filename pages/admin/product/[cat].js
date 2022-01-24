@@ -79,13 +79,9 @@ export async function getStaticPaths() {
     },
   });
   const cats = await catsData.json();
-console.log("respons in path: ",cats)
-  // Get the paths we want to pre-render based on posts
   const paths = cats.map((cat) => ({
     params: { cat },
   }));
-  // We'll pre-render only these paths at build time.
-  // { fallback: blocking } will server-render pages
-  // on-demand if the path doesn't exist.
+  
   return { paths, fallback: "blocking" };
 }
