@@ -72,16 +72,17 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const catsData = await fetch(`${server}/api/product/categories`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const cats = await catsData.json();
+  // const catsData = await fetch(`${server}/api/product/categories`, {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+  // const cats = await catsData.json();
+  const cats = ["hat", "t-shirt", "shirt", "jacket", "pants", "accessory"];
   const paths = cats.map((cat) => ({
     params: { cat },
   }));
-  
+
   return { paths, fallback: "blocking" };
 }
