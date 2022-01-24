@@ -51,7 +51,7 @@ export default function Home({ newArivals, sales }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const newArivals = await getProductsFromDB("newArival", true);
   const sales = await getProductsFromDB("sale", true);
   return {
@@ -59,7 +59,7 @@ export async function getStaticProps() {
       newArivals,
       sales,
     },
-    revalidate: 900, //every 15 minutes
+    // revalidate: 900, //every 15 minutes
   };
 }
 

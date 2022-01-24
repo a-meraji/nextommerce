@@ -46,7 +46,7 @@ export default function cats({ allProducts, allCategories, query }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const query = context.params.cat;
   const productsData = await fetch(`${server}/api/product/crud?cat=${query}`, {
     method: "GET",
@@ -67,11 +67,11 @@ export async function getStaticProps(context) {
 
   return {
     props: { allProducts, allCategories, query },
-    revalidate: 900, //every 15 minutes
+    // revalidate: 900, //every 15 minutes
   };
 }
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
   // const catsData = await fetch(`${server}/api/product/categories`, {
   //   method: "GET",
   //   headers: {
@@ -79,10 +79,10 @@ export async function getStaticPaths() {
   //   },
   // });
   // const cats = await catsData.json();
-  const cats = ["hat", "t-shirt", "shirt", "jacket", "pants", "accessory"];
-  const paths = cats.map((cat) => ({
-    params: { cat },
-  }));
+//   const cats = ["hat", "t-shirt", "shirt", "jacket", "pants", "accessory"];
+//   const paths = cats.map((cat) => ({
+//     params: { cat },
+//   }));
 
-  return { paths, fallback: "blocking" };
-}
+//   return { paths, fallback: "blocking" };
+// }
