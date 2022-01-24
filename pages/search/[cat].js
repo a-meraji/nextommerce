@@ -63,7 +63,7 @@ export default function cats({ products, allCategories, category }) {
   );
 }
 
-export async function getStaticProps(cnx) {
+export async function getServerSideProps(cnx) {
   const category = cnx.params.cat;
   const productsData = await fetch(
     `${server}/api/product/crud?cat=${category}`,
@@ -91,24 +91,24 @@ export async function getStaticProps(cnx) {
       allCategories,
       category,
     },
-    revalidate: 900, //every 15 minutes
+    // revalidate: 900, //every 15 minutes
   };
 }
-export async function getStaticPaths() {
-  const catsData = await fetch(`${server}/api/product/categories`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const cats = await catsData.json();
+// export async function getStaticPaths() {
+//   const catsData = await fetch(`${server}/api/product/categories`, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   });
+//   const cats = await catsData.json();
 
-  // Get the paths we want to pre-render based on posts
-  const paths = cats.map((cat) => ({
-    params: { cat },
-  }));
-  // We'll pre-render only these paths at build time.
-  // { fallback: blocking } will server-render pages
-  // on-demand if the path doesn't exist.
-  return { paths, fallback: "blocking" };
-}
+//   // Get the paths we want to pre-render based on posts
+//   const paths = cats.map((cat) => ({
+//     params: { cat },
+//   }));
+//   // We'll pre-render only these paths at build time.
+//   // { fallback: blocking } will server-render pages
+//   // on-demand if the path doesn't exist.
+//   return { paths, fallback: "blocking" };
+// }

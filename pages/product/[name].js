@@ -23,7 +23,7 @@ export default function id({ product, relateds }) {
   );
 }
 
-export async function getStaticProps(cnx) {
+export async function getServerSideProps(cnx) {
   const name = cnx.params.name;
 
   const productRes =  await fetch(`${server}/api/product/crud?name=${name}`, {
@@ -48,22 +48,22 @@ export async function getStaticProps(cnx) {
       product,
       relateds,
     },
-    revalidate: 900, //every 15 minutes
+    // revalidate: 900, //every 15 minutes
   }
 }
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
 
-  const allProductRes =  await fetch(`${server}/api/product/crud`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+//   const allProductRes =  await fetch(`${server}/api/product/crud`, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   });
 
-  const allProducts = await allProductRes.json();
+//   const allProducts = await allProductRes.json();
 
-  const paths = allProducts.map((item)=>({params:{name: item.name}}))
+//   const paths = allProducts.map((item)=>({params:{name: item.name}}))
 
-  return { paths, fallback: 'blocking' }
-}
+//   return { paths, fallback: 'blocking' }
+// }
