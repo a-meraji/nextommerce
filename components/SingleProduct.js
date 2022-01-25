@@ -155,7 +155,7 @@ function SingleProduct({ product }) {
                   }}
                 >
                   {item.color === color ? (
-                    <span className="absolute top-0 bottom-0 left-0 right-0 text-white">
+                    <span className={`absolute top-0 bottom-0 left-0 right-0 ${item.color=="white"?"text-black":"text-white"}`}>
                       <CheckIcon />
                     </span>
                   ) : null}
