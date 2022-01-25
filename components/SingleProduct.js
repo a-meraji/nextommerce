@@ -87,9 +87,11 @@ function SingleProduct({ product }) {
                 if (imgIndex > 0) setImgIndex(imgIndex - 1);
                 sideScroll("left", 25, 105, 10);
               }}
+              width={20}
               className="pr-0.5 border-r-[0.5px] border-r-gray-500 hover:opacity-50"
             />
             <ArrowRightIcon
+            width={20}
               onClick={() => {
                 if (imgIndex < images.length - 1) setImgIndex(imgIndex + 1);
                 sideScroll("right", 25, 105, 10);
@@ -198,8 +200,8 @@ function SingleProduct({ product }) {
             ) : null}
           </div>
           <div
-            className={`relative overflow-hidden mb-4 ${
-              readMore ? null : "max-h-24"
+            className={`relative overflow-hidden  mb-4 ${
+              readMore ? "max-h-full" : "max-h-24"
             }`}
           >
             <p className="text-third">{description}</p>
@@ -250,14 +252,6 @@ function SingleProduct({ product }) {
           .gridy {
             grid-template-columns: 65vw 35vw;
           }
-        }
-        .chevron {
-          -webkit-transition: -webkit-transform 0.3s ease-in-out;
-          -ms-transition: -ms-transform 0.3s ease-in-out;
-          transition: transform 0.3s ease-in-out;
-        }
-        .dropdown {
-          transition: all 0.3s ease-in-out;
         }
       `}</style>
     </section>
