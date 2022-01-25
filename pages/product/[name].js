@@ -1,6 +1,7 @@
 import {server} from "../../config/index";
 import GridProducts from "../../components/GridProducts";
 import SingleProduct from "../../components/SingleProduct";
+import Link from "next/link";
 
 export default function id({ product, relateds }) {
 
@@ -17,6 +18,9 @@ export default function id({ product, relateds }) {
           <div className="w-[85%] sm:w-[75%] mx-auto">
             <GridProducts products={relateds} limit="10" />
           </div>
+          
+
+
         </section>
       </div>
     </>
