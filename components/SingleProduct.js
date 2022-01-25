@@ -34,6 +34,7 @@ function SingleProduct({ product }) {
 
   // UI States
   const [imgIndex, setImgIndex] = useState(0);
+  const [readMore, setReadMore] = useState(false);
 
   //set image index every time the single-product change
   useEffect(() => {
@@ -60,11 +61,11 @@ function SingleProduct({ product }) {
       {/* col 1 */}
       <div className="bg-primarycont">
         <div className="relative text-primary">
-          <div className="absolute top-0 left-0 sm:z-10">
+          <div className="sm:absolute top-0 left-0 sm:z-10">
             <p className="bg-secondary pt-3  pl-5 pr-3 text-4xl font-semibold capitalize">
               {name.replace(/_/g, " ")}
             </p>
-            <p className="bg-secondary pb-2 px-5 text-xl font-thin w-min capitalize">
+            <p className="absolute sm:block bg-secondary pb-2 px-5 text-xl font-thin w-min capitalize">
               {price}$
             </p>
           </div>
@@ -140,7 +141,10 @@ function SingleProduct({ product }) {
             <div className="flex flex-row mb-7 flex-wrap">
               {store.map((item) => (
                 <button
-                  onClick={() => {setColor(item.color); setColorCode(item.colorCode)}}
+                  onClick={() => {
+                    setColor(item.color);
+                    setColorCode(item.colorCode);
+                  }}
                   className={` group hover:scale-110 transition-all relative mr-3 w-12 h-12 rounded-[50%]`}
                   style={{
                     backgroundColor: item.colorCode
@@ -193,7 +197,22 @@ function SingleProduct({ product }) {
               </>
             ) : null}
           </div>
-          <p className="mb-4 text-third">{description}</p>
+          <div
+            className={`relative overflow-hidden mb-4 ${
+              readMore ? null : "max-h-24"
+            }`}
+          >
+            <p className="text-third">{description}</p>
+            <p
+              className={`${
+                readMore ? "block" : "absolute pl-2"
+              } bg-secondary text-xl text-secondary read-more bottom-0 right-0 w-3/4`}
+            >
+              <button onClick={() => setReadMore(!readMore)}>
+                {readMore ? "read less" : "...read more"}
+              </button>
+            </p>
+          </div>
           <button
             onClick={() => {
               addItem({
@@ -215,34 +234,32 @@ function SingleProduct({ product }) {
       </div>
       <style jsx>{`
         .sub-color::before {
-            content: '';
-            display: block;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-bottom: 5px solid ${
-              theme === "dark" ? "#eeeeee" : "#151515"
-            };
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            transform: translateX(-50%);
+          content: "";
+          display: block;
+          width: 0;
+          height: 0;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-bottom: 5px solid ${theme === "dark" ? "#eeeeee" : "#151515"};
+          position: absolute;
+          top: -5px;
+          left: 50%;
+          transform: translateX(-50%);
         }
         @media screen and (min-width: 1024px) {
-          .gridy{
+          .gridy {
             grid-template-columns: 65vw 35vw;
           }
         }
-        .chevron{
-          -webkit-transition: -webkit-transform .3s ease-in-out;
-          -ms-transition: -ms-transform .3s ease-in-out;
-          transition: transform .3s ease-in-out;  
+        .chevron {
+          -webkit-transition: -webkit-transform 0.3s ease-in-out;
+          -ms-transition: -ms-transform 0.3s ease-in-out;
+          transition: transform 0.3s ease-in-out;
         }
-        .dropdown{
-          transition: all .3s ease-in-out;  
+        .dropdown {
+          transition: all 0.3s ease-in-out;
         }
-        `}</style>
+      `}</style>
     </section>
   );
 }
