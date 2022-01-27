@@ -6,19 +6,12 @@ import {
   CLEAR_CART,
   REMOVE,
   GET_TOTALS,
-  LOADING,
   DISPLAY_ITEMS,
   TOGGLE_AMOUNT,
   ADD,
   CART_CHANGE,
 } from "../Reducer/types";
-import {
-  sale,
-  latest,
-  price_inc,
-  price_dec,
-  relevence,
-} from "../../shared/json/index";
+import { sortView } from "../../shared/json";
 
 // get prefered theme saved on the browser and if exist then set the theme base on that
 const getInitialTheme = () => {
@@ -39,7 +32,6 @@ const getInitialTheme = () => {
 
 // initial reducer values
 const reducernitialState = {
-  loading: false,
   cart: [],
   total: 0,
   amount: 0,
@@ -132,25 +124,12 @@ const ContextProvider = ({ initialTheme, children }) => {
   function sorter(rawProducts) {
     let sortedProducts = [...rawProducts];
 
-    switch (sort) {
-      case sale:
-        sortedProducts = sortedProducts.filter((item) => item.sale === true);
-        break;
-      case latest:
-        sortedProducts.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        );
-        break;
-      case price_inc:
-        sortedProducts.sort((a, b) => a.price - b.price);
-        break;
-      case price_dec:
-        sortedProducts.sort((a, b) => b.price - a.price);
-        break;
-      default:
-        console.log("default");
-        break;
-    }
+    sortView.forEach(item => {
+      if(item.sort===sort){
+        const arrSorter = item.arrSorter;
+        sortedProducts = arrSorter(sortedProducts);
+      }
+    });
 
     return sortedProducts;
   }
