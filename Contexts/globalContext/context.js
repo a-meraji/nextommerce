@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
-import { useRouter } from "next/router";
 import reducer from "../Reducer/reducer";
 
+// dispatch types for reducer
 import {
   CLEAR_CART,
   REMOVE,
@@ -11,26 +11,32 @@ import {
   ADD,
   CART_CHANGE,
 } from "../Reducer/types";
+
+// a json containes names and functions for sorting an array of products exp:sort by price
 import { sortView } from "../../shared/json";
 
-// get prefered theme saved on the browser and if exist then set the theme base on that
+// if local storage or browser preferences has value for the theme
+//then get and set the theme based on that
 const getInitialTheme = () => {
+  // check for theme on localstorage and return if there was a saved value
   if (typeof window !== "undefined" && window.localStorage) {
     const storedPrefs = window.localStorage.getItem("color-theme");
     if (typeof storedPrefs === "string") {
       return storedPrefs;
     }
 
+    // check for "prefers-color-scheme" on browser preferences and return
+    //  if it matches with dark
     const userMedia = window.matchMedia("(prefers-color-scheme: dark)");
     if (userMedia.matches) {
       return "dark";
     }
   }
 
-  return "light"; // light theme as the default;
+  return "light"; // if none of above then light theme as the default;
 };
 
-// initial reducer values
+// initial shopping cart reducer states
 const reducernitialState = {
   cart: [],
   total: 0,
@@ -41,10 +47,13 @@ const reducernitialState = {
 const Context = React.createContext();
 
 const ContextProvider = ({ initialTheme, children }) => {
-  const router = useRouter();
+// bilingual States
+const [locale, setLocale] = useState("pt")
 
+//shopping cart reducer
   const [state, dispatch] = useReducer(reducer, reducernitialState);
-  // all functionallities to work with reducers with diferent dispatches
+  // all functionallities to work with reducers with diferent types of dispatch
+  //they exports as global
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
   };
@@ -63,14 +72,16 @@ const ContextProvider = ({ initialTheme, children }) => {
   const getTotal = () => {
     dispatch({ type: GET_TOTALS });
   };
-  // get the cart from local storage in case user refresh
+
+  // In case user refresh browser or open in new tab
+  //  get the sopping cart from local storage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("cart");
       if (typeof storedCart === "string") {
         const cartArr = JSON.parse(storedCart);
         dispatch({ type: CART_CHANGE, payload: cartArr });
-        //add storage eventlistener for syncing cart in all tabs
+        //add local storage eventlistener for syncing cart and color theme in all tabs
         window.addEventListener("storage", onStorageUpdate);
         return () => {
           window.removeEventListener("storage", onStorageUpdate);
@@ -78,7 +89,8 @@ const ContextProvider = ({ initialTheme, children }) => {
       }
     }
   }, []);
-  // update check bill whenever cart change
+
+  // update checkout bill whenever cart change
   useEffect(() => {
     if (typeof window !== "undefined") {
       getTotal();
@@ -86,11 +98,9 @@ const ContextProvider = ({ initialTheme, children }) => {
     }
   }, [state.cart]);
 
-  // set the theme from window storage or preferences
-  //then set root classlist (diffrent classes on root have diffrent values for a colorName)
-  // and also whenever theme changed then set root classList and window storage again.
+  // set the color theme state with getInitailTheme function
   const [theme, setTheme] = React.useState(getInitialTheme);
-
+  // Set root classlist (.light or .dark) and "color-theme" on local storage
   const ToggleTheme = (rawTheme) => {
     const root = window.document.documentElement;
     const isDark = rawTheme === "dark";
@@ -104,7 +114,7 @@ const ContextProvider = ({ initialTheme, children }) => {
   if (initialTheme) {
     ToggleTheme(initialTheme);
   }
-
+  // Whenever theme changed then set root classList and localStorage again.
   useEffect(() => {
     ToggleTheme(theme);
   }, [theme]);
@@ -119,8 +129,10 @@ const ContextProvider = ({ initialTheme, children }) => {
   function cartToggler() {
     setShowCart(!showCart);
   }
-  // sort products for view base on the choosen filter
+
   const [sort, setSort] = useState("relevence");
+  // sort view the given products array base on the "sort" state exp:sort by price
+  // then return the sorted array
   function sorter(rawProducts) {
     let sortedProducts = [...rawProducts];
 
@@ -134,7 +146,7 @@ const ContextProvider = ({ initialTheme, children }) => {
     return sortedProducts;
   }
 
-  //update states in all tabs
+  //update sopping cart an color theme in all tabs
   const onStorageUpdate = (e) => {
     const { key, newValue } = e;
     if (key === "cart") {
