@@ -1,21 +1,38 @@
 import { useGlobalContext } from "../Contexts/globalContext/context";
-import ReactCountryFlag from "react-country-flag"
+import ReactCountryFlag from "react-country-flag";
 import Link from "next/link";
 import { sideList, socialLinks } from "../shared/json";
 import { XIcon } from "@heroicons/react/outline";
 import { langs } from "../Contexts/values/LangValues";
 
 function Sidebar() {
-  const { showSide, sideToggler, translate:t, setLang } = useGlobalContext();
+  const {
+    showSide,
+    sideToggler,
+    translate: t,
+    lang,
+    setLang,
+  } = useGlobalContext();
 
   return (
     <aside
-      className={`z-50 glob-trans py-8 px-6 fixed top-0 left-0 w-full sm:w-[325px] h-full bg-primary text-secondary grid grid-rows${
+      style={{
+        direction: lang === langs["fa"] ? "rtl" : "ltr",
+        gridTemplateRows: "auto 1fr auto",
+        rowGap: "1rem",
+      }}
+      className={`z-50 py-8 px-6 fixed top-0 w-full sm:w-[325px] h-full bg-primary text-secondary grid grid-rows sidebar
+      ${lang === langs["fa"] ? "text-right right-0" : "text-left left-0"} ${
         showSide
-          ? "translate-y-0 translate-x-0"
-          : "-translate-y-full -translate-x-full"
+          ? `translate-y-0 translate-x-0 ${
+              lang === langs["fa"] ? "sidebar-left" : "sidebar-right"
+            } `
+          : `-translate-y-full ${
+              lang === langs["fa"]
+                ? "translate-x-full sidebar-left-reverse"
+                : "-translate-x-full sidebar-right-reverse"
+            }`
       }`}
-      style={{ gridTemplateRows: "auto 1fr auto", rowGap: "1rem" }}
     >
       {/* side bar header */}
       <div className=" flex justify-between items-center">
@@ -28,21 +45,42 @@ function Sidebar() {
       <ul className=" mt-4">
         {sideList.map((item, i) => (
           <li
-            className="flex pl-4 py-3 rounded-full w-1/2 hover:w-full hover:text-primary hover:bg-hover glob-trans hover:ml-4"
+            className="flex px-4 py-3 rounded-full w-1/2 hover:w-full hover:text-primary hover:bg-hover glob-trans hover:mx-4"
             key={i}
             onClick={sideToggler}
           >
             <item.icon width="20px" />
-            <Link href={item.url} className="ml-3 text-md">
+            <Link href={item.url} className="mx-3 text-md">
               <a>{t(item.name)}</a>
             </Link>
           </li>
         ))}
-        <li className="flex flex-row pl-6 mt-6 pt-3 py-3 border-t-[1px] border-hovercont w-full">
+        <li className="flex flex-row px-6 mt-6 pt-3 py-3 border-t-[1px] border-hovercont w-full">
           <p>{t("language")}</p>
-          <button onClick={()=>setLang(langs['en'])} className="ml-4"><ReactCountryFlag countryCode="GB" style={{objectFit:"cover" ,width:"25px", height:"25px", borderRadius:"50%"}} svg /></button>
-          <button onClick={()=>setLang(langs['fa'])} className="ml-4"><ReactCountryFlag countryCode="IR" style={{objectFit:"cover" ,width:"25px", height:"25px", borderRadius:"50%"}} svg /></button>
-
+          <button onClick={() => setLang(langs["en"])} className="mx-2">
+            <ReactCountryFlag
+              countryCode="GB"
+              style={{
+                objectFit: "cover",
+                width: "25px",
+                height: "25px",
+                borderRadius: "50%",
+              }}
+              svg
+            />
+          </button>
+          <button onClick={() => setLang(langs["fa"])} className="mx-2">
+            <ReactCountryFlag
+              countryCode="IR"
+              style={{
+                objectFit: "cover",
+                width: "25px",
+                height: "25px",
+                borderRadius: "50%",
+              }}
+              svg
+            />
+          </button>
         </li>
       </ul>
       {/* social links */}

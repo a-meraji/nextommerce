@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
-body{
+body {
   /* font-family: 'Courier Prime', monospace; */
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
-.curier{
-  font-family: 'Courier Prime', monospace;
+.curier {
+  font-family: "Courier Prime", monospace;
 }
 
 .dark {
@@ -21,7 +21,6 @@ body{
   --color-bg-primary-cont: #ffffff;
   --color-bg-secondary-cont: #eee;
   --color-bg-hover-cont: #3f3f3f;
-
 
   --color-text-primary: #ffffff;
   --color-text-secondary: #b3b3b3;
@@ -64,7 +63,61 @@ body{
   transition: all 0.3s ease-in-out;
 }
 
- .navbar{
+.sidebar {
+  transition: all 0.5s ease-in-out;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+/* animation-diretion: reverse ;
+    because to triiger animation more than twice we need two diffrent animation clip
+    so there is 4 animation clip over all for side bar
+    2 for Fa sidebar and 2 for En side bar */
+.sidebar-right {
+  animation-name: roundright;
+}
+@keyframes roundright {
+  from {
+    border-radius: 0 0 999px 0;
+  }
+  to {
+    border-radius: 0;
+  }
+}
+.sidebar-right-reverse {
+  animation-name: roundrightreverse;
+}
+@keyframes roundrightreverse {
+  from {
+    border-radius: 0;
+  }
+  to {
+    border-radius: 0 0 999px 0;
+  }
+}
+.sidebar-left {
+  animation-name: roundleft;
+}
+@keyframes roundleft {
+  from {
+    border-radius: 0 0 0 999px;
+  }
+  to {
+    border-radius: 0;
+  }
+}
+.sidebar-left-reverse {
+  animation-name: roundleftreverse;
+}
+@keyframes roundleftreverse {
+  from {
+    border-radius: 0;
+  }
+  to {
+    border-radius: 0 0 0 999px;
+  }
+}
+
+.navbar {
   background: inherit;
   backdrop-filter: blur(5px);
- }
+}

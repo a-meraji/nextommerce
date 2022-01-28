@@ -11,19 +11,20 @@ import {
 } from "react-icons/gi";
 import { MdMasks } from "react-icons/md";
 import { FaTshirt } from "react-icons/fa";
+import { langs } from "../Contexts/values/LangValues";
 
 export default function SideCategories({ categories }) {
-  const { setSort, translate:t } = useGlobalContext();
+  const { setSort, translate:t, lang } = useGlobalContext();
   const router = useRouter();
   return (
     <>
       {/* for tablet and pc view port */}
-      <div className="hidden relative sm:block w-[15%]">
-        <div className="absolute top-0 left-0 ml-4 md:ml-10">
+      <div className={`hidden relative sm:block w-[15%] ${lang===langs['fa']?"text-right":"text-left"}`}>
+        <div className="absolute top-0 right-0 ">
           <h4 className="text-xl font-bold capitalize mb-0.5 text-primary">
             {t("Categories")}
           </h4>
-          <div className="flex flex-col gap-y-2 mt-3 ml-0.5">
+          <div className="flex flex-col gap-y-2 mt-3 mr-0.5">
             <div onClick={() => setSort("relevence")}>
               <Link onClick={() => setSort("relevence")} href="/search">
                 <a

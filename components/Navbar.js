@@ -17,25 +17,34 @@ import {
 
 function Navbar() {
   const router = useRouter();
-  const { translate : t,sideToggler, amount, cartToggler } = useGlobalContext();
+  const {
+    translate: t,
+    lang,
+    sideToggler,
+    amount,
+    cartToggler,
+  } = useGlobalContext();
   // setting value of search input
   const [search, setSearch] = useState(router.query.q ? router.query.q : "");
   return (
     <>
-      <nav className="z-40 sticky top-0 flex justify-between text-sm items-center px-5 py-5 navbar text-primary glob-trans">
+      <nav
+        style={{ direction: `${lang === "fa" ? "rtl" : "ltr"}` }}
+        className="z-40 sticky top-0 flex justify-between text-sm items-center px-3 py-5 navbar text-primary glob-trans"
+      >
         <div className="flex ">
-          <button onClick={sideToggler}>
+          <button className="mx-3" onClick={sideToggler}>
             <MenuIcon className="cursor-pointer w-[22px] h-[22px] hover:text-accent" />
           </button>
           <div className="hidden sm:flex">
-            <div className="ml-6 hover:text-accent">
+            <div className="mx-3 hover:text-accent">
               <Link href="/">
                 <a>{t("home")}</a>
               </Link>
             </div>
-            <div className="ml-6 hover:text-accent">
+            <div className="mx-3 hover:text-accent">
               <Link href="/search">
-                <a>{t('categories')}</a>
+                <a>{t("categories")}</a>
               </Link>
             </div>
           </div>
@@ -56,30 +65,33 @@ function Navbar() {
               }}
               type="text"
               placeholder={t("search")}
-              className="mt-[1px] w-full ml-1 bg-transparent text-primary placeholder-[#757474] focus:outline-none"
+              className="mt-[1px] w-full mx-1 bg-transparent text-primary placeholder-[#757474] focus:outline-none"
             />
           </div>
-          <SearchIcon className="w-5 h-5 mr-1" />
+          <SearchIcon className="w-5 h-5 mx-1" />
         </div>
         <div className="flex">
-          <div className="mr-5 sm:mr-6 mt-1">
+          <div className="mr-5 sm:mx-3 mt-1">
             <Toggle />
           </div>
-            <button className=" mb-1  mt-1 hover:text-accent relative flex flex-row" onClick={cartToggler}>
-              <ShoppingBagIcon className="w-[22px] h-[22px]" />
+          <button
+            className=" mb-1 mx-3 mt-1 hover:text-accent relative flex flex-row"
+            onClick={cartToggler}
+          >
+            <ShoppingBagIcon className="w-[22px] h-[22px]" />
             {amount !== 0 ? (
               <div className="text-xs absolute text-center bottom-0 -right-2 w-4 h-4 rounded-full bg-secondarycont text-secondarycont">
                 {amount}
               </div>
             ) : null}
-            </button>
+          </button>
           {/* <div className="hover:text-accent">
             <button> */}
-              {/* <img
+          {/* <img
               className="w-7 h-7 rounded-full"
               src="https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
             ></img> */}
-              {/* <UserCircleIcon className="w-[24px] h-[24px] mt-1 " />
+          {/* <UserCircleIcon className="w-[24px] h-[24px] mt-1 " />
             </button>
           </div> */}
         </div>
