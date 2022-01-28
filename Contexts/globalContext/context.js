@@ -71,7 +71,8 @@ const ContextProvider = ({ initialTheme, children }) => {
   };
   // translator
   const translate = (word) => {
-    const key = word.toLowerCase();
+    let key = word.toLowerCase();
+    key = key.replace(/-/g, "_");
     if (!LangStrings[lang][key]) {
       console.warn(`No string '${key}' for locale '${lang}'`);
     }

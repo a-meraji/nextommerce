@@ -44,7 +44,7 @@ function Sidebar() {
       <ul className=" mt-4">
         {sideList.map((item, i) => (
           <li
-            className="flex px-4 py-3 rounded-full w-1/2 hover:w-full hover:text-primary hover:bg-hover glob-trans hover:mx-4"
+            className="flex px-4 py-3 rounded-full w-[55%] hover:w-full hover:text-primary hover:bg-hover glob-trans hover:mx-4"
             key={i}
             onClick={sideToggler}
           >
