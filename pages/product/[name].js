@@ -2,9 +2,11 @@ import {server} from "../../config/index";
 import GridProducts from "../../components/GridProducts";
 import SingleProduct from "../../components/SingleProduct";
 import Link from "next/link";
+import { useGlobalContext } from "../../Contexts/globalContext/context";
+
 
 export default function id({ product, relateds }) {
-
+const {translate: t} = useGlobalContext();
   return (
     <>
       <div className="bg-secondary text-secondary">
@@ -13,7 +15,7 @@ export default function id({ product, relateds }) {
         {/* related section */}
         <section className="border-t-[1px] border-gray-300">
           <h4 className="text-3xl text-primary text-center capitalize py-16">
-            Related Products
+            {t('other_products')}
           </h4>
           <div className="w-[85%] sm:w-[75%] mx-auto">
             <GridProducts products={relateds} limit="10" />
@@ -22,7 +24,7 @@ export default function id({ product, relateds }) {
         <div className="w-full flex justify-center py-10">
           <button className="py-2 px-5 bg-third text-primary rounded-full hover:scale-105 transition-transform">
             <Link href="/search">
-              <a>All Products</a>
+              <a>{t('All_Products')}</a>
             </Link>
           </button>
         </div>

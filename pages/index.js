@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import GridProducts from "../components/GridProducts";
 import Moto1 from "../components/Moto1";
 import Link from "next/link";
+import { useGlobalContext } from "../Contexts/globalContext/context";
 export default function Home({ newArivals, sales }) {
+  const {translate}=useGlobalContext();
   return (
     <>
       <div className="bg-secondary">
@@ -19,7 +21,7 @@ export default function Home({ newArivals, sales }) {
               transition={{ ease: "easeOut", duration: 1 }}
               className="capitalize text-3xl text-secondary text-center"
             >
-              latest arivals
+              {translate('latest_arivals')}
             </motion.h4>
             <GridProducts products={newArivals} limit={6} />
           </div>
@@ -34,15 +36,15 @@ export default function Home({ newArivals, sales }) {
               transition={{ ease: "easeOut", duration: 1 }}
               className="capitalize text-3xl text-secondary text-center"
             >
-              on sales
+              {translate("sales")}
             </motion.h4>
             <GridProducts products={sales} limit={6} />
           </div>
         ) : null}
         <div className="w-full flex justify-center pb-24">
-          <button className="py-2 px-5 bg-accent text-primarycont rounded-full text-xl hover:scale-105 transition-transform">
+          <button className="py-2 px-5 bg-accent text-white rounded-full text-xl hover:scale-105 transition-transform">
             <Link href="/search">
-              <a>View Products</a>
+              <a>{translate("View_Products")}</a>
             </Link>
           </button>
         </div>

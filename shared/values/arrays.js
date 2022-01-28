@@ -1,0 +1,1 @@
+export const allCategories = ["hat", "t-shirt", "shirt", "jacket", "pants", "accessory"]

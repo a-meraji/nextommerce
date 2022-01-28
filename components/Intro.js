@@ -5,8 +5,11 @@ import {shimmer, toBase64} from "../shared/utils/imgPlaceholder";
 import { useEffect } from "react";
 import Link from "next/link";
 import { bannerImages } from "../shared/json";
+import { useGlobalContext } from "../Contexts/globalContext/context";
 
 export default function Intro() {
+  const {translate: t} = useGlobalContext();
+
   useEffect(() => {
     AOS.init({
       once: false,
@@ -31,7 +34,7 @@ export default function Intro() {
             data-aos="fade-up"
             className="absolute  left-0 right-0 text-center top-[65%] sm:top-[75%] text-lg"
           >
-            _a minimal store.
+            {t('moto1')}
           </p>
         </div>
       </div>
@@ -41,7 +44,7 @@ export default function Intro() {
             data-aos="fade"
             className="absolute  left-0 right-0 text-center top-1/2 text-4xl"
           >
-            but diverce.
+            {t("moto2")}
           </p>
         </div>
       </div>

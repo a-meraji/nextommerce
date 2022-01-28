@@ -17,7 +17,7 @@ import {
 
 function Navbar() {
   const router = useRouter();
-  const { sideToggler, amount, cartToggler } = useGlobalContext();
+  const { translate : t,sideToggler, amount, cartToggler } = useGlobalContext();
   // setting value of search input
   const [search, setSearch] = useState(router.query.q ? router.query.q : "");
   return (
@@ -30,12 +30,12 @@ function Navbar() {
           <div className="hidden sm:flex">
             <div className="ml-6 hover:text-accent">
               <Link href="/">
-                <a>Home</a>
+                <a>{t("home")}</a>
               </Link>
             </div>
             <div className="ml-6 hover:text-accent">
               <Link href="/search">
-                <a>Categories</a>
+                <a>{t('categories')}</a>
               </Link>
             </div>
           </div>
@@ -55,7 +55,7 @@ function Navbar() {
                 }
               }}
               type="text"
-              placeholder="Search"
+              placeholder={t("search")}
               className="mt-[1px] w-full ml-1 bg-transparent text-primary placeholder-[#757474] focus:outline-none"
             />
           </div>

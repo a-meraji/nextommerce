@@ -1,2 +1,2 @@
-export const defaultLocale = "en"
-export const locales = ["fa", "en"]
+export const defaultLang = "en"
+export const langs = {fa:"fa", en:"en"}

@@ -15,7 +15,7 @@ function SingleProduct({ product }) {
   const router = useRouter();
   const { name, price, store, description } = product;
 
-  const { addItem, cartToggler, theme } = useGlobalContext();
+  const { translate: t, addItem, cartToggler, theme } = useGlobalContext();
 
   // take out all image urls from store and push into images[]
   var images = [];
@@ -139,7 +139,7 @@ function SingleProduct({ product }) {
       <div className="p-11 lg:pt-1">
         <div>
           <div>
-            <h4 className="mb-2 text-md text-primary">COLOR</h4>
+            <h4 className="mb-2 text-md text-primary uppercase">{t('color')}</h4>
             <div className="flex flex-row mb-7 flex-wrap">
               {store.map((item) => (
                 <button
@@ -172,7 +172,7 @@ function SingleProduct({ product }) {
             {store[0]["sizeAmnt"][0]["size"] != "" ? (
               <>
                 {" "}
-                <h4 className="mb-2 text-md text-primary">SIZE</h4>
+                <h4 className="mb-2 text-md text-primary uppercase">{t('size')}</h4>
                 <div className="flex flex-row mb-5 flex-wrap">
                   {store.map((item) => {
                     if (item.color === color) {
@@ -211,7 +211,7 @@ function SingleProduct({ product }) {
               } bg-secondary text-xl text-secondary read-more bottom-0 right-0 w-3/4`}
             >
               <button onClick={() => setReadMore(!readMore)}>
-                {readMore ? "read less" : "...read more"}
+                {readMore ? t("read_less") : `...${t("read_more")}`}
               </button>
             </p>
           </div>
@@ -228,9 +228,9 @@ function SingleProduct({ product }) {
               });
               cartToggler();
             }}
-            className="bg-primarycont text-primarycont w-full text-lg curier  py-5 mx-auto my-8 hover:opacity-70"
+            className="uppercase bg-primarycont text-primarycont w-full text-lg curier  py-5 mx-auto my-8 hover:opacity-70"
           >
-            ADD TO CART
+            {t('ADD_TO_CART')}
           </button>
         </div>
       </div>

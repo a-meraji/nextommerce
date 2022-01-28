@@ -1,9 +1,12 @@
 import { useGlobalContext } from "../Contexts/globalContext/context";
+import ReactCountryFlag from "react-country-flag"
 import Link from "next/link";
 import { sideList, socialLinks } from "../shared/json";
 import { XIcon } from "@heroicons/react/outline";
+import { langs } from "../Contexts/values/LangValues";
+
 function Sidebar() {
-  const { showSide, sideToggler } = useGlobalContext();
+  const { showSide, sideToggler, translate:t, setLang } = useGlobalContext();
 
   return (
     <aside
@@ -31,10 +34,16 @@ function Sidebar() {
           >
             <item.icon width="20px" />
             <Link href={item.url} className="ml-3 text-md">
-              <a>{item.name}</a>
+              <a>{t(item.name)}</a>
             </Link>
           </li>
         ))}
+        <li className="flex flex-row pl-6 mt-6 pt-3 py-3 border-t-[1px] border-hovercont w-full">
+          <p>{t("language")}</p>
+          <button onClick={()=>setLang(langs['en'])} className="ml-4"><ReactCountryFlag countryCode="GB" style={{objectFit:"cover" ,width:"25px", height:"25px", borderRadius:"50%"}} svg /></button>
+          <button onClick={()=>setLang(langs['fa'])} className="ml-4"><ReactCountryFlag countryCode="IR" style={{objectFit:"cover" ,width:"25px", height:"25px", borderRadius:"50%"}} svg /></button>
+
+        </li>
       </ul>
       {/* social links */}
       <ul className="flex justify-center">

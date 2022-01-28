@@ -15,6 +15,10 @@ import {
 // a json containes names and functions for sorting an array of products exp:sort by price
 import { sortView } from "../../shared/json";
 
+// an OBJ that have all word in English And Persian
+import { LangStrings } from "../values/LangStrings";
+import { defaultLang, langs } from "../values/LangValues";
+
 // if local storage or browser preferences has value for the theme
 //then get and set the theme based on that
 const getInitialTheme = () => {
@@ -47,10 +51,19 @@ const reducernitialState = {
 const Context = React.createContext();
 
 const ContextProvider = ({ initialTheme, children }) => {
-// bilingual States
-const [locale, setLocale] = useState("pt")
+  // bilingual States
+  const [lang, setLang] = useState(defaultLang);
+  // translator
+  const translate = (word) => {
+    const key = word.toLowerCase();
+    if (!LangStrings[lang][key]) {
+      console.warn(`No string '${key}' for locale '${lang}'`);
+    }
 
-//shopping cart reducer
+    return LangStrings[lang][key] || LangStrings[defaultLang][key] || "";
+  };
+
+  //shopping cart reducer
   const [state, dispatch] = useReducer(reducer, reducernitialState);
   // all functionallities to work with reducers with diferent types of dispatch
   //they exports as global
@@ -136,8 +149,8 @@ const [locale, setLocale] = useState("pt")
   function sorter(rawProducts) {
     let sortedProducts = [...rawProducts];
 
-    sortView.forEach(item => {
-      if(item.sort===sort){
+    sortView.forEach((item) => {
+      if (item.sort === sort) {
         const arrSorter = item.arrSorter;
         sortedProducts = arrSorter(sortedProducts);
       }
@@ -162,6 +175,9 @@ const [locale, setLocale] = useState("pt")
     <Context.Provider
       value={{
         ...state,
+        lang,
+        setLang,
+        translate,
         clearCart,
         remove,
         cartChange,

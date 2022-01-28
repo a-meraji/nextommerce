@@ -6,12 +6,12 @@ import { FilterIcon } from "@heroicons/react/outline";
 
 function SortItems() {
   const [showUl, setShowUl] = useState(false);
-  const { sort, setSort, theme } = useGlobalContext();
+  const { sort, setSort, theme, translate:t } = useGlobalContext();
   return (
     <>
       <div className="hidden relative sm:block w-[15%]">
         <div className="top-0 left-0 -ml-4 md:ml-0">
-          <h4 className="text-xl font-bold capitalize mb-0.5 text-primary">Sort By</h4>
+          <h4 className="text-xl font-bold capitalize mb-0.5 text-primary">{t('sort')}</h4>
           <div className="flex flex-col gap-y-2 mt-3 ml-0.5 text-third">
             {sortView.map((item, i) => (
               <button
@@ -21,7 +21,7 @@ function SortItems() {
                 }`}
                 onClick={() => setSort(item.sort)}
               >
-                {item.name}
+                {t(item.sort)}
               </button>
             ))}
           </div>
