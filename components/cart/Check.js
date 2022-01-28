@@ -4,7 +4,7 @@ import { useGlobalContext } from "../../Contexts/globalContext/context";
 export default function Check({ total: subtotal, cartToggler }) {
   const {translate : t, lang} = useGlobalContext();
   return (
-    <div className={`my-3 text-sm  curier capitalize `} style={{direction:`${lang==="fa"?"rtl":"ltr"}`}}>
+    <div className={`my-3 text-sm  font-mono capitalize `} style={{direction:`${lang==="fa"?"rtl":"ltr"}`}}>
       <div className="min-w-full min-h-[1px] bg-primarycont my-2 -mx-10"></div>
       <div className="flex flex-row justify-between">
         <div>{t('subtotal')}</div>

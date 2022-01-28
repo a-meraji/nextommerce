@@ -4,13 +4,32 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@font-face {
+  font-family: vazir;
+  src: url("/fonts/vazir/Vazir-Regular-FD.eot") format("eot");
+   src: url("/fonts/vazir/Vazir-Regular-FD.woff") format("woff"),
+    url("/fonts/vazir/Vazir-Regular-FD.woff2") format("woff2"),
+      url("/fonts/vazir/Vazir-Regular-FD.ttf") format("truetype");
+}
+@font-face {
+  font-family: tanha;
+  src: url("/fonts/tanha/Tanha-WOL.eot") format("eot");
+  src:  url("/fonts/tanha/Tanha-WOL.woff") format("woff"),
+    url("/fonts/tanha/Tanha-WOL.woff2") format("woff2"),
+      url("/fonts/tanha/Vazir-Regular-FD.ttf") format("truetype");
+}
 
-body {
-  /* font-family: 'Courier Prime', monospace; */
+.font-en {
   font-family: "Roboto", sans-serif;
 }
-.curier {
-  font-family: "Courier Prime", monospace;
+/* .font-en .curier {
+  font-family: "Courier Prime", monospace !important;
+} */
+.font-fa {
+  font-family: vazir;
+}
+.font-fa .curier{
+  font-family: tanha;
 }
 
 .dark {

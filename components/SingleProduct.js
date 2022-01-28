@@ -228,7 +228,7 @@ function SingleProduct({ product }) {
               });
               cartToggler();
             }}
-            className="uppercase bg-primarycont text-primarycont w-full text-lg curier  py-5 mx-auto my-8 hover:opacity-70"
+            className="uppercase bg-primarycont text-primarycont w-full text-lg  py-5 mx-auto my-8 hover:opacity-70"
           >
             {t('ADD_TO_CART')}
           </button>

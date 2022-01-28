@@ -1,9 +1,9 @@
 import { useGlobalContext } from "../Contexts/globalContext/context";
-import ReactCountryFlag from "react-country-flag";
 import Link from "next/link";
 import { sideList, socialLinks } from "../shared/json";
 import { XIcon } from "@heroicons/react/outline";
 import { langs } from "../Contexts/values/LangValues";
+import LangSelector from "./LangSelector";
 
 function Sidebar() {
   const {
@@ -11,7 +11,6 @@ function Sidebar() {
     sideToggler,
     translate: t,
     lang,
-    setLang,
   } = useGlobalContext();
 
   return (
@@ -55,32 +54,8 @@ function Sidebar() {
             </Link>
           </li>
         ))}
-        <li className="flex flex-row px-6 mt-6 pt-3 py-3 border-t-[1px] border-hovercont w-full">
-          <p>{t("language")}</p>
-          <button onClick={() => setLang(langs["en"])} className="mx-2">
-            <ReactCountryFlag
-              countryCode="GB"
-              style={{
-                objectFit: "cover",
-                width: "25px",
-                height: "25px",
-                borderRadius: "50%",
-              }}
-              svg
-            />
-          </button>
-          <button onClick={() => setLang(langs["fa"])} className="mx-2">
-            <ReactCountryFlag
-              countryCode="IR"
-              style={{
-                objectFit: "cover",
-                width: "25px",
-                height: "25px",
-                borderRadius: "50%",
-              }}
-              svg
-            />
-          </button>
+        <li className="px-6 mt-6 pt-3 py-3 border-t-[1px] border-hovercont w-full">
+          <LangSelector />
         </li>
       </ul>
       {/* social links */}

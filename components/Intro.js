@@ -32,7 +32,7 @@ export default function Intro() {
           </div>
           <p
             data-aos="fade-up"
-            className="absolute  left-0 right-0 text-center top-[65%] sm:top-[75%] text-lg"
+            className="absolute left-0 right-0 text-center top-[65%] sm:top-[75%] text-lg"
           >
             {t('moto1')}
           </p>

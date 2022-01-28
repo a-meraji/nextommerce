@@ -53,6 +53,22 @@ const Context = React.createContext();
 const ContextProvider = ({ initialTheme, children }) => {
   // bilingual States
   const [lang, setLang] = useState(defaultLang);
+  //change language and font
+  const langChanger = (lng) => {
+    const root = window.document.documentElement;
+    if (lng === langs["fa"]) {
+      setLang(lng);
+      root.classList.remove("font-en");
+      root.classList.add("font-fa");
+      localStorage.setItem("language", langs["fa"]);
+    }
+    else{
+      setLang(langs['en']);
+      root.classList.remove("font-fa");
+      root.classList.add("font-en");
+      localStorage.setItem("language", langs["en"]);
+    }
+  };
   // translator
   const translate = (word) => {
     const key = word.toLowerCase();
@@ -62,6 +78,20 @@ const ContextProvider = ({ initialTheme, children }) => {
 
     return LangStrings[lang][key] || LangStrings[defaultLang][key] || "";
   };
+  //set lang from localstorage or browser preferences
+  useEffect(() => {
+    const savedLang = localStorage.getItem("language");
+    if (typeof savedLang === "string") {
+      langChanger(savedLang)
+    } else {
+      const prefLang = navigator.language;
+      if (prefLang.indexOf("fa") > -1) {
+        langChanger(langs["fa"]);
+      } else {
+        langChanger(langs["en"]);
+      }
+    }
+  }, []);
 
   //shopping cart reducer
   const [state, dispatch] = useReducer(reducer, reducernitialState);
@@ -159,12 +189,15 @@ const ContextProvider = ({ initialTheme, children }) => {
     return sortedProducts;
   }
 
-  //update sopping cart an color theme in all tabs
+  //update shopping cart, language and color theme in all tabs
   const onStorageUpdate = (e) => {
     const { key, newValue } = e;
     if (key === "cart") {
       const cartArr = JSON.parse(newValue);
       dispatch({ type: CART_CHANGE, payload: cartArr });
+    }
+    if (key === "language") {
+      langChanger(newValue);
     }
     if (key === "color-theme") {
       setTheme(newValue);
@@ -176,7 +209,7 @@ const ContextProvider = ({ initialTheme, children }) => {
       value={{
         ...state,
         lang,
-        setLang,
+        langChanger,
         translate,
         clearCart,
         remove,

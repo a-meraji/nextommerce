@@ -58,7 +58,7 @@ export const LangStrings = {
     contact: "تماس",
     language:"زبان",
     search:"جستجو",
-    moto1:"فروشگاه مینیمال",
+    moto1:"فروشگاهی مینیمال",
     moto2:"!اما متنوع",
     latest_arivals:"آخرین محصولات",
     sales:"تخفیف ویژه",

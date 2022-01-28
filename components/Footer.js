@@ -1,8 +1,12 @@
 import { socialLinks } from "../shared/json";
 import Link from "next/link";
+import LangSelector from "./LangSelector";
 function footer() {
   return (
     <footer className="text-primary bg-primary py-6">
+        <div className="flex justify-center sm:justify-end text-center w-full mb-6 sm:mb-3 pr-5 text-xs">
+          <LangSelector/>
+        </div>
       <ul className="flex justify-center pb-3 px-6 border-b-[1px] border-secondarycont w-min mx-auto">
         {socialLinks.map((item, i) => (
           <li

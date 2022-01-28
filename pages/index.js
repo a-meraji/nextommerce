@@ -14,7 +14,7 @@ export default function Home({ newArivals, sales }) {
         <Intro />
         {newArivals.length > 0 ? (
           <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-20">
-            <motion.h4
+            <motion.p
               initial={{ y: 0, opacity: 0 }}
               whileInView={{ y: -40, opacity: 1 }}
               viewport={{ once: true }}
@@ -22,7 +22,7 @@ export default function Home({ newArivals, sales }) {
               className="capitalize text-3xl text-secondary text-center"
             >
               {translate('latest_arivals')}
-            </motion.h4>
+            </motion.p>
             <GridProducts products={newArivals} limit={6} />
           </div>
         ) : null}
