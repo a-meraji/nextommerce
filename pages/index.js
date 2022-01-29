@@ -1,9 +1,8 @@
-import Center from "../components/Center";
 import { server } from "../config";
-import Intro from "../components/Intro";
+import Intro from "../components/home_components/Intro";
 import { motion } from "framer-motion";
-import GridProducts from "../components/GridProducts";
-import Moto1 from "../components/Moto1";
+import GridProducts from "../components/product_components/GridProducts";
+import Moto1 from "../components/home_components/Moto1";
 import Link from "next/link";
 import { useGlobalContext } from "../Contexts/globalContext/context";
 export default function Home({ newArivals, sales }) {

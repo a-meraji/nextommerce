@@ -1,9 +1,9 @@
-import { sortView } from "../shared/json";
-import { useGlobalContext } from "../Contexts/globalContext/context";
-import styles from "../shared/styles/side_clyout.module.css";
+import { sortView } from "../../shared/json";
+import { useGlobalContext } from "../../Contexts/globalContext/context";
+import styles from "../../shared/styles/side_clyout.module.css";
 import { useState } from "react";
 import { FilterIcon } from "@heroicons/react/outline";
-import { langs } from "../Contexts/values/LangValues";
+import { langs } from "../../Contexts/values/LangValues";
 
 function SortItems() {
   const [showUl, setShowUl] = useState(false);

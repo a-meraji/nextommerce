@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useGlobalContext } from "../Contexts/globalContext/context";
+import { useGlobalContext } from "../../Contexts/globalContext/context";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { shimmer, toBase64 } from "../shared/utils/imgPlaceholder";
+import { shimmer, toBase64 } from "../../shared/utils/imgPlaceholder";
 //icons
 import {
   CheckIcon,
@@ -22,7 +22,7 @@ function SingleProduct({ product }) {
   store.forEach((color) => {
     color["imgUrls"].forEach((url) => images.push(url));
   });
-
+  
   // Product & Cart State
   const [color, setColor] = useState(store[0]["color"]);
   const [colorCode, setColorCode] = useState(store[0]["colorCode"]);
@@ -31,7 +31,7 @@ function SingleProduct({ product }) {
     setColor(store[0]["color"]);
     setSize(store[0]["sizeAmnt"][0]["size"]);
   }, [store]);
-
+  
   // UI States
   const [imgIndex, setImgIndex] = useState(0);
   const [readMore, setReadMore] = useState(false);
@@ -80,7 +80,6 @@ function SingleProduct({ product }) {
               shimmer(600, 400)
             )}`}
           />
-          {/* left and right arrow buttons */}
           <div className="absolute bottom-3 right-5 rounded-[50%] bg-primary bg-opacity-70 w-12  h-12 p-1 text-xs flex flex-row">
             <ArrowLeftIcon
               onClick={() => {
@@ -119,7 +118,7 @@ function SingleProduct({ product }) {
               }}
               className={`${
                 i === imgIndex ? "bg-primary" : null
-              } min-w-[30%] sm:min-w-[25%] md:min-w-[20%] max-w-[200px] m-[1px] `}
+              } min-w-[30%] sm:min-w-[25%] md:min-w-[20%] max-w-[200px] m-[1px]`}
             >
               <Image
                 width={200}

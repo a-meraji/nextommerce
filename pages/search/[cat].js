@@ -3,12 +3,11 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../Contexts/globalContext/context";
 // components
-import GridProducts from "../../components/GridProducts";
-import SideCategories from "../../components/SideCategories";
-import SortItems from "../../components/SortItems";
+import GridProducts from "../../components/product_components/GridProducts";
+import SideCategories from "../../components/category_components/SideCategories";
+import SortItems from "../../components/category_components/SortItems";
 // values, icons, etc...
 import { server } from "../../config";
-import { FilterIcon, TemplateIcon } from "@heroicons/react/outline";
 
 export default function cats({ products, allCategories, category }) {
   const router = useRouter();

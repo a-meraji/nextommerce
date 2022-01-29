@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { XIcon, CheckIcon, PencilAltIcon, TrashIcon , MenuIcon} from "@heroicons/react/outline";
+import { XIcon, CheckIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import AcceptModal from "./AcceptModal";
 const elm = (
@@ -30,7 +30,7 @@ useEffect(async () => {
       newPros.splice(index,1);
       setProducts(newPros);      
       alert("product deleted successfuly");
-      window.location.reload(false);
+      window.location.reload(true);
      } else {
       alert("something went wrong try again later");
     }
@@ -91,6 +91,7 @@ useEffect(async () => {
                 const col = i % 2 === 0 ? 2 : 1;
                 return (
                   <div
+                  key={i}
                     className={`min-w-[110px] rounded-full flex flex-row justify-between bg-gray-300 bg-opacity-20 text-gray-200 pl-4 pr-6 pb-0.5`}
                   >
                     <div>

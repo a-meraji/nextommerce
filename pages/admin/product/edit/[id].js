@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import TableKinds from "../../../../components/admin/TableKinds";
 import AcceptModal from "../../../../components/admin/AcceptModal";
 import { server } from "../../../../config";
 
 function edit({ id, product, allCategories }) {
+  const router = useRouter();
   const { name, category, price, store, description, sale, newArival, available } =
     product;
   const {
@@ -38,7 +40,7 @@ console.log(newArival)
       const data = await res.json();
       if (data.message=="updated") {
         alert("changes saved successfuly");
-        console.log("data is: ",data)
+        router.back()
        } else {
         alert("something went wrong try again later");
       }

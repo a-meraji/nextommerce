@@ -86,7 +86,7 @@ const ContextProvider = ({ initialTheme, children }) => {
       langChanger(savedLang)
     } else {
       const prefLang = navigator.language;
-      if (prefLang.indexOf("fa") > -1) {
+      if (prefLang==="fa") {
         langChanger(langs["fa"]);
       } else {
         langChanger(langs["en"]);

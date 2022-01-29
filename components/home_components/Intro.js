@@ -1,11 +1,11 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
-import {shimmer, toBase64} from "../shared/utils/imgPlaceholder";
+import {shimmer, toBase64} from "../../shared/utils/imgPlaceholder";
 import { useEffect } from "react";
 import Link from "next/link";
-import { bannerImages } from "../shared/json";
-import { useGlobalContext } from "../Contexts/globalContext/context";
+import { bannerImages } from "../../shared/json";
+import { useGlobalContext } from "../../Contexts/globalContext/context";
 
 export default function Intro() {
   const {translate: t} = useGlobalContext();

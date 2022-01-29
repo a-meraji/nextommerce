@@ -1,8 +1,8 @@
 import { useGlobalContext } from "../Contexts/globalContext/context";
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import TableOrder from "../components/TableOrder";
+import TableOrder from "../components/product_components/TableOrder";
 import { langs } from "../Contexts/values/LangValues";
 
 export default function checkout() {
@@ -100,7 +100,7 @@ export default function checkout() {
           {errors.name && (
             <p className="text-red-700 -mt-4 mb-4">
               {errors.name.type === "required"
-                ? "* enter the your name"
+                ? "* enter your name"
                 : "* name should not end with white-space or contained any non-letter charachter"}
             </p>
           )}
@@ -143,7 +143,7 @@ export default function checkout() {
           {errors.phone && (
             <p className="text-red-700 -mt-4 mb-4">
               {errors.phone.type === "required"
-                ? "* enter the your phone number"
+                ? "* enter your phone number"
                 : "* phone number not valid"}
             </p>
           )}

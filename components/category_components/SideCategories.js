@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import { useGlobalContext } from "../Contexts/globalContext/context";
+import { useGlobalContext } from "../../Contexts/globalContext/context";
 import Link from "next/link";
-import styles from "../shared/styles/flyout_menu.module.css";
+import styles from "../../shared/styles/flyout_menu.module.css";
 import { TemplateIcon } from "@heroicons/react/outline";
 import {
   GiWinterHat,
@@ -11,7 +11,7 @@ import {
 } from "react-icons/gi";
 import { MdMasks } from "react-icons/md";
 import { FaTshirt } from "react-icons/fa";
-import { langs } from "../Contexts/values/LangValues";
+import { langs } from "../../Contexts/values/LangValues";
 
 export default function SideCategories({ categories }) {
   const { setSort, translate:t, lang } = useGlobalContext();

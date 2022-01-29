@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import TableKinds from "../../../components/admin/TableKinds";
 import AcceptModal from "../../../components/admin/AcceptModal";
 
 function create() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -28,7 +30,12 @@ function create() {
 
   //states for diffrent kinds of a product diffrent colors sizes and amounts
   const [storeSt, setStoreSt] = useState([
-    { color: "", colorCode:"", sizeAmnt: [{ size: "", amount: 0 }], imgUrls: [] },
+    {
+      color: "",
+      colorCode: "",
+      sizeAmnt: [{ size: "", amount: 0 }],
+      imgUrls: [],
+    },
   ]);
   // final product
   const [save, setSave] = useState(false);
@@ -47,15 +54,20 @@ function create() {
         body: JSON.stringify(finalPro),
       });
       const data = await res.json();
-      if(data._id){alert('product saved successfuly')}
-      else{alert('something went wrong try again later')}
+      if (data._id) {
+        alert("product saved successfuly");
+        router.back();
+      } else {
+        alert(data.message);
+      }
       setSave(false);
     }
   }, [save]);
 
   const submitHandler = (form) => {
     // make a product model to send
-    const { name, category, price, description, sale,newArival, available } = form;
+    const { name, category, price, description, sale, newArival, available } =
+      form;
     const newName = name.replace(/ /g, "_");
     const newProduct = {
       name: newName,
@@ -166,7 +178,7 @@ function create() {
             <br />
             {storeSt.length > 1 && (
               <button
-              className="w-1/2 ml-1 mt-10 bg-red-600 rounded-full text-gray-200 px-auto py-0.5 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-red-600 hover:text-red-600"
+                className="w-1/2 ml-1 mt-10 bg-red-600 rounded-full text-gray-200 px-auto py-0.5 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-red-600 hover:text-red-600"
                 onClick={() => {
                   let tempObj = storeSt;
                   tempObj.pop();
@@ -194,7 +206,11 @@ function create() {
           <label>on sale</label>
         </div>
         <div className="mt-6">
-          <input className="mt-3 mr-2" type="checkbox" {...register("newArival")} />
+          <input
+            className="mt-3 mr-2"
+            type="checkbox"
+            {...register("newArival")}
+          />
           <label>new arival</label>
         </div>
         <div>

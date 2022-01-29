@@ -1,3 +1,1 @@
-const dev = process.env.NODE_ENV === 'production';
-
-export const server = 'https://nextommerce.vercel.app';
+export const server = process.env.NODE_ENV === 'production' ?'https://nextommerce.vercel.app':"http://localhost:3000";

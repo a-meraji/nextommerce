@@ -1,6 +1,6 @@
 import {server} from "../../config/index";
-import GridProducts from "../../components/GridProducts";
-import SingleProduct from "../../components/SingleProduct";
+import GridProducts from "../../components/product_components/GridProducts";
+import SingleProduct from "../../components/product_components/SingleProduct";
 import Link from "next/link";
 import { useGlobalContext } from "../../Contexts/globalContext/context";
 

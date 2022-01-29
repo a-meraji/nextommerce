@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { shimmer, toBase64 } from "../shared/utils/imgPlaceholder";
+import { shimmer, toBase64 } from "../../shared/utils/imgPlaceholder";
 
 export default function GridProducts({ products, limit }) {
   return (
