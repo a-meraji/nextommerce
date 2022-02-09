@@ -2,14 +2,10 @@ import Product from "../../models/ProductModel";
 import errorController from "../errorController";
 
 export default async function readProduct(req, res) {
-  const id = req.query.id;
-  const name = req.query.name;
-  const category = req.query.cat;
-  const filter = req.query.filter;
-  const value = req.query.value;
+  const {id,name,category,filter,value} = req.query
   // creats a propper condition object if quety had filter key format
   var conObj = new Object();
-  if (filter !== undefined && value !== undefined) {
+  if (filter !== undefined && value !== undefined && value!=="undefined") {
     if (value === "true" || value === "false") {
       conObj[filter] = value;
     } else {
