@@ -19,7 +19,7 @@ export default async function createOrder(req, res) {
       const createdOrder = await order.save();
       return res.status(200).send({ message: "saved", createdOrder });
     } catch (error) {
-      errorController(500, error.message, res);
+      errorController(500, error, res);
     }
   } else {
     errorController(422, "incomplete data", res);

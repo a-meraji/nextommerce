@@ -2,6 +2,7 @@ import { server } from "../../../config";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import AdminProduts from "../../../components/admin/AdminProduts";
+import authHandler from "../../../shared/utils/authHandler";
 
 export default function cats({ allProducts, allCategories, query }) {
   const [products, setProducts] = useState(allProducts);
@@ -18,11 +19,11 @@ export default function cats({ allProducts, allCategories, query }) {
   };
 
   return (
-    <div className="bg-black py-1 text-gray-100">
+    <div className="bg-secondary py-1 text-secondary">
       <div className="mx-10 my-8">
         <label className="text-xl">category: </label>
         <select
-          className="bg-gray-600 opacity-60 rounded-full px-2"
+          className="bg-third rounded-full px-2"
           name="categories"
           onChange={(e) => {
             queryHandler(e.target.value);
@@ -38,7 +39,12 @@ export default function cats({ allProducts, allCategories, query }) {
       {products.map((product, i) => {
         return (
           <div className="pb-6" key={i}>
-            <AdminProduts product={product} index={i} setProducts={setProducts} products={products} />
+            <AdminProduts
+              product={product}
+              index={i}
+              setProducts={setProducts}
+              products={products}
+            />
           </div>
         );
       })}
@@ -47,42 +53,42 @@ export default function cats({ allProducts, allCategories, query }) {
 }
 
 export async function getServerSideProps(context) {
-  const query = context.params.cat;
-  const productsData = await fetch(`${server}/api/product/crud?cat=${query}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const { authorized } = await authHandler(
+    context.req,
+    context.res
+  );
 
-  const catsData = await fetch(`${server}/api/product/categories`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  if (authorized) {
+    const query = context.params.cat;
+    const productsData = await fetch(
+      `${server}/api/product/crud?cat=${query}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-  const allProducts = await productsData.json();
-  const allCategories = await catsData.json();
+    const catsData = await fetch(`${server}/api/product/categories`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  return {
-    props: { allProducts, allCategories, query },
-    // revalidate: 900, //every 15 minutes
-  };
+    const allProducts = await productsData.json();
+    const allCategories = await catsData.json();
+
+    return {
+      props: { allProducts, allCategories, query },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/admin/login",
+        permanent: false,
+      },
+    };
+  }
 }
-
-// export async function getStaticPaths() {
-  // const catsData = await fetch(`${server}/api/product/categories`, {
-  //   method: "GET",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // });
-  // const cats = await catsData.json();
-//   const cats = ["hat", "t-shirt", "shirt", "jacket", "pants", "accessory"];
-//   const paths = cats.map((cat) => ({
-//     params: { cat },
-//   }));
-
-//   return { paths, fallback: "blocking" };
-// }

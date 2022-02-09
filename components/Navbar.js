@@ -3,6 +3,7 @@ import { useGlobalContext } from "../Contexts/globalContext/context";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { server } from "../config";
+import AdminNav from "./admin/AdminNav";
 
 // theme toggle Button
 import Toggle from "./ThemeToggle";
@@ -23,6 +24,7 @@ function Navbar() {
     sideToggler,
     amount,
     cartToggler,
+    displayProf, setDisplayProf
   } = useGlobalContext();
   // setting value of search input
   const [search, setSearch] = useState(router.query.q ? router.query.q : "");
@@ -71,11 +73,11 @@ function Navbar() {
           <SearchIcon className="w-5 h-5 mx-1" />
         </div>
         <div className="flex">
-          <div className="mr-5 sm:mx-3 mt-1">
+          <div className="sm:mx-3 mt-1">
             <Toggle />
           </div>
           <button
-            className=" mb-1 mx-3 mt-1 hover:text-accent relative flex flex-row"
+            className="mb-1 mx-3 mt-1 hover:text-accent relative flex flex-row"
             onClick={cartToggler}
           >
             <ShoppingBagIcon className="w-[22px] h-[22px]" />
@@ -85,18 +87,17 @@ function Navbar() {
               </div>
             ) : null}
           </button>
-          {/* <div className="hover:text-accent">
-            <button> */}
-          {/* <img
+            <button onClick={()=>setDisplayProf(!displayProf)} className="mr-5 sm:mx-3">
+              {/* <img
               className="w-7 h-7 rounded-full"
               src="https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
             ></img> */}
-          {/* <UserCircleIcon className="w-[24px] h-[24px] mt-1 " />
+              <UserCircleIcon className="w-[24px] h-[24px]" />
             </button>
-          </div> */}
         </div>
       </nav>
       <div className="absolute w-full py-10 top-0 bg-secondary glob-trans"></div>
+      {router.pathname.split("/")[1] === "admin" ? <AdminNav /> : null}
     </>
   );
 }

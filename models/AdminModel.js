@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -19,11 +19,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    address: {
+    role: {
       type: String,
+      required: true,
     },
-    phone:{
-      type: Number,
+    root: {
+      type: Boolean,
+      required: true,
     },
     suspend:{
       type:Boolean,
@@ -40,5 +42,5 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-let User = mongoose.models.user || mongoose.model("user", userSchema);
-export default User;
+let Admin = mongoose.models.admin || mongoose.model("admin", adminSchema);
+export default Admin;

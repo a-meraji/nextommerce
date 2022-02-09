@@ -13,13 +13,13 @@ export default async function updateOrderStatus(req, res) {
       },
       function (err, docs) {
         if (err) {
-          errorController(err.code, err.message, res);
+          errorController(500, err, res);
         } else {
           return res.status(200).send({ docs, message: "updated" });
         }
       }
     );
   } catch (err) {
-    errorController(500, err.message, res);
+    errorController(500, err, res);
   }
 }

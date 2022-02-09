@@ -1,6 +1,10 @@
 import { useForm } from "react-hook-form";
-
+import { useGlobalContext } from "../../Contexts/globalContext/context";
+import { useRouter } from "next/router";
+import Link from "next/link";
 export default function signup() {
+  const { updateAccount } = useGlobalContext();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -8,7 +12,6 @@ export default function signup() {
   } = useForm();
 
   const submitHandler = async (form) => {
-
     const res = await fetch("/api/auth/users", {
       method: "POST",
       headers: {
@@ -17,7 +20,11 @@ export default function signup() {
       body: JSON.stringify(form),
     });
     const data = await res.json();
-    if(data.user){
+    if (data.user) {
+      const { name, lastname, phone, address } = data.user;
+      updateAccount({ name, lastname, phone, address, isAdmin:false });
+      router.push("/");
+    }else{
       alert(data.message)
     }
   };
@@ -132,10 +139,15 @@ export default function signup() {
 
         <button
           type="submit"
-          className="bg-accent text-gray-200 my-5 text-lg rounded-full py-3 px-5"
+          className="bg-accent text-gray-200 my-5 mx-auto text-lg rounded-full py-1 px-5 w-[80%]"
         >
           Create account
         </button>
+        <div className="text-xs text-center">
+          <Link href="/auth/login">
+            <a>I have an account Login</a>
+          </Link>
+        </div>
       </form>
     </div>
   );

@@ -4,17 +4,26 @@ import { useRouter } from "next/router";
 import TableKinds from "../../../../components/admin/TableKinds";
 import AcceptModal from "../../../../components/admin/AcceptModal";
 import { server } from "../../../../config";
+import authHandler from "../../../../shared/utils/authHandler";
 
 function edit({ id, product, allCategories }) {
   const router = useRouter();
-  const { name, category, price, store, description, sale, newArival, available } =
-    product;
+  const {
+    name,
+    category,
+    price,
+    store,
+    description,
+    sale,
+    newArival,
+    available,
+  } = product;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-console.log(newArival)
+  console.log(newArival);
   //states for different kinds of a product diffrent colors sizes and amounts
   const [storeSt, setStoreSt] = useState(store);
   // category State
@@ -29,7 +38,6 @@ console.log(newArival)
   // fetch data just after click on save  button
   useEffect(async () => {
     if (save) {
-      console.log(finalPro)
       const res = await fetch("/api/product/crud", {
         method: "PATCH",
         headers: {
@@ -37,20 +45,28 @@ console.log(newArival)
         },
         body: JSON.stringify(finalPro),
       });
+
+      const athorized = res.headers.get("authorized") === "true";
       const data = await res.json();
-      if (data.message=="updated") {
-        alert("changes saved successfuly");
-        router.back()
-       } else {
+
+      if (athorized) {
+        if (data.message == "updated") {
+          alert("changes saved successfuly");
+        router.back();
+      } else {
         alert("something went wrong try again later");
       }
       setSave(false);
+    }else{
+      router.push("/admin/login");
     }
+  }
   }, [save]);
 
   const submitHandler = (form) => {
     // make a product model to send
-    const { name, category, price, description, sale, newArival, available } = form;
+    const { name, category, price, description, sale, newArival, available } =
+      form;
 
     const newName = name.replace(/ /g, "_");
     const newProduct = {
@@ -104,15 +120,13 @@ console.log(newArival)
         <select
           className="w-72 ml-8 bg-gray-300 bg-opacity-20  mt-2 rounded-full pl-3 py-0.5 text-gray-400"
           name="category"
-          onChange={(e)=>{setCatSt(e.target.value)}}
+          onChange={(e) => {
+            setCatSt(e.target.value);
+          }}
           {...register("category", { required: true })}
         >
           {allCategories?.map((cat, i) => (
-            <option
-              key={i}
-              value={cat}
-              selected={cat === catSt ? true : false}
-            >
+            <option key={i} value={cat} selected={cat === catSt ? true : false}>
               {cat}
             </option>
           ))}
@@ -156,7 +170,7 @@ console.log(newArival)
                   ...storeSt,
                   {
                     color: "",
-                    colorCode:"",
+                    colorCode: "",
                     sizeAmnt: [{ size: "", amount: 0 }],
                     imgUrls: [],
                   },
@@ -168,7 +182,7 @@ console.log(newArival)
             <br />
             {storeSt.length > 1 && (
               <button
-              className="w-1/2 ml-1 mt-10 bg-red-600 rounded-full text-gray-200 px-auto py-0.5 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-red-600 hover:text-red-600"
+                className="w-1/2 ml-1 mt-10 bg-red-600 rounded-full text-gray-200 px-auto py-0.5 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-red-600 hover:text-red-600"
                 onClick={() => {
                   let tempObj = storeSt;
                   tempObj.pop();
@@ -194,11 +208,21 @@ console.log(newArival)
         )}
         {/* sale & availablity */}
         <div className="mt-6">
-          <input className="mt-3 mr-2" type="checkbox" {...register("sale")} defaultChecked={sale} />
+          <input
+            className="mt-3 mr-2"
+            type="checkbox"
+            {...register("sale")}
+            defaultChecked={sale}
+          />
           <label>on sale</label>
         </div>
         <div className="mt-3">
-          <input className="mt-3 mr-2" type="checkbox" {...register("newArival")} defaultChecked={newArival} />
+          <input
+            className="mt-3 mr-2"
+            type="checkbox"
+            {...register("newArival")}
+            defaultChecked={newArival}
+          />
           <label>New Arival</label>
         </div>
         <div>
@@ -210,7 +234,7 @@ console.log(newArival)
           />
           <label>is available</label>
         </div>
-        
+
         <button
           className="w-3/4 mx-auto mt-10 bg-gray-100 bg-opacity-90 rounded-full text-gray-800 px-auto py-1.5 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-gray-200 hover:text-gray-100"
           onClick={() => {
@@ -221,30 +245,39 @@ console.log(newArival)
         </button>
       </form>
     </div>
-    
   );
 }
 
 export default edit;
 
 export async function getServerSideProps(context) {
-  const id = context.params.id;
-  const productData = await fetch(`${server}/api/product/crud?id=${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const { authorized } = await authHandler(context.req, context.res);
+  if (authorized) {
+    const id = context.params.id;
+    const productData = await fetch(`${server}/api/product/crud?id=${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  const catsData = await fetch(`${server}/api/product/categories`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+    const catsData = await fetch(`${server}/api/product/categories`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  const product = await productData.json();
-  const allCategories = await catsData.json();
+    const product = await productData.json();
+    const allCategories = await catsData.json();
 
-  return { props: { id, product, allCategories } };
+    return { props: { id, product, allCategories } };
+  } else {
+    return {
+      redirect: {
+        destination: "/admin/login",
+        permanent: false,
+      },
+    };
+  }
 }

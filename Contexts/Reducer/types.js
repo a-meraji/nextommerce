@@ -7,3 +7,4 @@ export const INCREASE = 'INCREASE';
 export const DECREASE = 'DECREASE';
 export const ADD = "ADD";
 export const CART_CHANGE = "CART_CHANGE";
+export const ACCOUNT_UPDATE = "ACCOUNT_UPDATE";

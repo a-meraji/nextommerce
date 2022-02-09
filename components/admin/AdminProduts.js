@@ -3,7 +3,7 @@ import { XIcon, CheckIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/out
 import { useRouter } from "next/router";
 import AcceptModal from "./AcceptModal";
 const elm = (
-  <div className={`min-w-[115px] border-b-[1px] flex flex-row justify-between -mb-3 pb-0.5`}>
+  <div className={`min-w-[115px] bg-secondary text-primary rounded-full flex flex-row justify-between -mb-3 pb-0.5`}>
     <p className="pl-2">size</p>
     <p className="pr-2">amount</p>
   </div>
@@ -24,17 +24,23 @@ useEffect(async () => {
       },
       body: JSON.stringify({id:_id}),
     });
-    const data = await res.json();
-    if (data.message=="deleted") {
-      let newPros = products;
+
+    const athorized = res.headers.get("authorized") === "true";
+      const data = await res.json();
+      if(athorized){
+        if (data.message=="deleted") {
+          let newPros = products;
       newPros.splice(index,1);
       setProducts(newPros);      
       alert("product deleted successfuly");
       window.location.reload(true);
-     } else {
+    } else {
       alert("something went wrong try again later");
     }
     setConfDelete(false);
+  }else{
+    router.push("/admin/login");
+  }
   }
 }, [confDelete])
   //for a smart responsive
@@ -49,7 +55,7 @@ useEffect(async () => {
   };
 
   return (
-    <div key={index} className="border-[1px] relative rounded-3xl my-6 mx-8 py-9 px-10 text-white">
+    <div key={index} className="border-[1px] border-hovercont relative rounded-3xl my-6 mx-8 py-9 px-10 bg-third text-secondary">
       <AcceptModal
           showModal={showModal}
           setShowModal={setShowModal}
@@ -60,11 +66,11 @@ useEffect(async () => {
         <PencilAltIcon width="20px" className="cursor-pointer" onClick={()=>router.push(`/admin/product/edit/${_id}`)}/>
 
       </div>
-      <p className="text-lg mb-4 w-max pb-1 border-gray-300 border-b-[2px]">
+      <p className="text-lg mb-4 w-max pb-1">
         <strong>name:</strong> {name.replace(/_/g, " ")}
       </p>
       <p>
-        <strong>price: </strong> <span className="w-max bg-gray-300 bg-opacity-20 rounded-lg text-gray-200 px-2 pb-0.5">{price}$</span>
+        <strong>price: </strong> <span className="w-max bg-secondary bg-opacity-20 rounded-lg px-2 pb-0.5">{price}$</span>
       </p>
       {store.map((miniStore, i) => {
         const { color, imgUrls, sizeAmnt } = miniStore;
@@ -72,7 +78,7 @@ useEffect(async () => {
           <div key={i} className="border-t-[1px]  mt-10 mb-14 pt-10">
             <p>
               <strong>color: {' '}</strong>
-              <span className="w-max bg-gray-300 bg-opacity-20 rounded-lg text-gray-200 px-2 pb-0.5">
+              <span className="w-max bg-secondary bg-opacity-20 rounded-lg px-2 pb-0.5">
                 {color}
               </span>
             </p>
@@ -86,13 +92,13 @@ useEffect(async () => {
            </div>:''}
            
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-y-4 justify-items-center max-w-[550px] mt-4 mb-6">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-y-4 justify-items-center max-w-[550px] my-8">
               {sizeAmnt.map((val, i) => {
                 const col = i % 2 === 0 ? 2 : 1;
                 return (
                   <div
                   key={i}
-                    className={`min-w-[110px] rounded-full flex flex-row justify-between bg-gray-300 bg-opacity-20 text-gray-200 pl-4 pr-6 pb-0.5`}
+                    className={`min-w-[110px] rounded-full flex flex-row justify-between bg-secondary bg-opacity-20 pl-4 pr-6 pb-0.5`}
                   >
                     <div>
                       <p

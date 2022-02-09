@@ -13,7 +13,7 @@ export default function TableKinds({
     <tr>
       <td>
         <input
-          className="w-full bg-gray-300 bg-opacity-20 text-gray-200 p-1"
+          className="w-full bg-hover text-secondary p-1"
           type="text"
           placeholder="color"
           value={color}
@@ -27,7 +27,7 @@ export default function TableKinds({
       </td>
       <td>
         <input
-          className="w-full bg-gray-300 bg-opacity-20 text-gray-200 p-1"
+          className="w-full bg-hover text-secondary p-1"
           type="text"
           placeholder="color code"
           value={clrCode}
@@ -41,7 +41,7 @@ export default function TableKinds({
       </td>
       <td>
         <select
-          className="w-full text-gray-500 bg-gray-300 bg-opacity-20 p-1"
+          className="w-full text-secondary bg-hover p-1"
           name="size"
           onChange={(e) => {
             let tempObj = storeSt;
@@ -74,7 +74,7 @@ export default function TableKinds({
       </td>
       <td>
         <input
-          className="w-full bg-gray-300 bg-opacity-20 text-gray-200 p-1"
+          className="w-full bg-hover text-secondary p-1"
           type="number"
           placeholder="amount"
           defaultValue={val["amount"]}
@@ -101,7 +101,7 @@ export default function TableKinds({
       </table>
       <div className="mb-6">
         <button
-          className="w-28 bg-gray-100 bg-opacity-90  mt-4 rounded-full text-gray-800 px-auto py-0.5 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-gray-200 hover:text-gray-100"
+          className="w-28 bg-hover  mt-4 rounded-full text-secondary px-auto py-0.5 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-hovercont hover:text-primary"
           onClick={() => {
             let tempObj = storeSt;
             tempObj[i]["sizeAmnt"].push({ size: "", amount: 0 });
@@ -112,7 +112,7 @@ export default function TableKinds({
         </button>
         {storeSt[i]["sizeAmnt"].length > 1 ? (
           <button
-            className="ml-3 w-28 bg-gray-100 bg-opacity-90  mt-4 rounded-full text-gray-800 px-auto py-0.5 hover:bg-transparent hover:border-solid hover:border-[1px] hover:border-gray-200 hover:text-gray-100"
+            className="ml-3 w-28 bg-danger  mt-4 rounded-full text-white px-auto py-0.5 hover:bg-transparent hover:border-[1px] hover:border-red-600 hover:text-danger"
             onClick={() => {
               let tempObj = storeSt;
               tempObj[i]["sizeAmnt"].pop();
@@ -140,7 +140,7 @@ export default function TableKinds({
           tempObj[i]["imgUrls"] = tempUrls;
           setStoreSt(tempObj);
         }}
-        className="w-full h-48 bg-gray-300 bg-opacity-20  mt-4 mb-1 rounded-md text-gray-200 pl-3 py-0.5"
+        className="w-full h-48 bg-hover mt-4 mb-1 rounded-md text-secondary pl-3 py-0.5"
         placeholder="https://..."
         {...register(`imgUrls${i}`, { required: true })}
       />

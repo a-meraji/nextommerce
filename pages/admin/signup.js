@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
-
+import { useGlobalContext } from "../../Contexts/globalContext/context";
+import { useRouter } from "next/router";
 export default function signup() {
+  const  router  = useRouter();
+  const { updateAccount } = useGlobalContext();
   const {
     register,
     handleSubmit,
@@ -16,41 +19,62 @@ export default function signup() {
       body: JSON.stringify(form),
     });
     const data = await res.json();
-    console.log(data);
+    if (data.account) {
+      const { name, lastname } = data.account;
+      updateAccount({ name, lastname, isAdmin:true });
+      router.push("/admin/order");
+    } else {
+      alert(data.message);
+    }
   };
 
   return (
-    <div>
-      <form className="flex flex-col" onSubmit={handleSubmit(submitHandler)}>
-        <label>First Name</label>
+    <div className="bg-secondary text-secondary py-10">
+      <form
+        className="w-4/5 max-w-[500px] border-2 bg-third border-third p-6 sm:px-10 mx-auto rounded-xl flex flex-col"
+        onSubmit={handleSubmit(submitHandler)}
+      >
+        <label className="mb-1 text-primary text-lg" htmlFor="name">
+          First Name:
+        </label>
         <input
-          placeholder="First Name"
+          className="rounded-full px-2 mb-6 bg-secondary"
+          placeholder="enter your First Name"
+          id="name"
           type="text"
           {...register("name", { required: true, maxLength: 20 })}
         />
         {errors.name && (
-          <p className="text-red-700">
+          <p className="text-red-700 -mt-4 mb-4">
             {errors.name.type == "required"
-              ? "please enter the firstname"
-              : "maximum lenght for first name is 20 character"}
+              ? "* please enter your firstname"
+              : "* maximum lenght for first name is 20 character"}
           </p>
         )}
-        <label>Last Name</label>
+        <label className="mb-1 text-primary text-lg" htmlFor="lastname">
+          Last Name:
+        </label>
         <input
-          placeholder="Last Name"
+          id="lastname"
+          className="rounded-full px-2 mb-6 bg-secondary"
+          placeholder="enter your Last Name"
           type="text"
           {...register("lastname", { required: true, maxLength: 20 })}
         />
         {errors.lastname && (
-          <p className="text-red-700">
+          <p className="text-red-700 -mt-4 mb-4">
             {errors.lastname.type == "required"
-              ? "please enter the last name"
-              : "maximum lenght for last name is 20 character"}
+              ? "* please enter your last name"
+              : "* maximum lenght for last name is 20 character"}
           </p>
         )}
-        <label>Email</label>
+        <label className="mb-1 text-primary text-lg" htmlFor="email">
+          Email:
+        </label>
         <input
-          placeholder="Email"
+          id="email"
+          className="rounded-full px-2 mb-6 bg-secondary"
+          placeholder="enter your Email"
           type="email"
           {...register("email", {
             required: true,
@@ -59,15 +83,19 @@ export default function signup() {
           })}
         />
         {errors.email && (
-          <p className="text-red-700">
+          <p className="text-red-700 -mt-4 mb-4">
             {errors.email.type == "required"
-              ? "please enter an email"
-              : "this email seems to be not valid"}
+              ? "* please enter your email"
+              : "* invalid Email"}
           </p>
         )}
-        <label>Password</label>
+        <label className="mb-1 text-primary text-lg" htmlFor="password">
+          Password:
+        </label>
         <input
-          placeholder="Password"
+          id="password"
+          className="rounded-full px-2 mb-6 bg-secondary"
+          placeholder="enter a Password"
           type="password"
           {...register("password", {
             required: true,
@@ -75,43 +103,64 @@ export default function signup() {
           })}
         />
         {errors.password && (
-          <p className="text-red-700">
+          <p className="text-red-700 -mt-4 mb-4">
             {errors.password.type == "required"
-              ? "please enter a password"
-              : "password must be between 6 and 40 characters included capital letters and numbers"}
+              ? "* please enter a password"
+              : "* password must be between 6 and 40 characters included capital letters and numbers"}
           </p>
         )}
-        <label>Role</label>
-        <input
-          placeholder="admin"
-          type="text"
-          {...register("role", {
-            required: true,
-          })}
-        />
-        {errors.role && <p className="text-red-700">please enter the role</p>}
-        <p>choose an access root condition</p>
-        <div>
+
+        <p className="text-primary text-lg">choose a role:</p>
+        <div className="flex">
           <input
+            id="admin"
+            name="role"
+            value="admin"
             type="radio"
-            id="true"
-            name="root"
-            value="true"
-            {...register("root")}
+            {...register("role", {
+              required: true,
+            })}
           />
-          <label for="true">true</label> <br />
-          <input
-            type="radio"
-            id="false"
-            name="root"
-            value="false"
-            {...register("root")}
-          />
-          <label for="false">false</label> <br />
+          <label className="ml-1 pb-2" htmlFor="admin">
+            admin
+          </label>
         </div>
-        <label>Admin Email</label>
+        <div className="flex mb-7">
+          <input
+            id="master"
+            name="role"
+            value="master"
+            type="radio"
+            {...register("role", {
+              required: true,
+            })}
+          />
+          <label className="ml-1 pb-2" htmlFor="master">
+            master
+          </label>
+        </div>
+        <br />
+        <div className="flex">
+          <input
+            id="root"
+            name="root"
+            value={() => EventTarget.value}
+            type="checkbox"
+            {...register("root")}
+          />
+          <label className="text-primary text-lg ml-1 pb-2" htmlFor="master">
+            root access
+          </label>
+          <br />
+        </div>
+
+        <label className="mb-1 text-primary text-lg" htmlFor="adminEmail">
+          adminEmail:
+        </label>
         <input
-          placeholder="admin Email"
+          id="adminEmail"
+          className="rounded-full px-2 mb-6 bg-secondary"
+          placeholder="enter admin Email"
           type="email"
           {...register("adminEmail", {
             required: true,
@@ -120,29 +169,39 @@ export default function signup() {
           })}
         />
         {errors.adminEmail && (
-          <p className="text-red-700">
+          <p className="text-red-700 -mt-4 mb-4">
             {errors.adminEmail.type == "required"
-              ? "please enter admin email"
-              : "this email seems to be not valid"}
+              ? "* please enter admin Email"
+              : "* invalid Email"}
           </p>
         )}
-        <label>Admin Password</label>
+        <label className="mb-1 text-primary text-lg" htmlFor="adminPassword">
+          admin Password:
+        </label>
         <input
-          placeholder="Admin Password"
-          type="adminPassword"
+          id="adminPassword"
+          className="rounded-full px-2 mb-6 bg-secondary"
+          placeholder="enter admin Password"
+          type="password"
           {...register("adminPassword", {
             required: true,
             pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,40}$/,
           })}
         />
         {errors.adminPassword && (
-          <p className="text-red-700">
+          <p className="text-red-700 -mt-4 mb-4">
             {errors.adminPassword.type == "required"
-              ? "please enter admin password"
-              : "password must be between 6 and 40 characters included capital letters and numbers"}
+              ? "* please enter admin Password"
+              : "* password must be between 6 and 40 characters included capital letters and numbers"}
           </p>
         )}
-        <button type="submit">Submit</button>
+
+        <button
+          type="submit"
+          className="bg-accent text-gray-200 my-5 text-lg rounded-full py-3 px-5"
+        >
+          Create account
+        </button>
       </form>
     </div>
   );

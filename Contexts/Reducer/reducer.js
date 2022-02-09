@@ -8,6 +8,7 @@ import {
   DECREASE,
   ADD,
   CART_CHANGE,
+  ACCOUNT_UPDATE,
 } from "./types";
 
 const reducer = (state, action) => {
@@ -70,6 +71,9 @@ const reducer = (state, action) => {
   }
   if(action.type === CART_CHANGE){
     return {...state, cart: action.payload}
+  }
+  if(action.type === ACCOUNT_UPDATE){
+    return {...state, account: action.payload}
   }
   throw new Error("no matching action type");
 };

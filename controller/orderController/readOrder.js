@@ -24,8 +24,8 @@ export default async function readOrders(req, res) {
   }
   try {
     const orders = await Order.find(conditions);
-    return res.status(200).send({ orders, message: "found" });
+    return res.status(200).json({ orders, message: "found" });
   } catch (err) {
-    errorController(500, err.message, res);
+    errorController(500, err, res);
   }
 }

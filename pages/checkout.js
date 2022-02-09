@@ -4,11 +4,13 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import TableOrder from "../components/product_components/TableOrder";
 import { langs } from "../Contexts/values/LangValues";
+import { useEffect } from "react";
 
 export default function checkout() {
   const router = useRouter();
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -19,6 +21,7 @@ export default function checkout() {
     total,
     amount,
     clearCart,
+    account,
   } = useGlobalContext();
   const [orders, setOrders] = useState({
     name: "",
@@ -71,6 +74,19 @@ export default function checkout() {
       }
     }
   };
+
+  useEffect(()=>{
+    if(account.name){
+      setValue("name", account.name);
+      setValue("lastname", account.lastname);
+      setValue("address", account.address);
+      setValue("phone", account.phone);
+      document.getElementById("name").value = account.name;
+      document.getElementById("lastname").value = account.lastname;
+      document.getElementById("address").value = account.address;
+      document.getElementById("phone").value = account.phone;
+    }
+  })
 
   return (
     <div

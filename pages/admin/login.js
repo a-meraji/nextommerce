@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
-
+import { useGlobalContext } from "../../Contexts/globalContext/context";
+import { useRouter } from "next/router";
 export default function login() {
+  const  router  = useRouter();
+  const { updateAccount } = useGlobalContext();
   const {
     register,
     handleSubmit,
@@ -16,14 +19,26 @@ export default function login() {
       body:JSON.stringify(form)
     });
     const data = await res.json();
-    console.log(data)
+    if (data.account) {
+      const {name,lastname} = data.account;
+      updateAccount({name,lastname, isAdmin:true});
+    router.push("/admin/order");
+    }else{
+      console.log(data)
+      if(data.message.message){
+        alert(data.message.message)
+      }else{
+        alert(data.message)
+      }
+    }
   };
 
   return (
-    <div>
-      <form className="flex flex-col" onSubmit={handleSubmit(submitHandler)}>        
-        <label>Email</label>
+    <div className="bg-secondary text-secondary pt-12 pb-20">
+      <form className="flex flex-col w-4/5 max-w-[500px] border-2 bg-third border-third p-6 sm:px-10 my-10 mx-auto rounded-xl" onSubmit={handleSubmit(submitHandler)}>        
+        <label className="mb-1 text-primary text-lg">Email</label>
         <input
+        className="rounded-full px-2 mb-6 bg-secondary"
           placeholder="Email"
           type="email"
           {...register("email", {
@@ -39,8 +54,9 @@ export default function login() {
                 : "this email seems to be not valid"}
             </p>
           )}
-        <label>Password</label>
+        <label className="mb-1 text-primary text-lg">Password</label>
         <input
+        className="rounded-full px-2 mb-6 bg-secondary"
           placeholder="Password"
           type="password"
           {...register("password", {
@@ -55,7 +71,7 @@ export default function login() {
               : "password must be between 6 and 40 characters included capital letters and numbers"}
           </p>
         )}
-        <button type="submit">Submit</button>
+        <button className="bg-accent text-gray-200 my-5 mx-auto text-lg rounded-full py-1 px-5 w-[80%]" type="submit">Login</button>
       </form>
     </div>
   );

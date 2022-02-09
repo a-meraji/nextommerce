@@ -1,6 +1,7 @@
 import connectDB from "../../../middleware/db/mongodb";
 import errorController from "../../../controller/errorController";
 //controllers
+import {authMiddleware} from "../../../controller/authController/authMiddleware";
 import createProduct from "../../../controller/productsController/createProduct";
 import readProduct from "../../../controller/productsController/readProducts";
 import updateProduct from "../../../controller/productsController/updateProduct";
@@ -11,13 +12,22 @@ const reqHandler = (req, res) => {
     before req proccesing check security credentials like JWT token 
   ************************************************************** */
   const method = req.method;
-  if (method === "POST")  createProduct(req, res);
-  else if (method === "GET") readProduct(req, res);
-  else if (method === "PATCH") updateProduct(req, res);
-  else if (method === "DELETE") deleteProduct(req, res);
-  else {
-    errorController(422,"request method not supported",res);
+  switch (method) {
+    case "GET":
+      readProduct(req, res);
+      break;
+    case "POST":
+      authMiddleware(req, res, true, createProduct);
+      break;
+    case "PATCH":
+      authMiddleware(req, res, true, updateProduct);
+      break;
+    case "DELETE":
+      authMiddleware(req, res, true, deleteProduct);
+      break;
+    default:
+      errorController(422, "request method not supported", res);
+      break;
   }
 };
 export default connectDB(reqHandler);
-

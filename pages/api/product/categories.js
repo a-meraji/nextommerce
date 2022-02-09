@@ -1,14 +1,24 @@
 import connectDB from "../../../middleware/db/mongodb";
 import Category from "../../../models/CategoryModel";
-
+import { authMiddleware } from "../../../controller/authController/authMiddleware";
 const reqHandler = (req, res) => {
   const method = req.method;
-  if (method === "GET") getCats(req, res);
-  else if (method === "POST") createCat(req, res);
-  else if (method === "UPDATE") updateCat(req, res);
-  else if (method === "DELETE") deleteCat(req, res);
-  else {
-    res.status(422).send({ message: "req_method_not_supported" });
+  switch (method) {
+    case "GET":
+      getCats(req, res);
+      break;
+    case "POST":
+      authMiddleware(req, res, true, createCat);
+      break;
+    case "UPDATE":
+      authMiddleware(req, res, true, updateCat);
+      break;
+    case "DELETE":
+      authMiddleware(req, res, true, deleteCat);
+      break;
+    default:
+      res.status(422).send({ message: "req_method_not_supported" });
+      break;
   }
 };
 

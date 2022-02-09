@@ -13,11 +13,12 @@ import {
 // calender
 import DatePicker from "../../../components/admin/DatePicker";
 import format from "date-fns/format";
+import authHandler from "../../../shared/utils/authHandler";
 
 export default function index({ orders }) {
   const router = useRouter();
 
-  // order state to send to order api 
+  // order state to send to order api
   const [ordSt, setOrdSt] = useState(orders);
   useEffect(() => {
     setOrdSt(orders);
@@ -51,19 +52,24 @@ export default function index({ orders }) {
       },
       body: JSON.stringify({ id, status }),
     });
+    const athorized = data.headers.get("authorized") === "true";
     const res = await data.json();
-    if (res.message == "updated") {
-      var newOrders = ordSt;
-      newOrders = newOrders.map((order) => {
-        if (order._id === id) {
-          order.sent = !res.docs.sent;
-        }
-        return order;
-      });
-
-      setOrdSt(newOrders);
-    }else{
-      alert(res.message);
+    if (athorized === true) {
+      if (res.message && res.message == "updated") {
+        var newOrders = ordSt;
+        newOrders = newOrders.map((order) => {
+          if (order._id === id) {
+            order.sent = !res.docs.sent;
+          }
+          return order;
+        });
+        setOrdSt(newOrders);
+      } else {
+        alert("couldn't update order");
+        console.log(res);
+      }
+    } else {
+      router.push("/admin/login");
     }
   };
 
@@ -72,11 +78,15 @@ export default function index({ orders }) {
     var keys = "";
     var values = "";
     // check for undefined and empty and white space
-    if (name !== undefined && name!=="" && name.indexOf(" ") < 0) {
+    if (name !== undefined && name !== "" && name.indexOf(" ") < 0) {
       keys = "name";
       values = name;
     }
-    if (lastname !== undefined && lastname!=="" &&  lastname.indexOf(" ") < 0) {
+    if (
+      lastname !== undefined &&
+      lastname !== "" &&
+      lastname.indexOf(" ") < 0
+    ) {
       keys += "_lastname";
       values += `_${lastname}`;
     }
@@ -84,7 +94,7 @@ export default function index({ orders }) {
       keys += "_sent";
       values += `_${sent}`;
     }
-    if (dateQuery !== undefined && dateQuery!=="") {
+    if (dateQuery !== undefined && dateQuery !== "") {
       keys += "_createdAt";
       values += `_${dateQuery}`;
     }
@@ -96,22 +106,22 @@ export default function index({ orders }) {
       {/* query inputs */}
       <div className="flex flex-col gap-y-6  justify-center lg:flex-row lg:justify-between">
         <div className="flex flex-col gap-x-4 gap-y-6 md:flex-row align-middle w-3/4 mx-auto sm:w-full justify-start flex-wrap">
-            <input
+          <input
             placeholder="name"
-              className="bg-third rounded-full py-2 px-3  "
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
+            className="bg-third rounded-full py-2 px-3  "
+            id="name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
             placeholder="lastname"
-              className="bg-third rounded-full py-2 px-3  "
-              id="lastname"
-              type="text"
-              value={lastname}
-              onChange={(e) => setLastname(e.target.value)}
-            />
+            className="bg-third rounded-full py-2 px-3  "
+            id="lastname"
+            type="text"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+          />
           <select
             className="rounded-full py-1 bg-third px-3 "
             value={sent}
@@ -128,16 +138,21 @@ export default function index({ orders }) {
             <span className="mr-1 my-auto">calender</span>
             <CalendarIcon className="my-auto" width={20} />
           </button>
-          <button className="flex px-4 py-2 bg-red-500 mx-auto sm:mx-0  text-white rounded-full" onClick={()=>setDateQuery()}>reset calender</button>
-        </div>
           <button
-            className="rounded-full bg-success text-white py-2 px-6 max-h-12 min-w-[200px] lg:min-w-[150px] mx-auto"
-            onClick={fetchOrders}
+            className="flex px-4 py-2 bg-red-500 mx-auto sm:mx-0  text-white rounded-full"
+            onClick={() => setDateQuery()}
           >
-            <div className="flex justify-center">
-            <span>search</span> <SearchIcon width={20} />
-            </div>
+            reset calender
           </button>
+        </div>
+        <button
+          className="rounded-full bg-success text-white py-2 px-6 max-h-12 min-w-[200px] lg:min-w-[150px] mx-auto"
+          onClick={fetchOrders}
+        >
+          <div className="flex justify-center">
+            <span>search</span> <SearchIcon width={20} />
+          </div>
+        </button>
       </div>
 
       {/* orders */}
@@ -180,7 +195,7 @@ export default function index({ orders }) {
               </div>
             </div>
             <div className="-px-9 sm:px-0">
-            <TableOrder cart={order.cart} />
+              <TableOrder cart={order.cart} />
             </div>
           </li>
         ))}
@@ -223,15 +238,34 @@ export default function index({ orders }) {
 }
 
 export async function getServerSideProps(context) {
-  const { key, value } = context.query;
-  const res = await fetch(`${server}/api/order?key=${key}&value=${value}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
+  const { authorized, access, refresh } = await authHandler(
+    context.req,
+    context.res
+  );
 
-  const data = await res.json();
-
-  return {
-    props: { orders: data.orders }, // will be passed to the page component as props
-  };
+  if (authorized === true) {
+    const { key, value } = context.query;
+    const response = await fetch(
+      `${server}/api/order?key=${key}&value=${value}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          refresh: refresh,
+          access: access,
+        },
+      }
+    );
+    const data = await response.json();
+    return {
+      props: { orders: data.orders }, // will be passed to the page component as props
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/admin/login",
+        permanent: false,
+      },
+    };
+  }
 }

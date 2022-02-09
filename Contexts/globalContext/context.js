@@ -10,6 +10,7 @@ import {
   TOGGLE_AMOUNT,
   ADD,
   CART_CHANGE,
+  ACCOUNT_UPDATE,
 } from "../Reducer/types";
 
 // a json containes names and functions for sorting an array of products exp:sort by price
@@ -45,6 +46,7 @@ const reducernitialState = {
   cart: [],
   total: 0,
   amount: 0,
+  account:{},
 };
 
 /* ********  CONTEXT ************ */
@@ -116,6 +118,12 @@ const ContextProvider = ({ initialTheme, children }) => {
   const getTotal = () => {
     dispatch({ type: GET_TOTALS });
   };
+  const updateAccount = (account) => {
+    dispatch({ type: ACCOUNT_UPDATE, payload:  account  });
+  }
+  
+  //
+  const [displayProf, setDisplayProf] = useState(false);
 
   // In case user refresh browser or open in new tab
   //  get the sopping cart from local storage
@@ -226,6 +234,9 @@ const ContextProvider = ({ initialTheme, children }) => {
         sorter,
         sort,
         setSort,
+        updateAccount,
+        displayProf,
+        setDisplayProf,
       }}
     >
       {children}

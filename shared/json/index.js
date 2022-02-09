@@ -100,5 +100,5 @@ export const bannerImages = [
   },
 ];
 
-export const refreshToken = { type: "REFRESH", age: 60 * 60 * 24 * 365 * 5 };
-export const accessToken = { type: "ACCESS", age: 10 * 60 };
+export const refreshToken = { type: "refresh", age: 60 * 60 * 24 * 365 * 5 };// 5years
+export const accessToken = { type: "access", age: 7 * 60 }; // 7min

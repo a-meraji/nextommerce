@@ -7,7 +7,7 @@ const connectDB = (handler) => async (req, res) => {
       return handler(req, res);
     }
     // Use new db connection
-    await mongoose.connect(process.env.MONGODB_URI, {
+    mongoose.connect(process.env.MONGODB_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
