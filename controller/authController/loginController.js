@@ -10,14 +10,8 @@ import {
 import { refreshTokenSubmiter } from "../../middleware/auth/refreshTokenSubmit";
 import User from "../../models/UserModel";
 
-export default async function loginController(req, res) {
+export default async function loginController(req, res,isAdmin) {
   const { email, password } = req.body;
-  // check it's admin auth or user auth
-  var pathname = req.headers.referer;
-  const isAdmin = pathname.includes("admin");
-  if (isAdmin) pathname = "/admin/signup";
-  else pathname = "/auth/signup";
-
   try {
     if (!email || !password) throw Error("incomplete credentials");
     // find account bas on email and then compare passwords

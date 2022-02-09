@@ -10,7 +10,7 @@ const reqHandler = (req, res) => {
   }else if (req.method === "GET") {
     clientAccessController(req, res, false);
   } else if (req.method === "PUT") {
-    loginController(req, res);
+    loginController(req, res,false);
   }else if(req.method === "DELETE"){
     logoutController(req, res);
   }
