@@ -19,6 +19,7 @@ export default function login() {
       body:JSON.stringify(form)
     });
     const data = await res.json();
+    console.log(res)
     if (data.account) {
       const {name,lastname} = data.account;
       updateAccount({name,lastname, isAdmin:true});
