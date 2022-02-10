@@ -7,7 +7,6 @@ import errorController from "../errorController";
 export default async function readAccount(req, res) {
   try {
     const isAdmin = req.cookies["isAdmin"]
-console.log(typeof isAdmin)
     var refToken = req.cookies[refreshToken.type];
 
     if (refToken === "undefined" || refToken === undefined) {

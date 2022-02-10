@@ -17,7 +17,7 @@ export const deleteCookie = (type, req, res) => {
 
 export const isAdminCookie = (req, res, isAdmin) => {
   const cookies = new Cookies(req, res);
-  cookies.set("isAdmin", isAdmin, { httpOnly: true });
+  cookies.set("isAdmin", `${isAdmin}`, { httpOnly: true });
 };
 export const isAdminDelete = (req, res) => {
   const cookies = new Cookies(req, res);

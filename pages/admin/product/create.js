@@ -249,7 +249,7 @@ function create() {
 export default create;
 
 export async function getServerSideProps(context) {
-  const { authorized } = await authHandler(context.req, context.res);
+  const { authorized } = await authHandler(context.req, context.res,true);
 
   if (authorized === true) {
     return {

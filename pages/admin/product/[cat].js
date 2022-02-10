@@ -55,7 +55,8 @@ export default function cats({ allProducts, allCategories, query }) {
 export async function getServerSideProps(context) {
   const { authorized } = await authHandler(
     context.req,
-    context.res
+    context.res,
+    true
   );
 
   if (authorized) {

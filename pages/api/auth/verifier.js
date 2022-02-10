@@ -1,5 +1,4 @@
 import connectDB from "../../../middleware/db/mongodb";
-
 import { serverAccessController } from "../../../controller/authController/serverAccessController";
 
 const reqHandler = (req, res) => {

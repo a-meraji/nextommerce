@@ -28,6 +28,8 @@ export async function authMiddleware(req, res, isAdmin, next) {
   }
 
   try {
+    console.log("serverside auth isAdmin : ",isAdmin,typeof isAdmin);
+    if (isAdmin === undefined||isAdmin==="undefined") throw new Error("isAdmin is undefined");
     // if access token still exist
     if (accToken !== "undefined" && accToken !== undefined) {
       //first verify access token. if it was verified next()

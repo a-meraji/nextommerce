@@ -240,7 +240,8 @@ export default function index({ orders }) {
 export async function getServerSideProps(context) {
   const { authorized, access, refresh } = await authHandler(
     context.req,
-    context.res
+    context.res,
+    true
   );
 
   if (authorized === true) {

@@ -11,7 +11,6 @@ export const hashPass = async (plainPass) => {
 // compare hased pass and plain pass
 export const comparePass = async (plainPass, hashedPass) => {
   const match = await bcrypt.compare(plainPass, hashedPass);
-  console.log(match);
   if (match === true) {
     return true;
   }

@@ -11,8 +11,6 @@ export const tokenGanarator = (id, type, maxAge) => {
 export const tokenDecoder =  (token, type) => {
   const secret = secreter(type);
   let id;
-  console.log("token decode: ",token)
-
   if (token && secret) {
     id = jwt.verify(token, secret, (err, decodedToken) => {
       if (err) {

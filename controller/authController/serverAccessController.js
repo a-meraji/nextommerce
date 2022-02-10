@@ -22,41 +22,32 @@ export async function serverAccessController(req, res) {
     refToken = req.cookies[refreshToken.type];
     accToken = req.cookies[accessToken.type];
   }
-console.log("*********************")
-console.log("refreshToken: ", refToken);
-console.log("accessToken: ", accToken);
   //it's an unathorized request if refresh token is not provided
   if (refToken === "undefined" || refToken === undefined) {
     return unathorized(res);
   }
 
   try {
-    const { isAdmin } = req.query;
-    if (isAdmin === undefined) throw new Error("isAdmin is undefined");
+    var isAdmin = req.query.isAdmin;
+    if (isAdmin === undefined || isAdmin === "undefined")
+      throw new Error("isAdmin is undefined");
+    isAdmin = isAdmin === "true" ? true : false;
     // if access token still exist
     if (accToken !== "undefined" && accToken !== undefined) {
       //first verify access token. if it was verified next()
       const validId = tokenDecoder(accToken, accessToken.type);
-      var validPerson = isAdmin
-        ? await Admin.findById(validId)
-        : await User.findById(validId);
+      var validPerson =
+        isAdmin === true
+          ? await Admin.findById(validId)
+          : await User.findById(validId);
       if (validPerson && validPerson.suspend === true) unathorized(res);
       else if (validPerson && validPerson !== null) {
         // user athourized
-        console.log("user athourized in access part");
         res.setHeader("authorized", "true");
+        res.setHeader("isAdmin", isAdmin);
         return res.status(200).json({ message: "user authorized" });
       } else {
-        //  if access token not verified then verify refresh token
-        // if refresh token was valid but not existed in DB,
-        //then account will be suspended to avoid token highjacking
-        const validRef = await refreshTokenVerifier(refToken, isAdmin, res);
-        if (validRef.id) {
-          //refresh token was valid
-          return authenticated(req, res, validRef.id);
-        } else {
-          return unathorized(res);
-        }
+          return unathorized(res);      
       }
     }
     // if only refresh token is  provided
@@ -66,7 +57,7 @@ console.log("accessToken: ", accToken);
       const validRef = await refreshTokenVerifier(refToken, isAdmin, res);
       if (validRef.id) {
         //refresh token was valid
-        return authenticated(req, res, validRef.id);
+        return authenticated(req, res, validRef.id, isAdmin);
       } else {
         return unathorized(res);
       }
@@ -87,22 +78,35 @@ async function refreshTokenVerifier(token, isAdmin, res) {
 
   // if refresh token not found in DB proccess if the account needs to get suspended
   if (!validRefToken) {
-    const suspendedAccount = isAdmin
-      ? await Admin.findByIdAndUpdate(id, { suspend: true })
-      : await User.findByIdAndUpdate(id, { suspend: true });
+    const suspendedAccount =
+      isAdmin === true
+        ? await Admin.findByIdAndUpdate(id, { suspend: true })
+        : await User.findByIdAndUpdate(id, { suspend: true });
     if (!suspendedAccount) {
       // no such account with this id found
       return { message: "account not found" };
     } else {
-      return {
-        message: `account suspended`,
-      };
+        return {
+          message: `account suspended`,
+        };     
     }
+  }
+  else{
+    var validPerson =
+        isAdmin === true
+          ? await Admin.findById(id)
+          : await User.findById(id);
+      if (validPerson && validPerson.suspend === true) unathorized(res);
+      if(!validPerson || validPerson === null){
+        return {
+          message: `account not found`,
+        };
+      }
   }
   return { message: `refresh token is valid`, id };
 }
 
-const authenticated = async (req, res, ownerID) => {
+const authenticated = async (req, res, ownerID, isAdmin) => {
   const newAccess = tokenGanarator(ownerID, accessToken.type, accessToken.age);
   const newRefresh = tokenGanarator(
     ownerID,
@@ -114,18 +118,18 @@ const authenticated = async (req, res, ownerID) => {
   if (!data.message) {
     return unathorized(res);
   } else {
-    console.log("user athourized in refresh part");
     res.setHeader("authorized", "true");
     res.setHeader(refreshToken.type, newRefresh);
     res.setHeader(accessToken.type, newAccess);
+    res.setHeader("isAdmin", isAdmin);
     return res.status(200).json({ message: "user authorized" });
   }
 };
 
 const unathorized = (res) => {
-  console.log("unathorized");
   res.setHeader("authorized", "false");
   res.setHeader(refreshToken.type, "");
   res.setHeader(accessToken.type, "");
+  res.setHeader("isAdmin", "");
   return res.status(401).json({ message: "user not authorized" });
 };

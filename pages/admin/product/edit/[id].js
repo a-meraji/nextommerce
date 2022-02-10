@@ -251,7 +251,7 @@ function edit({ id, product, allCategories }) {
 export default edit;
 
 export async function getServerSideProps(context) {
-  const { authorized } = await authHandler(context.req, context.res);
+  const { authorized } = await authHandler(context.req, context.res, true);
   if (authorized) {
     const id = context.params.id;
     const productData = await fetch(`${server}/api/product/crud?id=${id}`, {

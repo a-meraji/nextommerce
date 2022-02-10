@@ -7,6 +7,8 @@ import { tokenDecoder, tokenGanarator } from "../../shared/utils/auth/JWTUtils";
 import {
   cookieGenerator,
   deleteCookie,
+  isAdminCookie,
+  isAdminDelete,
 } from "../../shared/utils/auth/tokenCookei";
 import { refreshToken, accessToken } from "../../shared/json";
 
@@ -24,21 +26,24 @@ export async function clientAccessController(req, res, isAdmin) {
 
   //it's an unathorized request if refresh token is not provided
   if (refToken === "undefined" || refToken === undefined) {
-    return unathorized(req,res);
+    return unathorized(req, res);
   }
 
   try {
+    if (isAdmin === undefined) throw new Error("isAdmin is undefined");
     // if both token provided
     if (accToken !== "undefined" && accToken !== undefined) {
       //first verify access token. if it was verified next()
       const validId = tokenDecoder(accToken, accessToken.type);
-      var validPerson = isAdmin
-        ? await Admin.findById(validId)
-        : await User.findById(validId);
-      if (validPerson && validPerson.suspend === true) unathorized(req,res);
+      var validPerson =
+        isAdmin === true
+          ? await Admin.findById(validId)
+          : await User.findById(validId);
+      if (validPerson && validPerson.suspend === true) unathorized(req, res);
       else if (validPerson && validPerson !== null) {
         // user athourized
-    res.setHeader("authorized", "true");
+        res.setHeader("authorized", "true");
+        isAdminCookie(req, res, isAdmin);
         return res.status(200).json({ message: "user authorized" });
       } else {
         //  if access token not verified then verify refresh token
@@ -52,9 +57,9 @@ export async function clientAccessController(req, res, isAdmin) {
         );
         if (validRef.id) {
           //refresh token was valid
-          return authenticated(req, res, validRef.id);
+          return authenticated(req, res, validRef.id, isAdmin);
         } else {
-          return unathorized(req,res);
+          return unathorized(req, res);
         }
       }
     }
@@ -65,9 +70,9 @@ export async function clientAccessController(req, res, isAdmin) {
       const validRef = await refreshTokenVerifier(refToken, isAdmin, req, res);
       if (validRef.id) {
         // refresh token was valid
-        return authenticated(req, res, validRef.id);
+        return authenticated(req, res, validRef.id, isAdmin);
       } else {
-        return unathorized(req,res);
+        return unathorized(req, res);
       }
     }
   } catch (err) {
@@ -86,15 +91,15 @@ async function refreshTokenVerifier(token, isAdmin, req, res) {
 
   // if refresh token not found in DB proccess if the account needs to get suspended
   if (!validRefToken) {
-    const suspendedAccount = isAdmin
-      ? await Admin.findByIdAndUpdate(id, { suspend: true })
-      : await User.findByIdAndUpdate(id, { suspend: true });
+    const suspendedAccount =
+      isAdmin === true
+        ? await Admin.findByIdAndUpdate(id, { suspend: true })
+        : await User.findByIdAndUpdate(id, { suspend: true });
 
     if (!suspendedAccount) {
       // no such account with this id found
       return { message: "account not found" };
     }
-    console.log("delete sus cookie");
     return {
       message: `account suspended`,
     };
@@ -102,7 +107,7 @@ async function refreshTokenVerifier(token, isAdmin, req, res) {
   return { message: `refresh token is valid`, id };
 }
 
-const authenticated = async (req, res, ownerID) => {
+const authenticated = async (req, res, ownerID, isAdmin) => {
   const newAccess = tokenGanarator(ownerID, accessToken.type, accessToken.age);
   const newRefresh = tokenGanarator(
     ownerID,
@@ -112,17 +117,19 @@ const authenticated = async (req, res, ownerID) => {
 
   const data = await refreshTokenSubmiter(newRefresh, ownerID);
   if (!data.message) {
-    return unathorized(req,res);
+    return unathorized(req, res);
   } else {
     res.setHeader("authorized", "true");
     cookieGenerator(refreshToken, newRefresh, req, res);
     cookieGenerator(accessToken, newAccess, req, res);
+    isAdminCookie(req, res, isAdmin);
     return res.status(200).json({ message: "user authorized" });
   }
 };
 
-const unathorized = (req,res) => {
+const unathorized = (req, res) => {
   deleteCookie(refreshToken.type, req, res);
   deleteCookie(accessToken.type, req, res);
+  isAdminDelete(req, res);
   return res.status(401).json({ message: "user not authorized" });
 };

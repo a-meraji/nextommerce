@@ -14,8 +14,9 @@ export default async function loginController(req, res,isAdmin) {
   const { email, password } = req.body;
   try {
     if (!email || !password) throw Error("incomplete credentials");
+    if (isAdmin === undefined) throw new Error("isAdmin is undefined");
     // find account bas on email and then compare passwords
-    const account = isAdmin
+    const account = isAdmin===true
       ? await Admin.findOne({ email })
       : await User.findOne({ email });
     if (account) {
