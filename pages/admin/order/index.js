@@ -13,7 +13,7 @@ import {
 // calender
 import DatePicker from "../../../components/admin/DatePicker";
 import format from "date-fns/format";
-import authHandler from "../../../shared/utils/authHandler";
+import authHandler from "../../../shared/utils/auth/authHandler";
 
 export default function index({ orders }) {
   const router = useRouter();

@@ -1,4 +1,4 @@
-import { tokenDecoder } from "../../middleware/auth/JWTUtils";
+import { tokenDecoder } from "../../shared/utils/auth/JWTUtils";
 import { refreshToken } from "../../shared/json";
 import User from "../../models/UserModel";
 import Admin from "../../models/AdminModel";

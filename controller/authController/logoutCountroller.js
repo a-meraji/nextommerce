@@ -1,7 +1,7 @@
 import RefreshToken from "../../models/RefreshTokenModel";
 import errorController from "../errorController";
 import { refreshToken, accessToken } from "../../shared/json";
-import { deleteCookie, isAdminDelete } from "../../middleware/auth/tokenCookei";
+import { deleteCookie, isAdminDelete } from "../../shared/utils/auth/tokenCookei";
 
 export default async function logoutController(req, res) {
   // check it's admin auth or user auth

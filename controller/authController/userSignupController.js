@@ -4,10 +4,10 @@ import { refreshToken, accessToken } from "../../shared/json/index";
 import {
   cookieGenerator,
   isAdminCookie,
-} from "../../middleware/auth/tokenCookei";
-import { refreshTokenSubmiter } from "../../middleware/auth/refreshTokenSubmit";
-import { tokenGanarator } from "../../middleware/auth/JWTUtils";
-import { hashPass } from "../../middleware/auth/bcrypt";
+} from "../../shared/utils/auth/tokenCookei";
+import { refreshTokenSubmiter } from "../../shared/utils/auth/refreshTokenSubmit";
+import { tokenGanarator } from "../../shared/utils/auth/JWTUtils";
+import { hashPass } from "../../shared/utils/auth/bcrypt";
 
 export default async function signupController(req, res) {
   const { name, lastname, email, password, phone, address } = req.body;

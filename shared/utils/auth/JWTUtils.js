@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-import { accessToken, refreshToken } from "../../shared/json";
+import { accessToken, refreshToken } from "../../json";
 
 // sign refresh and access JWT token
 export const tokenGanarator = (id, type, maxAge) => {
@@ -16,9 +16,6 @@ export const tokenDecoder =  (token, type) => {
   if (token && secret) {
     id = jwt.verify(token, secret, (err, decodedToken) => {
       if (err) {
-        
-        console.log("decode ERROR: ",token)
-        console.log("docode ERROR: ",secret)
         throw Error("token not valid");
       } else {
         return decodedToken.id;

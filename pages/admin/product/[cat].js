@@ -2,7 +2,7 @@ import { server } from "../../../config";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import AdminProduts from "../../../components/admin/AdminProduts";
-import authHandler from "../../../shared/utils/authHandler";
+import authHandler from "../../../shared/utils/auth/authHandler";
 
 export default function cats({ allProducts, allCategories, query }) {
   const [products, setProducts] = useState(allProducts);

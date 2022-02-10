@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import TableKinds from "../../../../components/admin/TableKinds";
 import AcceptModal from "../../../../components/admin/AcceptModal";
 import { server } from "../../../../config";
-import authHandler from "../../../../shared/utils/authHandler";
+import authHandler from "../../../../shared/utils/auth/authHandler";
 
 function edit({ id, product, allCategories }) {
   const router = useRouter();

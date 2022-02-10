@@ -1,13 +1,13 @@
 import Admin from "../../models/AdminModel";
 import errorController from "../errorController";
-import { comparePass } from "../../middleware/auth/bcrypt";
-import { tokenGanarator } from "../../middleware/auth/JWTUtils";
+import { comparePass } from "../../shared/utils/auth/bcrypt";
+import { tokenGanarator } from "../../shared/utils/auth/JWTUtils";
 import { refreshToken, accessToken } from "../../shared/json";
 import {
   cookieGenerator,
   isAdminCookie,
-} from "../../middleware/auth/tokenCookei";
-import { refreshTokenSubmiter } from "../../middleware/auth/refreshTokenSubmit";
+} from "../../shared/utils/auth/tokenCookei";
+import { refreshTokenSubmiter } from "../../shared/utils/auth/refreshTokenSubmit";
 import User from "../../models/UserModel";
 
 export default async function loginController(req, res,isAdmin) {

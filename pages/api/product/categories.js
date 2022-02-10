@@ -1,6 +1,6 @@
 import connectDB from "../../../middleware/db/mongodb";
 import Category from "../../../models/CategoryModel";
-import { authMiddleware } from "../../../controller/authController/authMiddleware";
+import { authMiddleware } from "../../../middleware/auth/authMiddleware";
 const reqHandler = (req, res) => {
   const method = req.method;
   switch (method) {

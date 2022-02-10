@@ -84,7 +84,7 @@ export const LangStrings = {
     add_to_cart:"اضافه به سبد خرید",
     subtotal:"مجموع کالا",
     tax:"مالیات",
-    tax_cal:"محاصبه در ادامه",
+    tax_cal:"محاسبه در ادامه",
     shipping:"ارسال",
     free:"رایگان",
     total:"کل",

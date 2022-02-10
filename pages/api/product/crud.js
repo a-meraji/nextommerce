@@ -1,7 +1,7 @@
 import connectDB from "../../../middleware/db/mongodb";
 import errorController from "../../../controller/errorController";
 //controllers
-import {authMiddleware} from "../../../controller/authController/authMiddleware";
+import {authMiddleware} from "../../../middleware/auth/authMiddleware";
 import createProduct from "../../../controller/productsController/createProduct";
 import readProduct from "../../../controller/productsController/readProducts";
 import updateProduct from "../../../controller/productsController/updateProduct";

@@ -1,9 +1,9 @@
 import Admin from "../../models/AdminModel";
 import User from "../../models/UserModel";
 import RefreshToken from "../../models/RefreshTokenModel";
-import { refreshTokenSubmiter } from "../../middleware/auth/refreshTokenSubmit";
+import { refreshTokenSubmiter } from "../../shared/utils/auth/refreshTokenSubmit";
 import errorController from "../errorController";
-import { tokenDecoder, tokenGanarator } from "../../middleware/auth/JWTUtils";
+import { tokenDecoder, tokenGanarator } from "../../shared/utils/auth/JWTUtils";
 import { refreshToken, accessToken } from "../../shared/json";
 
 /* 

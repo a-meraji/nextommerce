@@ -29,7 +29,8 @@ export default function AdminNav() {
                 <li ><Link href="/admin/product/hat"><a>display products</a></Link></li>
                 <li ><Link href="/admin/order"><a>orders</a></Link></li>
                 </div>
-                <div className="flex flex-row justify-end py-5">
+                <div className="flex flex-row justify-end gap-x-9 py-5">
+                  <li><Link href="/admin/signup"><a>signup new admin</a></Link></li>
                     <li onClick={()=>loggingOut()}>Log out</li>
                 </div>
             </ul>

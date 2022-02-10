@@ -1,11 +1,11 @@
 import Admin from "../../models/AdminModel";
 import errorController from "../errorController";
-import { comparePass } from "../../middleware/auth/bcrypt";
-import { tokenGanarator } from "../../middleware/auth/JWTUtils";
+import { comparePass } from "../../shared/utils/auth/bcrypt";
+import { tokenGanarator } from "../../shared/utils/auth/JWTUtils";
 import { refreshToken, accessToken } from "../../shared/json";
-import { cookieGenerator, isAdminCookie } from "../../middleware/auth/tokenCookei";
-import { refreshTokenSubmiter } from "../../middleware/auth/refreshTokenSubmit";
-import { hashPass } from "../../middleware/auth/bcrypt";
+import { cookieGenerator, isAdminCookie } from "../../shared/utils/auth/tokenCookei";
+import { refreshTokenSubmiter } from "../../shared/utils/auth/refreshTokenSubmit";
+import { hashPass } from "../../shared/utils/auth/bcrypt";
 
 export default async function signupController(req, res) {
   const {

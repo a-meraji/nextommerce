@@ -160,7 +160,7 @@ export default function signup() {
         <input
           id="adminEmail"
           className="rounded-full px-2 mb-6 bg-secondary"
-          placeholder="enter admin Email"
+          placeholder="enter the Email of an already signed admin"
           type="email"
           {...register("adminEmail", {
             required: true,
@@ -179,7 +179,7 @@ export default function signup() {
           admin Password:
         </label>
         <input
-          id="adminPassword"
+          id="enter the password of an already signed admin"
           className="rounded-full px-2 mb-6 bg-secondary"
           placeholder="enter admin Password"
           type="password"

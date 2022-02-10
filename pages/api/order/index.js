@@ -4,7 +4,7 @@ import createOrder from "../../../controller/orderController/createOrder";
 import readOrders from "../../../controller/orderController/readOrder";
 import updateOrderStatus from "../../../controller/orderController/updateOrder";
 import errorController from "../../../controller/errorController";
-import { authMiddleware } from "../../../controller/authController/authMiddleware";
+import { authMiddleware } from "../../../middleware/auth/authMiddleware";
 
 const reqHandler = (req, res) => {
   const method = req.method;

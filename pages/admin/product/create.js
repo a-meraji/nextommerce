@@ -4,9 +4,7 @@ import { useRouter } from "next/router";
 import TableKinds from "../../../components/admin/TableKinds";
 import AcceptModal from "../../../components/admin/AcceptModal";
 import { server } from "../../../config/index";
-import { refreshToken, accessToken } from "../../../shared/json";
-import { cookieGenerator } from "../../../middleware/auth/tokenCookei";
-import authHandler from "../../../shared/utils/authHandler";
+import authHandler from "../../../shared/utils/auth/authHandler";
 
 function create() {
   const router = useRouter();

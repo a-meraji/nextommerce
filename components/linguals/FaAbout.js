@@ -21,6 +21,14 @@ export default function FaAbout() {
               دارای پنل مدیریت با قابلتیت ساخت،ویرایش،خوانش و حذف
               محصولات،سفارشات و دیگر ادمین ها
             </li>
+            <li className="text-sm">
+              <Link href="/admin/login">
+                <a className="text-accent">برو به پنل کاربری</a>
+              </Link>{" "}
+            </li>
+            <li className="text-xs mb-3">
+              برای ورود به پنل کاربری از این ایمیل admin@exm.com  و از این رمز  Abc123  استفاده کنید
+            </li>
             <li> JWT سرویس ورود خروج بر پایه</li>
             <li>تم روشن و تاریک</li>
             <li>دوزبانه (انگلیسی / فارسی)</li>

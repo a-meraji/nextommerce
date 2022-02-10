@@ -1,12 +1,12 @@
 import { server } from "../config";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useGlobalContext } from "../Contexts/globalContext/context";
 import { XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
 export default function Profile() {
   const router = useRouter();
-  const { updateAccount, account, displayProf, setDisplayProf } =
+  const { updateAccount, account, displayProf, setDisplayProf, lang } =
     useGlobalContext();
   useEffect(async () => {
     const result = await fetch(
@@ -50,7 +50,7 @@ export default function Profile() {
     <div
       className={`${
         displayProf ? "block" : "hidden"
-      } fixed top-0 right-0 mt-20 mr-[10px] z-50`}
+      } fixed top-0 mt-20 ${lang==="en"?"right-0 mr-[10px]":"left-0 ml-[10px]"} z-50`}
     >
       <div className="absolute top-0 left-0 m-2 text-secondarycont">
         <button onClick={() => setDisplayProf(false)}>

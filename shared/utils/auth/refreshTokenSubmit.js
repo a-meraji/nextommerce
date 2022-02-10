@@ -1,4 +1,4 @@
-import RefreshToken from "../../models/RefreshTokenModel";
+import RefreshToken from "../../../models/RefreshTokenModel";
 
 // save refresh JWT token in data base 
 // we need to save refresh token to block access to the accounts

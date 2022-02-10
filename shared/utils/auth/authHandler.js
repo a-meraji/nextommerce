@@ -1,6 +1,6 @@
-  import { refreshToken, accessToken } from "../json";
-  import { cookieGenerator } from "../../middleware/auth/tokenCookei";
-  import {server} from "../../config/index";
+  import { refreshToken, accessToken } from "../../json";
+  import { cookieGenerator } from "./tokenCookei";
+  import {server} from "../../../config/index";
   
   export default async function authHandler (req, res) {
     var access = req.cookies[accessToken.type];
