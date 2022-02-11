@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import Loading from "./Loading";
 import Navbar from "./Navbar";
@@ -21,16 +22,20 @@ export default function Layout({ children }) {
   }, [router]);
 
   return (
-    <>
-        <div className="content glob-trans">
-        <Loading loading={loading}/>
-          <Navbar />
-          <Sidebar />
-          <Cart />
-          <Profile/>
-          {children}
-          <Footer />
-        </div>
-    </>
+    <div className="content glob-trans">
+      <Head>
+        <title>Nextommerce</title>
+        <meta name="description" content="e-commerce pwa with next.js" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
+      <Loading loading={loading} />
+      <Navbar />
+      <Sidebar />
+      <Cart />
+      <Profile />
+      {children}
+      <Footer />
+    </div>
   );
 }
