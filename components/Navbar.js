@@ -74,26 +74,22 @@ function Navbar() {
           <SearchIcon className="w-5 h-5 mx-1" />
         </div>
         <div className="flex">
-          <div className="sm:mx-3 mt-1">
-            <Toggle />
+          <div className="mx-3 md:mx-5 mt-1">
+            <Toggle className="w-5 h-5"/>
           </div>
           <button
             className="mb-1 mx-3 mt-1 hover:text-accent relative flex flex-row"
             onClick={cartToggler}
           >
-            <ShoppingBagIcon className="w-[22px] h-[22px]" />
+            <ShoppingBagIcon className="w-5 h-5" />
             {amount !== 0 ? (
               <div className="text-xs absolute text-center bottom-0 -right-2 w-4 h-4 rounded-full bg-secondarycont text-secondarycont">
                 {amount}
               </div>
             ) : null}
           </button>
-            <button onClick={()=>setDisplayProf(!displayProf)} className="mr-5 sm:mx-3">
-              {/* <img
-              className="w-7 h-7 rounded-full"
-              src="https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
-            ></img> */}
-              <UserCircleIcon className="w-[24px] h-[24px]" />
+            <button onClick={()=>setDisplayProf(!displayProf)} className="mx-3 md:mx-5">
+              <UserCircleIcon className="w-5 h-5" />
             </button>
         </div>
       </nav>

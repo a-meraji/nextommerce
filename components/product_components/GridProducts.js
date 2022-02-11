@@ -9,7 +9,7 @@ export default function GridProducts({ products, limit }) {
       {products?.map((product, i) => {
         if (i >= limit) return;
         return (
-          <Link key={i}  href={`/product/${product.name}`} passHref>
+          <Link key={i}  href={`/product/${product.name}?cat=${product.category}`} passHref>
            <motion.a
               initial={{ zIndex:-100, opacity: 0, y: 0 }}
               whileInView={{ zIndex:0, opacity: 1, y: -100 }}

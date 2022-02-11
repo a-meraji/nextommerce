@@ -18,7 +18,7 @@ export default function FaAbout() {
           <ul className="leading-8 mr-3">
             <li>PWA</li>
             <li>
-              دارای پنل مدیریت با قابلتیت ساخت،ویرایش،خوانش و حذف
+              دارای پنل مدیریت با قابلیتت ساخت،ویرایش،خوانش و حذف
               محصولات،سفارشات و دیگر ادمین ها
             </li>
             <li className="text-sm">
