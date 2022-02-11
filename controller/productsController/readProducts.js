@@ -5,7 +5,6 @@ export default async function readProduct(req, res) {
   const {id,name,filter,value} = req.query
   // creats a propper condition object if quety had filter key format
   var conObj = new Object();
-  console.log(id,name,filter,value);
   if (filter !== undefined && value !== undefined && value!=="undefined") {
     if (value === "true" || value === "false") {
       conObj[filter] = value;

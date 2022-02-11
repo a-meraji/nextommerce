@@ -9,11 +9,13 @@ export default function id({ product, relateds }) {
 const {translate: t} = useGlobalContext();
   return (
     <>
-      <div className="bg-secondary text-secondary">
+      <article className="bg-secondary text-secondary">
         {/* single product section */}
+        <section style={{zIndex:2}}>
        <SingleProduct product={product}/>
+        </section>
         {/* related section */}
-        <section className="border-t-[1px] border-gray-300">
+        <section style={{zIndex:0}} className="border-t-[1px] border-gray-300">
           <h4 className="text-3xl text-primary text-center capitalize py-16">
             {t('other_products')}
           </h4>
@@ -28,7 +30,7 @@ const {translate: t} = useGlobalContext();
             </Link>
           </button>
         </div>
-      </div>
+      </article>
     </>
   );
 }
