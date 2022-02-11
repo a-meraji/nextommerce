@@ -6,47 +6,47 @@ import Moto1 from "../components/home_components/Moto1";
 import Link from "next/link";
 import { useGlobalContext } from "../Contexts/globalContext/context";
 export default function Home({ newArivals, sales }) {
-  const {translate}=useGlobalContext();
+  const { translate } = useGlobalContext();
   return (
-      <div className="bg-secondary">     
-        <Intro />
-        {newArivals.length > 0 ? (
-          <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-20">
-            <motion.p
-              initial={{ y: 0, opacity: 0 }}
-              whileInView={{ y: -40, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ ease: "easeOut", duration: 1 }}
-              className="capitalize text-3xl text-secondary text-center"
-            >
-              {translate('latest_arivals')}
-            </motion.p>
-            <GridProducts products={newArivals} limit={6} />
-          </div>
-        ) : null}
-        <Moto1 />
-        {sales.length > 0 ? (
-          <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-10">
-            <motion.h4
-              initial={{ y: 0, opacity: 0 }}
-              whileInView={{ y: -40, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ ease: "easeOut", duration: 1 }}
-              className="capitalize text-3xl text-secondary text-center"
-            >
-              {translate("sales")}
-            </motion.h4>
-            <GridProducts products={sales} limit={6} />
-          </div>
-        ) : null}
-        <div className="w-full flex justify-center pb-24">
-          <button className="py-2 px-5 bg-accent text-white rounded-full text-xl hover:scale-105 transition-transform">
-            <Link href="/search">
-              <a>{translate("View_Products")}</a>
-            </Link>
-          </button>
+    <div className="bg-secondary">
+      <Intro />
+      {newArivals.length > 0 ? (
+        <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-20">
+          <motion.p
+            initial={{ y: 0, opacity: 0 }}
+            whileInView={{ y: -40, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ ease: "easeOut", duration: 1 }}
+            className="capitalize text-3xl text-secondary text-center"
+          >
+            {translate("latest_arivals")}
+          </motion.p>
+          <GridProducts products={newArivals} limit={6} />
         </div>
+      ) : null}
+      <Moto1 />
+      {sales.length > 0 ? (
+        <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-10">
+          <motion.h4
+            initial={{ y: 0, opacity: 0 }}
+            whileInView={{ y: -40, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ ease: "easeOut", duration: 1 }}
+            className="capitalize text-3xl text-secondary text-center"
+          >
+            {translate("sales")}
+          </motion.h4>
+          <GridProducts products={sales} limit={6} />
+        </div>
+      ) : null}
+      <div className="w-full flex justify-center pb-24">
+        <button className="py-2 px-5 bg-accent text-white rounded-full text-xl hover:scale-105 transition-transform">
+          <Link href="/search">
+            <a>{translate("View_Products")}</a>
+          </Link>
+        </button>
       </div>
+    </div>
   );
 }
 
