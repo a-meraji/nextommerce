@@ -26,7 +26,7 @@ export default function Intro() {
               data-aos="fade"
               layout="fill"
               priority
-              src="https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn11.bigcommerce.com%2Fs-qfzerv205w%2Fimages%2Fstencil%2Foriginal%2Fproducts%2F115%2F489%2FHat-front-black__72990.1603748583.png&w=640&q=85"
+              src="/black-hat.png"
               className="object-contain bg-transparent"
             />
           </div>
