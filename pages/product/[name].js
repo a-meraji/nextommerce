@@ -15,7 +15,7 @@ const {translate: t} = useGlobalContext();
        <SingleProduct product={product}/>
         </section>
         {/* related section */}
-        <section style={{zIndex:0}} className="border-t-[1px] border-gray-300">
+        <section style={{zIndex:0}} className="border-t-[1px] border-gray-300 mt-10">
           <h4 className="text-3xl text-primary text-center capitalize py-16">
             {t('other_products')}
           </h4>

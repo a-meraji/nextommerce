@@ -5,14 +5,14 @@ import { shimmer, toBase64 } from "../../shared/utils/imgPlaceholder";
 
 export default function GridProducts({ products, limit }) {
   return (
-    <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 pt-28">
+    <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 pt-28 ">
       {products?.map((product, i) => {
         if (i >= limit) return;
         return (
           <Link key={i}  href={`/product/${product.name}`} passHref>
-            <motion.a
-              initial={{ opacity: 0, y: 0 }}
-              whileInView={{ opacity: 1, y: -100 }}
+           <motion.a
+              initial={{ zIndex:-100, opacity: 0, y: 0 }}
+              whileInView={{ zIndex:0, opacity: 1, y: -100 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 1.05 }}
