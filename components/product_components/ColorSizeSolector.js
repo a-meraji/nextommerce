@@ -26,7 +26,7 @@ export  default function ColorSizeSelector({store, description, name,price,img})
           <div>
               {/* selcting color */}
             <h4 className="mb-3 text-md text-primary uppercase font-bold">{t('color')}</h4>
-            <div className="flex flex-row mb-7 flex-wrap">
+            <div className="flex flex-row mb-10 flex-wrap">
               {store.map((item) => (
                 <button
                   onClick={() => {
@@ -60,7 +60,7 @@ export  default function ColorSizeSelector({store, description, name,price,img})
               <>
                 {" "}
                 <h4 className="mb-3 text-md text-primary uppercase font-bold">{t('size')}</h4>
-                <div className="flex flex-row mb-5 flex-wrap">
+                <div className="flex flex-row mb-10 flex-wrap">
                   {store.map((item) => {
                     if (item.color === color) {
                       return item["sizeAmnt"].map((subItem, i) => {
@@ -73,7 +73,7 @@ export  default function ColorSizeSelector({store, description, name,price,img})
                                 subItem.size === size
                                   ? "border-primarycont border-2 text-primary"
                                   : "border-hovercont text-third border-[1px]"
-                              } hover:scale-110 mb-3 transition-all mr-3 w-12 h-12 rounded-[50%] font-bold`}
+                              } hover:scale-110 transition-all mr-3 w-12 h-12 rounded-[50%] font-bold`}
                             >
                               {subItem.size}
                             </button>
@@ -88,7 +88,7 @@ export  default function ColorSizeSelector({store, description, name,price,img})
           </div>
           {/* description */}
           <div
-            className={`relative overflow-hidden  mb-4 ${
+            className={`relative overflow-hidden  mb-16 ${
               readMore ? "max-h-full" : "max-h-24"
             }`}
           >
@@ -117,7 +117,7 @@ export  default function ColorSizeSelector({store, description, name,price,img})
               });
               cartToggler();
             }}
-            className="uppercase bg-primarycont text-primarycont w-full text-lg  py-5 mx-auto my-8 hover:opacity-70"
+            className="uppercase bg-primarycont text-primarycont w-full text-lg  py-5 mx-auto mb-10 hover:opacity-70"
           >
             {t('ADD_TO_CART')}
           </button>
