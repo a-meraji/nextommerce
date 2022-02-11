@@ -65,7 +65,7 @@ export default function cats({ products, allCategories, category }) {
 export async function getServerSideProps(cnx) {
   const category = cnx.params.cat;
   const productsData = await fetch(
-    `${server}/api/product/crud?cat=${category}`,
+    `${server}/api/product/crud?filter=category&value=${category}`,
     {
       method: "GET",
       headers: {

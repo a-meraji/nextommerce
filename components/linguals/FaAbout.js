@@ -29,7 +29,7 @@ export default function FaAbout() {
             <li className="text-xs mb-3">
               برای ورود به پنل کاربری از این ایمیل admin@exm.com  و از این رمز  Abc123  استفاده کنید
             </li>
-            <li> JWT سرویس ورود خروج بر پایه</li>
+            <li>سرویس ورود خروج بر پایه JWT</li>
             <li>تم روشن و تاریک</li>
             <li>دوزبانه (انگلیسی / فارسی)</li>
             <li>تصویر و فونت بهینه سازی شده</li>

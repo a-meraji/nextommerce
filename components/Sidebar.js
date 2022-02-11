@@ -6,12 +6,7 @@ import { langs } from "../Contexts/values/LangValues";
 import LangSelector from "./LangSelector";
 
 function Sidebar() {
-  const {
-    showSide,
-    sideToggler,
-    translate: t,
-    lang,
-  } = useGlobalContext();
+  const { showSide, sideToggler, translate: t, lang } = useGlobalContext();
 
   return (
     <aside
@@ -43,18 +38,16 @@ function Sidebar() {
       {/* side bar list */}
       <ul className=" mt-4">
         {sideList.map((item, i) => (
-          <li
-            className="flex px-4 py-3 rounded-full w-[55%] hover:w-full hover:text-primary hover:bg-hover glob-trans hover:mx-4"
-            key={i}
-            onClick={sideToggler}
-          >
-            <item.icon width="20px" />
-            <Link href={item.url} className="mx-3 text-md">
-              <a>{t(item.name)}</a>
+          <li className="flex w-full" key={i} onClick={sideToggler}>
+            <Link href={item.url} className="text-md w-full">
+              <a className="px-2 w-full flex my-2 h-10  rounded-full hover:mx-4 w-[55%] hover:w-full hover:text-primary hover:bg-hover glob-trans ">
+                <item.icon width="20px" />
+                <span className="py-2">{t(item.name)}</span>
+              </a>
             </Link>
           </li>
         ))}
-        <li className="px-6 mt-6 pt-3 py-3 border-t-[1px] border-hovercont w-full">
+        <li className="px-3 mt-6 pt-3 py-3 border-t-[1px] border-hovercont w-full">
           <LangSelector />
         </li>
       </ul>

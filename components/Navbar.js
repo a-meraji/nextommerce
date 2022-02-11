@@ -63,6 +63,7 @@ function Navbar() {
                   router.push(
                     server + "/search?" + currentUrlParams.toString()
                   );
+                  setSearch("");
                 }
               }}
               type="text"

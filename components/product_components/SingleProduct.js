@@ -135,10 +135,10 @@ function SingleProduct({ product }) {
         </div>
       </div>
       {/* cols 2 */}
-      <div className="p-11 lg:pt-1">
+      <div className="py-11 px-5 lg:px-11 lg:pt-2">
         <div>
           <div>
-            <h4 className="mb-2 text-md text-primary uppercase">{t('color')}</h4>
+            <h4 className="mb-3 text-md text-primary uppercase font-bold">{t('color')}</h4>
             <div className="flex flex-row mb-7 flex-wrap">
               {store.map((item) => (
                 <button
@@ -171,7 +171,7 @@ function SingleProduct({ product }) {
             {store[0]["sizeAmnt"][0]["size"] != "" ? (
               <>
                 {" "}
-                <h4 className="mb-2 text-md text-primary uppercase">{t('size')}</h4>
+                <h4 className="mb-3 text-md text-primary uppercase font-bold">{t('size')}</h4>
                 <div className="flex flex-row mb-5 flex-wrap">
                   {store.map((item) => {
                     if (item.color === color) {
@@ -185,7 +185,7 @@ function SingleProduct({ product }) {
                                 subItem.size === size
                                   ? "border-primarycont border-2 text-primary"
                                   : "border-hovercont text-third border-[1px]"
-                              } hover:scale-110 mb-3 transition-all mr-3 w-12 h-12 rounded-[50%]`}
+                              } hover:scale-110 mb-3 transition-all mr-3 w-12 h-12 rounded-[50%] font-bold`}
                             >
                               {subItem.size}
                             </button>

@@ -2,9 +2,10 @@ import Product from "../../models/ProductModel";
 import errorController from "../errorController";
 
 export default async function readProduct(req, res) {
-  const {id,name,category,filter,value} = req.query
+  const {id,name,filter,value} = req.query
   // creats a propper condition object if quety had filter key format
   var conObj = new Object();
+  console.log(id,name,filter,value);
   if (filter !== undefined && value !== undefined && value!=="undefined") {
     if (value === "true" || value === "false") {
       conObj[filter] = value;
@@ -19,8 +20,6 @@ export default async function readProduct(req, res) {
       ? await Product.findById(id)
       : name!==undefined
       ? await Product.findOne({ name: name })
-      : category!==undefined
-      ? await Product.find({ category: category })
       : conObj.hasOwnProperty(filter)
       ? await Product.find(conObj)
       : await Product.find({});
