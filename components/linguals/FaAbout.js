@@ -16,7 +16,7 @@ export default function FaAbout() {
         <section className="my-8 w-3/4 mx-auto border-t-[1px] border-b-[1px] border-secondarycont py-3">
           <p className="text-primary text-xl mb-2">ویژگی های سایت</p>
           <ul className="leading-8 mr-3">
-            <li>PWA</li>
+            {/* <li>PWA</li> */}
             <li>
               دارای پنل مدیریت با قابلیتت ساخت،ویرایش،خوانش و حذف
               محصولات،سفارشات و دیگر ادمین ها

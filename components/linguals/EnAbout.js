@@ -11,7 +11,7 @@ export default function EnAbout() {
         <section className="my-8 w-3/4 mx-auto border-t-[1px] border-b-[1px] border-secondarycont py-3">
           <p className="text-primary text-xl mb-2">Web features: </p>
           <ul className="leading-8 ml-3">
-            <li>PWA</li>
+            {/* <li>PWA</li> */}
             <li>
               Admin Pannel with ability to CRUD products, orders and other admin
               user
