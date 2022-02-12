@@ -39,7 +39,7 @@ export default function Home({ newArivals, sales }) {
           <GridProducts products={sales} limit={6} />
         </div>
       ) : null}
-      <div className="w-full flex justify-center pb-24">
+      <div className="w-full flex justify-center pb-10">
         <button className="py-2 px-5 bg-accent text-white rounded-full text-xl hover:scale-105 transition-transform">
           <Link href="/search">
             <a>{translate("View_Products")}</a>
