@@ -18,16 +18,16 @@ export default function FaAbout() {
           <ul className="leading-8 mr-3">
             {/* <li>PWA</li> */}
             <li>
-              دارای پنل مدیریت با قابلیتت ساخت،ویرایش،خوانش و حذف
+              دارای پنل مدیریت با قابلیت ساخت،ویرایش،خوانش و حذف
               محصولات،سفارشات و دیگر ادمین ها
             </li>
             <li className="text-sm">
               <Link href="/admin/login">
-                <a className="text-accent">برو به پنل کاربری</a>
+                <a className="text-accent">برو به پنل ادمین</a>
               </Link>{" "}
             </li>
             <li className="text-xs mb-3">
-              برای ورود به پنل کاربری از این ایمیل admin@exm.com  و از این رمز  Abc123  استفاده کنید
+              برای ورود به پنل ادمین از این ایمیل admin@exm.com  و از این رمز  Abc123  استفاده کنید
             </li>
             <li>سرویس ورود خروج بر پایه JWT</li>
             <li>تم روشن و تاریک</li>
