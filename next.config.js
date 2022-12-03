@@ -8,6 +8,6 @@ module.exports = withPWA({
     disable: process.env.NODE_ENV === "development",
   },
   images: {
-    domains: ["demo.vercel.store"],
+    domains: ["bigcommerce.vercel.store"],
   },
 });
