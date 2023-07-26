@@ -1,84 +1,76 @@
-import React from 'react'
-import FirstIntro from '../components/portfolio_secs/Intro1'
-import Skills from '../components/portfolio_secs/Skills'
-import Message from '../components/portfolio_secs/Message'
-import ProjectPresent from '../components/portfolio_secs/ProjectPresent'
-import { projects } from '../utils/assets'
-import {
-  Animator,
-  ScrollContainer,
-  ScrollPage,
-  batch,
-  Fade,
-  FadeIn,
-  StickyIn,
-  ZoomIn,
-} from 'react-scroll-motion'
-
-export default function Home() {
-  if (typeof window !== 'undefined') {
-    return (
-      <main className="font-pop bg-primary text-primary  transition-colors duration-700">
-        <div id="about"></div>
-        <ScrollContainer id="scrollContainer" style={{ zIndex: -100 }}>
-          <ScrollPage page={0}>
-            <Animator animation={batch(Fade(), StickyIn())}>
-              <article className="layout-p relative w-screen">
-                <FirstIntro />
-              </article>
-            </Animator>
-          </ScrollPage>
-
-          <ScrollPage page={1}>
-            <Animator animation={batch(FadeIn(), ZoomIn())}>
-              <article id="skills">
-                <Skills />
-              </article>
-            </Animator>
-          </ScrollPage>
-
-          <article id="my-works" className="layout-p">
-            {projects.map((project, index) => (
-              <ProjectPresent
-                key={`${project.title}${index}`}
-                project={project}
-                index={index}
-              />
-            ))}
-          </article>
-
-          <div id="message" className="layout-p pb-[50vh]">
-            <Message />
-          </div>
-        </ScrollContainer>
-      </main>
-    )
-  }
-
+import { server } from "../config";
+import Intro from "../components/home_components/Intro";
+import { motion } from "framer-motion";
+import GridProducts from "../components/product_components/GridProducts";
+import Moto1 from "../components/home_components/Moto1";
+import Link from "next/link";
+import { useGlobalContext } from "../Contexts/globalContext/context";
+export default function Home({ newArivals, sales }) {
+  const { translate } = useGlobalContext();
   return (
-    <main className="font-pop bg-primary text-primary  transition-colors duration-700">
-        <div id="about"></div>
-              <article className="layout-p relative w-screen">
-                <FirstIntro />
-              </article>
+    <div className="bg-secondary">
+      <Intro />
+      {newArivals.length > 0 ? (
+        <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-20">
+          <motion.p
+            initial={{ y: 0, opacity: 0 }}
+            whileInView={{ y: -40, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ ease: "easeOut", duration: 1 }}
+            className="capitalize text-3xl text-secondary text-center"
+          >
+            {translate("latest_arivals")}
+          </motion.p>
+          <GridProducts products={newArivals} limit={6} />
+        </div>
+      ) : null}
+      <Moto1 />
+      {sales.length > 0 ? (
+        <div className="w-[85%] sm:w-[75%] mx-auto mt-36 mb-10">
+          <motion.h4
+            initial={{ y: 0, opacity: 0 }}
+            whileInView={{ y: -40, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ ease: "easeOut", duration: 1 }}
+            className="capitalize text-3xl text-secondary text-center"
+          >
+            {translate("sales")}
+          </motion.h4>
+          <GridProducts products={sales} limit={6} />
+        </div>
+      ) : null}
+      <div className="w-full flex justify-center pb-10">
+        <button className="py-2 px-5 bg-accent text-white rounded-full text-xl hover:scale-105 transition-transform">
+          <Link href="/search">
+            <a>{translate("View_Products")}</a>
+          </Link>
+        </button>
+      </div>
+    </div>
+  );
+}
 
-              <article id="skills">
-                <Skills />
-              </article>
+export async function getServerSideProps() {
+  const newArivals = await getProductsFromDB("newArival", true);
+  const sales = await getProductsFromDB("sale", true);
+  return {
+    props: {
+      newArivals,
+      sales,
+    },
+    // revalidate: 900, //every 15 minutes
+  };
+}
 
-          <article id="my-works" className="layout-p">
-            {projects.map((project, index) => (
-              <ProjectPresent
-                key={`${project.title}${index}`}
-                project={project}
-                index={index}
-              />
-            ))}
-          </article>
-
-          <div id="message" className="layout-p pb-[50vh]">
-            <Message />
-          </div>
-      </main>
-  )
+async function getProductsFromDB(prop, value) {
+  const data = await fetch(
+    `${server}/api/product/crud?filter=${prop}&value=${value}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await data.json();
 }
